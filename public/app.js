@@ -3,22 +3,28 @@ window.addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>
 window.addEventListener('pointermove',e=>{glow.style.transform=`translate(${e.clientX-160}px,${e.clientY-160}px)`;if(stage&&innerWidth>700){const x=(e.clientX/innerWidth-.5)*10,y=(e.clientY/innerHeight-.5)*-10;stage.style.setProperty('--rx',`${y}deg`);stage.style.setProperty('--ry',`${x}deg`)}});
 document.querySelectorAll('.service').forEach(s=>s.addEventListener('mouseenter',()=>{document.querySelectorAll('.service').forEach(x=>x.classList.remove('active'));s.classList.add('active')}));
 const reveal=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('shown')}),{threshold:.13});document.querySelectorAll('section, .project-card, .service').forEach(el=>reveal.observe(el));
+
+
 document.querySelector('form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const b = e.currentTarget.querySelector('button');
     const form = e.currentTarget;
     
-    // Validación básica
+    // Obtenemos todos los inputs y el textarea
+    const inputs = form.querySelectorAll('input');
+    const mensajeArea = form.querySelector('textarea');
+
     const datos = {
-        nombre: form.querySelector('input[placeholder*="llamás"]').value,
-        empresa: form.querySelector('input[placeholder*="empresa"]').value,
-        correo: form.querySelector('input[type="email"]').value,
-        telefono: form.querySelector('input[type="tel"]').value,
-        mensaje: form.querySelector('textarea').value
+        nombre: inputs[0].value,
+        empresa: inputs[1].value,
+        correo: inputs[2].value,
+        telefono: inputs[3].value,
+        mensaje: mensajeArea.value
     };
 
+    // Validación simple
     if(!datos.nombre || !datos.correo || !datos.mensaje) {
-        alert("Por favor completa los campos obligatorios.");
+        alert("Por favor completa los campos obligatorios (Nombre, Correo y Proyecto).");
         return;
     }
 
@@ -41,10 +47,13 @@ document.querySelector('form').addEventListener('submit', async (e) => {
         }
     } catch (err) {
         alert("Hubo un error al enviar. Inténtalo de nuevo.");
-        b.textContent = 'INICIAR CONVERSACIÓN <b>→</b>';
+        b.textContent = 'INICIAR CONVERSACIÓN →';
         b.disabled = false;
     }
 });
+
+
+
 document.querySelector('.menu-toggle').addEventListener('click',()=>document.querySelector('nav').classList.toggle('open'));
 const modal=document.querySelector('.detail-modal'),modalContent=document.querySelector('.modal-content');
 const serviceDetails={
