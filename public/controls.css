@@ -1,0 +1,1 @@
+.project-controls{display:flex;gap:9px;margin-top:27px}.project-controls button{width:39px;height:39px;border-radius:50%;border:1px solid #bdc7d6;background:#fff;color:#0b1020;font-size:17px;cursor:pointer;transition:.25s}.project-controls button:hover{background:#1554ff;color:#fff;border-color:#1554ff}@media(max-width:800px){.project-controls{margin-top:20px}}
