@@ -7,13 +7,37 @@ const reveal=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isInters
 
 document.querySelector('form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const b = e.currentTarget.querySelector('button');
     const form = e.currentTarget;
+    const b = form.querySelector('button');
     
-    // Obtenemos todos los inputs y el textarea
     const inputs = form.querySelectorAll('input');
     const mensajeArea = form.querySelector('textarea');
 
+    // Mapeo de campos
+    const campos = [
+        { el: inputs[0], required: true },  // Nombre
+        { el: inputs[1], required: false }, // Empresa
+        { el: inputs[2], required: true },  // Correo
+        { el: inputs[3], required: true },  // Teléfono
+        { el: mensajeArea, required: true } // Mensaje
+    ];
+
+    let formValido = true;
+
+    // Validar cada campo
+    campos.forEach(campo => {
+        const parent = campo.el.parentElement;
+        if (campo.required && !campo.el.value.trim()) {
+            parent.classList.add('error');
+            formValido = false;
+        } else {
+            parent.classList.remove('error');
+        }
+    });
+
+    if (!formValido) return; // Si hay errores, no enviamos nada
+
+    // Si todo está bien, enviamos los datos
     const datos = {
         nombre: inputs[0].value,
         empresa: inputs[1].value,
@@ -21,12 +45,6 @@ document.querySelector('form').addEventListener('submit', async (e) => {
         telefono: inputs[3].value,
         mensaje: mensajeArea.value
     };
-
-    // Validación simple
-    if(!datos.nombre || !datos.correo || !datos.mensaje) {
-        alert("Por favor completa los campos obligatorios (Nombre, Correo y Proyecto).");
-        return;
-    }
 
     b.textContent = 'ENVIANDO...';
     b.disabled = true;
@@ -46,9 +64,11 @@ document.querySelector('form').addEventListener('submit', async (e) => {
             throw new Error();
         }
     } catch (err) {
-        alert("Hubo un error al enviar. Inténtalo de nuevo.");
-        b.textContent = 'INICIAR CONVERSACIÓN →';
-        b.disabled = false;
+        b.textContent = 'ERROR AL ENVIAR';
+        setTimeout(() => {
+            b.textContent = 'INICIAR CONVERSACIÓN →';
+            b.disabled = false;
+        }, 3000);
     }
 });
 
