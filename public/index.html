@@ -20,13 +20,48 @@
     <link rel="stylesheet" href="streamline.css" />
 
     <link rel="icon" type="image/png" href="asys-logo.png?v=2" />
+    <script>
+  // Redondear bordes del logo automáticamente para la pestaña
+  (() => {
+    const img = new Image();
+    img.src = 'asys-logo.png';
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const size = 64; // Tamaño óptimo para pestaña
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+
+      // Bordes redondeados: 16 para esquinas redondeadas, o 32 para círculo perfecto
+      const radio = 16; 
+
+      ctx.beginPath();
+      if (ctx.roundRect) {
+        ctx.roundRect(0, 0, size, size, radio);
+      } else {
+        ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+      }
+      ctx.clip();
+      ctx.drawImage(img, 0, 0, size, size);
+
+      // Asignar a la pestaña
+      let link = document.querySelector("link[rel~='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
+      link.href = canvas.toDataURL('image/png');
+    };
+  })();
+</script>
   </head>
   <body>
     <div class="cursor-glow" aria-hidden="true"></div>
     <div class="grain" aria-hidden="true"></div>
     <header class="site-header">
       <a class="brand" href="#inicio" aria-label="ASYS Technology, inicio"><img src="asys-logo.png" alt="Logotipo de ASYS Technology" /><span>ASYS<span class="brand-dot">.</span></span></a>
-      <nav aria-label="Navegación principal"><a href="#inicio">INICIO</a><a href="#servicios">SERVICIOSs</a><a href="#proyectos">PROYECTOS</a><a href="#impacto">IMPACTO</a><a href="#contacto">CONTACTO</a></nav>
+      <nav aria-label="Navegación principal"><a href="#inicio">INICIO</a><a href="#servicios">SERVICIOS</a><a href="#proyectos">PROYECTOS</a><a href="#impacto">IMPACTO</a><a href="#contacto">CONTACTO</a></nav>
       <a href="#contacto" class="header-cta">HABLEMOS <i>↗</i></a>
       <button class="menu-toggle" aria-label="Abrir menú">☰</button>
     </header>
