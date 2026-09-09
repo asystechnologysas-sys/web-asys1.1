@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software Barbería · En Construcción | ASYS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+    body {
+      background-color: #050813;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Efectos de luces Neón */
+    .neon-aura-1 {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 102, 255, 0.3) 0%, transparent 65%);
+      top: -120px;
+      left: -120px;
+      filter: blur(80px);
+    }
+    .neon-aura-2 {
+      position: absolute;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(0, 225, 255, 0.22) 0%, transparent 65%);
+      bottom: -100px;
+      right: -100px;
+      filter: blur(80px);
+    }
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(circle, black 40%, transparent 80%);
+    }
+
+    /* Tarjeta Neón Flotante */
+    .card-neon {
+      position: relative;
+      z-index: 2;
+      background: rgba(11, 18, 38, 0.8);
+      border: 1px solid rgba(0, 190, 255, 0.4);
+      border-radius: 28px;
+      padding: 55px 42px;
+      max-width: 620px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(0, 120, 255, 0.25), inset 0 0 20px rgba(0, 200, 255, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .badge-neon {
+      display: inline-block;
+      padding: 7px 18px;
+      border-radius: 25px;
+      background: rgba(0, 210, 255, 0.12);
+      border: 1px solid #00d2ff;
+      color: #00d2ff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+    }
+
+    h1 {
+      font-size: clamp(34px, 4.5vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 15px;
+    }
+
+    .neon-gradient-text {
+      background: linear-gradient(90deg, #0077ff, #00e1ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(0, 150, 255, 0.4);
+    }
+
+    .cursive-text {
+      font-family: 'Caveat', cursive;
+      font-size: 56px;
+      color: #00d2ff;
+      font-weight: 700;
+      display: inline-block;
+      text-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+    }
+
+    p {
+      color: #94a3b8;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 20px 0 35px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-neon {
+      background: linear-gradient(135deg, #0066ff, #00d2ff);
+      color: white;
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 0 25px rgba(0, 130, 255, 0.6);
+      transition: all 0.3s ease;
+    }
+    .btn-neon:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 45px rgba(0, 210, 255, 0.9);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      border-color: #00d2ff;
+      color: #00d2ff;
+      background: rgba(0, 210, 255, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <div class="neon-aura-1"></div>
+  <div class="neon-aura-2"></div>
+  <div class="grid-bg"></div>
+
+  <div class="card-neon">
+    <span class="badge-neon">⚡ Próximamente · En Construcción</span>
+    <h1>Software para<br><span class="neon-gradient-text">Agendamiento de Citas</span><br><span class="cursive-text">Barbería</span></h1>
+    <p>Estamos desarrollando la experiencia digital definitiva para barberías: agenda 24/7, recordatorios por WhatsApp, catálogo de cortes y control de ingresos en tiempo real.</p>
+
+    <div class="actions">
+      <a href="https://wa.me/573117304768?text=Hola%20ASYS,%20me%20interesa%20el%20Software%20para%20Barber%C3%ADas" target="_blank" class="btn-neon">Solicitar Acceso Anticipado ↗</a>
+      <a href="index.html" class="btn-outline">← Volver al Inicio</a>
+    </div>
+  </div>
+</body>
+</html>
