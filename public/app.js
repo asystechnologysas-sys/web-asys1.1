@@ -104,3 +104,24 @@ let autoProjectCarousel;function startProjectCarousel(){clearInterval(autoProjec
 openDetail=function(detail){if(!detail.metrics){modalContent.className='modal-content';modalContent.innerHTML=`<div><h2>${detail.title}</h2><p>${detail.text}</p><div class="modal-points">${detail.points.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="service-visual"><b>SOLUCIÓN ASYS</b><strong>Procesos que<br>se sienten<br>naturales.</strong></div>`}else{modalContent.className='modal-content case-study';modalContent.innerHTML=`<div class="case-gallery"><button class="gallery-arrow gallery-prev" aria-label="Imagen anterior">←</button><button class="gallery-arrow gallery-next" aria-label="Imagen siguiente">→</button>${detail.images.map((src,i)=>`<img class="${i===0?'active':''}" src="${src}" alt="Pantalla ${i+1} del proyecto" />`).join('')}<span class="gallery-count">01 / ${String(detail.images.length).padStart(2,'0')}</span><div class="gallery-dots">${detail.images.map((_,i)=>`<button class="${i===0?'active':''}" data-slide="${i}" aria-label="Ver imagen ${i+1}"></button>`).join('')}</div></div><div class="case-heading"><div><h2>${detail.title}</h2><p>${detail.description}</p></div><div class="case-before"><b>ANTES</b><p>${detail.before}</p><hr><b>CON ASYS TECHNOLOGY</b><p>${detail.after}</p></div></div><div class="case-metrics">${detail.metrics.map(x=>`<div class="case-metric"><small>${x[0]}</small><b>${x[1]}</b></div>`).join('')}</div><blockquote class="case-quote">${detail.quote}<footer>— ${detail.author}</footer></blockquote><div class="case-grid"><div><h3>CARACTERÍSTICAS PRINCIPALES</h3><ul>${detail.features.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>FUNCIONAMIENTO PASO A PASO</h3><ol>${detail.steps.map(x=>`<li>${x}</li>`).join('')}</ol></div></div>`};modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'};
 modalContent.addEventListener('click',event=>{const gallery=event.target.closest('.case-gallery');if(!gallery)return;const images=[...gallery.querySelectorAll('img')];let index=images.findIndex(img=>img.classList.contains('active'));if(event.target.closest('.gallery-next'))index=(index+1)%images.length;else if(event.target.closest('.gallery-prev'))index=(index-1+images.length)%images.length;else if(event.target.matches('[data-slide]'))index=Number(event.target.dataset.slide);else return;images.forEach((img,i)=>img.classList.toggle('active',i===index));gallery.querySelectorAll('[data-slide]').forEach((dot,i)=>dot.classList.toggle('active',i===index));gallery.querySelector('.gallery-count').textContent=`${String(index+1).padStart(2,'0')} / ${String(images.length).padStart(2,'0')}`});
 const projectCards=[...projectTrack.querySelectorAll('.project-card:not(.dashboard)')];projectCards.forEach(card=>projectTrack.append(card.cloneNode(true)));projectTrack.addEventListener('click',event=>{const open=event.target.closest('[data-project]');if(open)openDetail(projects[open.dataset.project])});clearInterval(autoProjectCarousel);startProjectCarousel=()=>{};let continuousMotion;function runContinuousCarousel(){clearInterval(continuousMotion);continuousMotion=setInterval(()=>{projectTrack.scrollLeft+=.95;const threshold=projectTrack.scrollWidth/2;if(projectTrack.scrollLeft>=threshold)projectTrack.scrollLeft-=threshold},16)}runContinuousCarousel();projectTrack.addEventListener('mouseenter',()=>clearInterval(continuousMotion));projectTrack.addEventListener('mouseleave',runContinuousCarousel);document.querySelector('.project-prev').addEventListener('click',()=>{projectTrack.scrollBy({left:-projectTrack.clientWidth*1.15,behavior:'smooth'})});document.querySelector('.project-next').addEventListener('click',()=>{projectTrack.scrollBy({left:projectTrack.clientWidth*1.15,behavior:'smooth'})});
+
+// Activar la línea azul según la sección visible
+const navLinks = document.querySelectorAll('.nav-item');
+const sections = document.querySelectorAll('section[id]');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop - 120;
+    if (pageYOffset >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach((link) => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
+    }
+  });
+});
