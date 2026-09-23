@@ -27,60 +27,34 @@ function actualizarRecorrido() {
     if (!productJourney) return;
 
     const rect = productJourney.getBoundingClientRect();
-    const distancia = Math.max(
-        productJourney.offsetHeight - window.innerHeight,
-        1
-    );
-
-    const progreso = Math.min(
-        1,
-        Math.max(0, -rect.top / distancia)
-    );
-
-    const paso = Math.min(
-        4,
-        Math.floor(progreso * 5)
-    );
+    const distancia = Math.max(productJourney.offsetHeight - window.innerHeight, 1);
+    const progreso = Math.min(1, Math.max(0, -rect.top / distancia));
+    const paso = Math.min(4, Math.floor(progreso * 5));
 
     productJourney.dataset.step = paso;
 
-    const barra =
-        productJourney.querySelector(
-            ".journey-progress span"
-        );
+    const barra = productJourney.querySelector(".journey-progress span");
 
     if (barra) {
-        barra.style.width =
-            `${progreso * 100}%`;
+        barra.style.width = `${progreso * 100}%`;
     }
 
 }
-
 
 if (productJourney) {
 
     actualizarRecorrido();
 
-    window.addEventListener(
-        "scroll",
-        () => {
+    window.addEventListener("scroll", () => {
 
-            if (journeyFramePending) return;
+        if (journeyFramePending) return;
 
-            journeyFramePending = true;
+        journeyFramePending = true;
+        requestAnimationFrame(actualizarRecorrido);
 
-            requestAnimationFrame(
-                actualizarRecorrido
-            );
+    }, { passive: true });
 
-        },
-        { passive: true }
-    );
-
-    window.addEventListener(
-        "resize",
-        actualizarRecorrido
-    );
+    window.addEventListener("resize", actualizarRecorrido);
 
 }
 
@@ -89,50 +63,35 @@ if (productJourney) {
    MENÚ MÓVIL
 ========================================================= */
 
-const menuToggle =
-    document.getElementById("menuToggle");
-
-const navLinks =
-    document.querySelector(".nav-links");
-
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.querySelector(".nav-links");
 
 if (menuToggle && navLinks) {
 
-    menuToggle.addEventListener(
-        "click",
-        () => {
+    menuToggle.addEventListener("click", () => {
 
-            navLinks.classList.toggle("open");
+        navLinks.classList.toggle("open");
 
-            const abierto =
-                navLinks.classList.contains("open");
+        const abierto = navLinks.classList.contains("open");
 
-            menuToggle.textContent =
-                abierto ? "✕" : "☰";
+        menuToggle.textContent = abierto ? "✕" : "☰";
 
-        }
-    );
+    });
 
 
-    navLinks.querySelectorAll("a").forEach(
-        link => {
+    // Cerrar menú al seleccionar una opción
 
-            link.addEventListener(
-                "click",
-                () => {
+    navLinks.querySelectorAll("a").forEach(link => {
 
-                    navLinks.classList.remove(
-                        "open"
-                    );
+        link.addEventListener("click", () => {
 
-                    menuToggle.textContent =
-                        "☰";
+            navLinks.classList.remove("open");
 
-                }
-            );
+            menuToggle.textContent = "☰";
 
-        }
-    );
+        });
+
+    });
 
 }
 
@@ -141,9 +100,7 @@ if (menuToggle && navLinks) {
    CAMBIO DEL HEADER AL HACER SCROLL
 ========================================================= */
 
-const navbar =
-    document.getElementById("navbar");
-
+const navbar = document.getElementById("navbar");
 
 function actualizarNavbar() {
 
@@ -169,7 +126,6 @@ function actualizarNavbar() {
 
 }
 
-
 window.addEventListener(
     "scroll",
     actualizarNavbar
@@ -186,39 +142,36 @@ document.querySelectorAll(
     'a[href^="#"]'
 ).forEach(link => {
 
-    link.addEventListener(
-        "click",
-        function (event) {
+    link.addEventListener("click", function (event) {
 
-            const href =
-                this.getAttribute("href");
+        const destino =
+            document.querySelector(
+                this.getAttribute("href")
+            );
 
-            if (!href || href === "#") return;
+        if (!destino) return;
 
-            const destino =
-                document.querySelector(href);
+        event.preventDefault();
 
-            if (!destino) return;
+        const headerHeight =
+            navbar
+                ? navbar.offsetHeight
+                : 0;
 
-            event.preventDefault();
+        const posicion =
+            destino.offsetTop -
+            headerHeight -
+            15;
 
-            const headerHeight =
-                navbar
-                    ? navbar.offsetHeight
-                    : 0;
+        window.scrollTo({
 
-            const posicion =
-                destino.offsetTop -
-                headerHeight -
-                15;
+            top: posicion,
 
-            window.scrollTo({
-                top: posicion,
-                behavior: "smooth"
-            });
+            behavior: "smooth"
 
-        }
-    );
+        });
+
+    });
 
 });
 
@@ -227,165 +180,102 @@ document.querySelectorAll(
    ANIMACIONES AL APARECER
 ========================================================= */
 
-const elementosAnimados =
-    document.querySelectorAll(
-        ".problem-card, " +
-        ".feature-card, " +
-        ".plan-card, " +
-        ".included-box, " +
-        ".demo-content, " +
-        ".phone-demo, " +
-        ".faq-list, " +
-        ".section-heading, " +
-        ".cta-box"
-    );
-
-
-elementosAnimados.forEach(
-    elemento => {
-
-        elemento.classList.add(
-            "animate-on-scroll"
-        );
-
-    }
+const elementosAnimados = document.querySelectorAll(
+    ".problem-card, " +
+    ".feature-card, " +
+    ".plan-card, " +
+    ".included-box, " +
+    ".demo-content, " +
+    ".phone-demo, " +
+    ".faq-list, " +
+    ".section-heading, " +
+    ".cta-box"
 );
 
 
-const observer =
-    new IntersectionObserver(
+elementosAnimados.forEach(elemento => {
 
-        entries => {
+    elemento.classList.add("animate-on-scroll");
 
-            entries.forEach(
-                entry => {
-
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
-
-                    entry.target.classList.add(
-                        "is-shown"
-                    );
-
-                    if (
-                        entry.target.classList.contains(
-                            "plan-card"
-                        )
-                    ) {
-
-                        entry.target.classList.add(
-                            "price-card-ready"
-                        );
-
-                        animarPrecio(
-                            entry.target
-                        );
-
-                    }
-
-                    observer.unobserve(
-                        entry.target
-                    );
-
-                }
-            );
-
-        },
-
-        {
-            threshold: 0.12
-        }
-
-    );
+});
 
 
-elementosAnimados.forEach(
-    elemento => {
+const observer = new IntersectionObserver(
 
-        observer.observe(elemento);
+    (entries) => {
 
+        entries.forEach(entry => {
+
+            if (!entry.isIntersecting) return;
+
+            entry.target.classList.add("is-shown");
+
+            // Las tarjetas de precio tienen su propia animación y hover en CSS.
+            // Se eliminan estos estilos inline al entrar en pantalla para no
+            // bloquear sus transformaciones.
+            if (entry.target.classList.contains("plan-card")) {
+
+                entry.target.classList.add("price-card-ready");
+                animarPrecio(entry.target);
+
+            }
+
+            observer.unobserve(entry.target);
+
+        });
+
+    },
+
+    {
+        threshold: 0.12
     }
+
 );
 
 
-/* =========================================================
-   RESPALDO DE SCROLL REAL
-========================================================= */
+elementosAnimados.forEach(elemento => {
 
-const elementosScroll =
-    [...elementosAnimados];
+    observer.observe(elemento);
 
+});
+
+
+/* Respaldo de scroll real: mantiene activas las entradas en cualquier navegador. */
+const elementosScroll = [...elementosAnimados];
 let scrollRevealPending = false;
-
 
 function revelarConScroll() {
 
     scrollRevealPending = false;
 
-    elementosScroll.forEach(
-        elemento => {
+    elementosScroll.forEach(elemento => {
 
-            if (
-                elemento.classList.contains(
-                    "is-shown"
-                )
-            ) {
-                return;
-            }
+        if (elemento.classList.contains("is-shown")) return;
 
-            const limite =
-                window.innerHeight * .88;
+        const limite = window.innerHeight * .88;
 
-            if (
-                elemento.getBoundingClientRect()
-                    .top < limite
-            ) {
+        if (elemento.getBoundingClientRect().top < limite) {
+            elemento.classList.add("is-shown");
 
-                elemento.classList.add(
-                    "is-shown"
-                );
-
-                if (
-                    elemento.classList.contains(
-                        "plan-card"
-                    )
-                ) {
-
-                    elemento.classList.add(
-                        "price-card-ready"
-                    );
-
-                    animarPrecio(
-                        elemento
-                    );
-
-                }
-
+            if (elemento.classList.contains("plan-card")) {
+                elemento.classList.add("price-card-ready");
+                animarPrecio(elemento);
             }
 
         }
-    );
+
+    });
 
 }
 
+window.addEventListener("scroll", () => {
 
-window.addEventListener(
-    "scroll",
-    () => {
+    if (scrollRevealPending) return;
 
-        if (scrollRevealPending) return;
+    scrollRevealPending = true;
+    requestAnimationFrame(revelarConScroll);
 
-        scrollRevealPending = true;
-
-        requestAnimationFrame(
-            revelarConScroll
-        );
-
-    },
-    { passive: true }
-);
-
+}, { passive: true });
 
 revelarConScroll();
 
@@ -394,83 +284,40 @@ revelarConScroll();
    REVELADO SUAVE DE CONTENIDO AL HACER SCROLL
 ========================================================= */
 
-const bloquesRevelables =
-    document.querySelectorAll(
-        ".center-heading, " +
-        ".cta-content, " +
-        ".faq-grid, " +
-        ".footer-main"
-    );
+const bloquesRevelables = document.querySelectorAll(
+    ".center-heading, .cta-content, .faq-grid, .footer-main"
+);
 
-
-const reduceMotion =
-    window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    );
-
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 if (reduceMotion.matches) {
 
-    bloquesRevelables.forEach(
-        bloque => {
-
-            bloque.classList.add(
-                "scroll-reveal",
-                "is-visible"
-            );
-
-        }
-    );
+    bloquesRevelables.forEach(bloque => {
+        bloque.classList.add("scroll-reveal", "is-visible");
+    });
 
 } else {
 
-    const revealObserver =
-        new IntersectionObserver(
-            entries => {
+    const revealObserver = new IntersectionObserver(entries => {
 
-                entries.forEach(
-                    entry => {
+        entries.forEach(entry => {
 
-                        if (
-                            !entry.isIntersecting
-                        ) {
-                            return;
-                        }
+            if (!entry.isIntersecting) return;
 
-                        entry.target.classList.add(
-                            "is-visible"
-                        );
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
 
-                        revealObserver.unobserve(
-                            entry.target
-                        );
+        });
 
-                    }
-                );
+    }, { threshold: .16 });
 
-            },
-            {
-                threshold: .16
-            }
-        );
+    bloquesRevelables.forEach((bloque, indice) => {
 
+        bloque.classList.add("scroll-reveal");
+        bloque.style.transitionDelay = `${Math.min(indice % 3, 2) * .08}s`;
+        revealObserver.observe(bloque);
 
-    bloquesRevelables.forEach(
-        (bloque, indice) => {
-
-            bloque.classList.add(
-                "scroll-reveal"
-            );
-
-            bloque.style.transitionDelay =
-                `${Math.min(indice % 3, 2) * .08}s`;
-
-            revealObserver.observe(
-                bloque
-            );
-
-        }
-    );
+    });
 
 }
 
@@ -480,22 +327,18 @@ if (reduceMotion.matches) {
 ========================================================= */
 
 const dashboard =
-    document.querySelector(
-        ".dashboard-window"
-    );
+    document.querySelector(".dashboard-window");
 
 
 const heroVisual =
-    document.querySelector(
-        ".hero-visual"
-    );
+    document.querySelector(".hero-visual");
 
 
 if (dashboard && heroVisual) {
 
     heroVisual.addEventListener(
         "mousemove",
-        event => {
+        (event) => {
 
             const rect =
                 heroVisual.getBoundingClientRect();
@@ -549,114 +392,87 @@ if (dashboard && heroVisual) {
 
 
 /* =========================================================
-   PLAN ÚNICO ASYS BARBER
+   BOTONES DE PLANES
 ========================================================= */
 
 const planButtons =
-    document.querySelectorAll(
-        ".plan-button"
-    );
+    document.querySelectorAll(".plan-button");
 
 
-const selectedPlanName =
-    document.getElementById(
-        "selectedPlanName"
-    );
+const selectedPlanName = document.getElementById("selectedPlanName");
+const selectedPlanWhatsapp = document.getElementById("selectedPlanWhatsapp");
 
+planButtons.forEach(button => {
 
-const selectedPlanWhatsapp =
-    document.getElementById(
-        "selectedPlanWhatsapp"
-    );
+    button.addEventListener("click", function () {
 
+        const plan =
+            this
+                .closest(".plan-card")
+                ?.querySelector(".plan-label")
+                ?.textContent
+                .trim();
 
-planButtons.forEach(
-    button => {
+        if (!plan) return;
 
-        button.addEventListener(
-            "click",
-            function () {
+        let mensaje = "";
 
-                const card =
-                    this.closest(
-                        ".plan-card"
-                    );
+        if (plan.includes("1 BARBERO")) {
 
-                if (!card) return;
+            mensaje =
+                "Hola ASYS, quiero información sobre el plan para 1 barbero.";
 
-                const precio =
-                    card
-                        .querySelector(
-                            "[data-price]"
-                        )
-                        ?.dataset.price ||
-                    "40000";
+        }
 
+        else if (plan.includes("2 BARBEROS")) {
 
-                const mensaje =
-                    "Hola ASYS, quiero información sobre ASYS Barber. " +
-                    "Me interesa el plan único de $40.000 COP mensuales " +
-                    "con barberos ilimitados.";
+            mensaje =
+                "Hola ASYS, quiero información sobre el plan para 2 barberos.";
 
+        }
 
-                const enlace =
-                    generarWhatsApp(
-                        mensaje
-                    );
+        else {
 
+            mensaje =
+                "Hola ASYS, quiero información sobre el plan para 3 o más barberos.";
 
-                this.href =
-                    enlace;
+        }
 
+        const enlace = generarWhatsApp(mensaje);
+        const card = this.closest(".plan-card");
+        const precio = card?.querySelector("[data-price]")?.dataset.price;
 
-                card.classList.add(
-                    "selected"
-                );
+        this.href = enlace;
 
+        document.querySelectorAll(".plan-card").forEach(otraTarjeta => {
+            otraTarjeta.classList.toggle("selected", otraTarjeta === card);
+        });
 
-                if (
-                    selectedPlanName
-                ) {
+        if (selectedPlanName && precio) {
+            selectedPlanName.textContent =
+                `${plan} · $${formatearPrecio(Number(precio))} COP / mes`;
+        }
 
-                    selectedPlanName.textContent =
-                        `ASYS BARBER · $${formatearPrecio(
-                            Number(precio)
-                        )} COP / mes`;
+        if (selectedPlanWhatsapp) {
+            selectedPlanWhatsapp.href = enlace;
+        }
 
-                }
+    });
 
-
-                if (
-                    selectedPlanWhatsapp
-                ) {
-
-                    selectedPlanWhatsapp.href =
-                        enlace;
-
-                }
-
-            }
-        );
-
-    }
-);
+});
 
 
 /* =========================================================
    GENERADOR DE WHATSAPP
 ========================================================= */
 
-function generarWhatsApp(
-    mensaje
-) {
+function generarWhatsApp(mensaje) {
 
     return (
         "https://wa.me/" +
         WHATSAPP_NUMBER +
         "?text=" +
-        encodeURIComponent(
-            mensaje
-        )
+        encodeURIComponent(mensaje)
     );
 
 }
@@ -667,9 +483,7 @@ function generarWhatsApp(
 ========================================================= */
 
 const whatsappButton =
-    document.querySelector(
-        ".whatsapp-button"
-    );
+    document.querySelector(".whatsapp-button");
 
 
 if (whatsappButton) {
@@ -682,9 +496,7 @@ if (whatsappButton) {
                 "Hola ASYS, quiero conocer la solución para barberías.";
 
             whatsappButton.href =
-                generarWhatsApp(
-                    mensaje
-                );
+                generarWhatsApp(mensaje);
 
         }
     );
@@ -697,15 +509,10 @@ if (whatsappButton) {
 ========================================================= */
 
 const ctaButton =
-    document.querySelector(
-        ".cta-button"
-    );
-
+    document.querySelector(".cta-button");
 
 const ctaSecondary =
-    document.querySelector(
-        ".cta-secondary"
-    );
+    document.querySelector(".cta-secondary");
 
 
 if (ctaButton) {
@@ -714,17 +521,11 @@ if (ctaButton) {
         "click",
         () => {
 
-            ctaButton.href =
-                selectedPlanWhatsapp
-                    ? (
-                        selectedPlanWhatsapp.href ||
-                        generarWhatsApp(
-                            "Hola ASYS, quiero conocer el sistema para barberías."
-                        )
-                    )
-                    : generarWhatsApp(
-                        "Hola ASYS, quiero conocer el sistema para barberías."
-                    );
+            ctaButton.href = selectedPlanWhatsapp
+                ? selectedPlanWhatsapp.href
+                : generarWhatsApp(
+                    "Hola ASYS, quiero conocer el sistema para barberías."
+                );
 
         }
     );
@@ -742,32 +543,30 @@ const cards =
     );
 
 
-cards.forEach(
-    card => {
+cards.forEach(card => {
 
-        card.addEventListener(
-            "mouseenter",
-            () => {
+    card.addEventListener(
+        "mouseenter",
+        () => {
 
-                card.style.transform =
-                    "translateY(-7px)";
+            card.style.transform =
+                "translateY(-7px)";
 
-            }
-        );
+        }
+    );
 
 
-        card.addEventListener(
-            "mouseleave",
-            () => {
+    card.addEventListener(
+        "mouseleave",
+        () => {
 
-                card.style.transform =
-                    "translateY(0)";
+            card.style.transform =
+                "translateY(0)";
 
-            }
-        );
+        }
+    );
 
-    }
-);
+});
 
 
 /* =========================================================
@@ -780,75 +579,75 @@ const preguntas =
     );
 
 
-preguntas.forEach(
-    pregunta => {
+preguntas.forEach(pregunta => {
 
-        pregunta.addEventListener(
-            "toggle",
-            () => {
+    pregunta.addEventListener(
+        "toggle",
+        () => {
 
-                if (!pregunta.open) return;
+            if (!pregunta.open) return;
 
-                preguntas.forEach(
-                    otraPregunta => {
+            preguntas.forEach(otraPregunta => {
 
-                        if (
-                            otraPregunta !==
-                            pregunta &&
-                            otraPregunta.open
-                        ) {
+                if (
+                    otraPregunta !== pregunta &&
+                    otraPregunta.open
+                ) {
 
-                            otraPregunta.open =
-                                false;
+                    otraPregunta.open = false;
 
-                        }
+                }
 
-                    }
-                );
+            });
 
-            }
-        );
+        }
+    );
 
-    }
-);
+});
 
 
 /* =========================================================
-   EFECTO DEL PLAN ÚNICO
+   EFECTO DE LOS PLANES
 ========================================================= */
 
 const planes =
-    document.querySelectorAll(
-        ".plan-card"
+    document.querySelectorAll(".plan-card");
+
+
+planes.forEach(plan => {
+
+    plan.addEventListener(
+        "mouseenter",
+        () => {
+
+            planes.forEach(otro => {
+
+                if (otro !== plan) {
+
+                    otro.style.opacity = ".72";
+
+                }
+
+            });
+
+        }
     );
 
 
-planes.forEach(
-    plan => {
+    plan.addEventListener(
+        "mouseleave",
+        () => {
 
-        plan.addEventListener(
-            "mouseenter",
-            () => {
+            planes.forEach(otro => {
 
-                plan.style.opacity =
-                    "1";
+                otro.style.opacity = "1";
 
-            }
-        );
+            });
 
+        }
+    );
 
-        plan.addEventListener(
-            "mouseleave",
-            () => {
-
-                plan.style.opacity =
-                    "1";
-
-            }
-        );
-
-    }
-);
+});
 
 
 /* =========================================================
@@ -872,55 +671,32 @@ const sectionObserver =
 
         entries => {
 
-            entries.forEach(
-                entry => {
+            entries.forEach(entry => {
 
-                    if (
-                        !entry.isIntersecting
-                    ) {
-                        return;
-                    }
+                if (!entry.isIntersecting) return;
 
-                    const id =
-                        entry.target
-                            .getAttribute(
-                                "id"
-                            );
+                const id =
+                    entry.target.getAttribute("id");
 
+                // Algunas escenas narrativas no tienen enlace propio en el
+                // menú. En ellas se conserva el último enlace navegable.
+                const enlaceDeSeccion = Array.from(enlacesNavegacion).find(
+                    enlace => enlace.getAttribute("href") === `#${id}`
+                );
 
-                    const enlaceDeSeccion =
-                        Array.from(
-                            enlacesNavegacion
-                        ).find(
-                            enlace =>
-                                enlace.getAttribute(
-                                    "href"
-                                ) === `#${id}`
-                        );
+                if (!enlaceDeSeccion) return;
 
+                enlacesNavegacion.forEach(enlace => {
 
-                    if (!enlaceDeSeccion) {
-                        return;
-                    }
-
-
-                    enlacesNavegacion.forEach(
-                        enlace => {
-
-                            enlace.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-
-                    enlaceDeSeccion.classList.add(
+                    enlace.classList.remove(
                         "active"
                     );
 
-                }
-            );
+                });
+
+                enlaceDeSeccion.classList.add("active");
+
+            });
 
         },
 
@@ -931,15 +707,11 @@ const sectionObserver =
     );
 
 
-secciones.forEach(
-    seccion => {
+secciones.forEach(seccion => {
 
-        sectionObserver.observe(
-            seccion
-        );
+    sectionObserver.observe(seccion);
 
-    }
-);
+});
 
 
 /* =========================================================
@@ -952,48 +724,49 @@ const botonesCTA =
     );
 
 
-botonesCTA.forEach(
-    boton => {
+botonesCTA.forEach(boton => {
 
-        boton.addEventListener(
-            "mouseenter",
-            () => {
+    boton.addEventListener(
+        "mouseenter",
+        () => {
 
-                boton.style.transform =
-                    "translateY(-2px)";
+            boton.style.transform =
+                "translateY(-2px)";
 
-            }
-        );
+        }
+    );
 
 
-        boton.addEventListener(
-            "mouseleave",
-            () => {
+    boton.addEventListener(
+        "mouseleave",
+        () => {
 
-                boton.style.transform =
-                    "translateY(0)";
+            boton.style.transform =
+                "translateY(0)";
 
-            }
-        );
+        }
+    );
 
-    }
-);
+});
 
 
 /* =========================================================
-   PLAN ÚNICO
+   CONTADOR VISUAL DE PLANES
+   Preparado para futuras modificaciones
 ========================================================= */
 
 const precios = {
 
-    unico: 40000
+    uno: 35000,
+
+    dos: 50000,
+
+    tres: 70000
 
 };
 
 
-function formatearPrecio(
-    valor
-) {
+function formatearPrecio(valor) {
 
     return new Intl.NumberFormat(
         "es-CO"
@@ -1001,133 +774,47 @@ function formatearPrecio(
 
 }
 
-
 if (ctaSecondary) {
 
-    ctaSecondary.addEventListener(
-        "click",
-        () => {
+    ctaSecondary.addEventListener("click", () => {
 
-            if (
-                selectedPlanWhatsapp &&
-                selectedPlanWhatsapp.href
-            ) {
-
-                ctaSecondary.href =
-                    selectedPlanWhatsapp.href;
-
-            } else {
-
-                ctaSecondary.href =
-                    generarWhatsApp(
-                        "Hola ASYS, quiero información sobre ASYS Barber. " +
-                        "Me interesa el plan único de $40.000 COP mensuales " +
-                        "con barberos ilimitados."
-                    );
-
-            }
-
+        if (selectedPlanWhatsapp) {
+            ctaSecondary.href = selectedPlanWhatsapp.href;
         }
-    );
+
+    });
 
 }
 
 
-/* =========================================================
-   ANIMACIÓN DEL PRECIO
-========================================================= */
+function animarPrecio(tarjeta) {
 
-function animarPrecio(
-    tarjeta
-) {
+    const precio = tarjeta.querySelector("[data-price]");
 
-    const precio =
-        tarjeta.querySelector(
-            "[data-price]"
-        );
-
-
-    if (
-        !precio ||
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches
-    ) {
-
+    if (!precio || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         return;
-
     }
 
+    const total = Number(precio.dataset.price);
+    const inicio = performance.now();
+    const duracion = 700;
 
-    const total =
-        Number(
-            precio.dataset.price
-        );
+    function actualizarPrecio(ahora) {
 
+        const progreso = Math.min((ahora - inicio) / duracion, 1);
+        const suavizado = 1 - Math.pow(1 - progreso, 3);
+        const valor = Math.round((total * suavizado) / 1000) * 1000;
 
-    const inicio =
-        performance.now();
+        precio.textContent = `$${formatearPrecio(valor)}`;
 
-
-    const duracion =
-        700;
-
-
-    function actualizarPrecio(
-        ahora
-    ) {
-
-        const progreso =
-            Math.min(
-                (ahora - inicio) /
-                duracion,
-                1
-            );
-
-
-        const suavizado =
-            1 -
-            Math.pow(
-                1 - progreso,
-                3
-            );
-
-
-        const valor =
-            Math.round(
-                (
-                    total *
-                    suavizado
-                ) / 1000
-            ) * 1000;
-
-
-        precio.textContent =
-            `$${formatearPrecio(
-                valor
-            )}`;
-
-
-        if (
-            progreso < 1
-        ) {
-
-            requestAnimationFrame(
-                actualizarPrecio
-            );
-
+        if (progreso < 1) {
+            requestAnimationFrame(actualizarPrecio);
         }
 
     }
 
-
-    precio.textContent =
-        "$0";
-
-
-    requestAnimationFrame(
-        actualizarPrecio
-    );
+    precio.textContent = "$0";
+    requestAnimationFrame(actualizarPrecio);
 
 }
 
@@ -1140,9 +827,7 @@ console.log(
     "ASYS Technology | Sistema para Barberías cargado correctamente."
 );
 
-
 console.log(
-    "Plan:",
-    precios.unico,
-    "COP / mes | Barberos ilimitados"
+    "Planes:",
+    precios
 );
