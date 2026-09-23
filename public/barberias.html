@@ -2,20 +2,21 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <meta
         name="description"
-        content="Software para barberías de ASYS Technology. Agenda, clientes, servicios y gestión de barberos en un solo lugar."
+        content="ASYS Barber — Software de agendamiento y gestión para barberías."
     >
 
-    <title>Software para Barberías | ASYS Technology</title>
+    <title>ASYS Barber | Software para Barberías</title>
 
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -23,956 +24,370 @@
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
 
-    <header class="navbar" id="navbar">
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-        <div class="container nav-container">
+<header class="navbar" id="navbar">
 
-            <a href="#inicio" class="brand-logo">
+    <div class="container nav-container">
 
-                <img
-                    src="nuevo%20logo.png"
-                    alt="ASYS Technology"
-                >
+        <a href="#inicio" class="brand-logo">
 
-                <div class="brand-text">
-                    <strong>ASYS</strong>
-                    <small>TECHNOLOGY</small>
-                </div>
+            <img
+                src="nuevo logo.png"
+                alt="ASYS Technology"
+            >
 
+            <span class="brand-text">
+
+                <strong>ASYS</strong>
+
+                <small>TECHNOLOGY</small>
+
+            </span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="#inicio" class="active">
+                Inicio
             </a>
 
+            <a href="#solucion">
+                Solución
+            </a>
 
-            <nav class="nav-links">
+            <a href="#funcionalidades">
+                Funcionalidades
+            </a>
 
-                <a href="#inicio" class="active">Inicio</a>
+            <a href="#planes">
+                Planes
+            </a>
 
-                <a href="#solucion">Solución</a>
+            <a href="#faq">
+                FAQ
+            </a>
 
-                <a href="#funcionalidades">Funcionalidades</a>
+            <a
+                href="#contacto"
+                class="nav-cta"
+            >
+                Hablar con ASYS
+            </a>
 
-                <a href="#planes">Planes</a>
+        </nav>
 
-                <a href="#faq">Preguntas</a>
+
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Abrir menú"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section
+    class="hero"
+    id="inicio"
+>
+
+    <div class="container hero-grid">
+
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                SOFTWARE PARA BARBERÍAS
+
+            </div>
+
+
+            <div class="hero-line"></div>
+
+
+            <h1>
+
+                Tu barbería.
+                <span>Más organizada.</span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Gestiona citas, barberos, clientes y servicios
+                desde una plataforma diseñada para simplificar
+                la operación diaria de tu barbería.
+
+            </p>
+
+
+            <div class="hero-actions">
 
                 <a
-                    href="https://wa.me/573117304768"
-                    target="_blank"
-                    class="nav-cta"
+                    href="#planes"
+                    class="btn btn-primary"
                 >
-                    Hablar con nosotros
+                    Ver planes
                 </a>
 
-            </nav>
+
+                <a
+                    href="#demo"
+                    class="text-link"
+                >
+                    Conocer el sistema →
+                </a>
+
+            </div>
 
 
-            <button
-                class="menu-toggle"
-                id="menuToggle"
-                aria-label="Abrir menú"
-            >
-                ☰
-            </button>
+            <div class="hero-note">
+
+                <span></span>
+
+                Sistema disponible para barberías
+
+            </div>
 
         </div>
 
-    </header>
 
 
+        <!-- DASHBOARD -->
 
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
+        <div class="hero-visual">
 
-    <main>
+            <div class="dashboard-window">
 
-        <section class="hero" id="inicio">
+                <div class="dashboard-header">
 
-            <div class="hero-background"></div>
+                    <div>
 
-            <div class="container hero-grid">
+                        <strong>
+                            ASYS Barber
+                        </strong>
 
-                <div class="hero-content">
-
-                    <div class="eyebrow">
-                        <span class="eyebrow-dot"></span>
-                        SOLUCIÓN PARA BARBERÍAS
-                    </div>
-
-
-                    <h1>
-                        Tu barbería.<br>
-                        <span>Más organizada.</span><br>
-                        Más inteligente.
-                    </h1>
-
-
-                    <div class="hero-line"></div>
-
-
-                    <p class="hero-description">
-                        Gestiona tu agenda, clientes, servicios y barberos
-                        desde un solo lugar.
-                    </p>
-
-
-                    <div class="hero-actions">
-
-                        <a
-                            href="#planes"
-                            class="btn btn-primary"
-                        >
-                            Ver planes
-                            <span>→</span>
-                        </a>
-
-
-                        <a
-                            href="#funcionalidades"
-                            class="text-link"
-                        >
-                            Conocer la solución
-                            <span>→</span>
-                        </a>
+                        <small>
+                            Panel de administración
+                        </small>
 
                     </div>
 
 
-                    <div class="hero-note">
+                    <div class="status">
 
                         <span></span>
 
-                        Una solución desarrollada por ASYS Technology
+                        Sistema activo
 
                     </div>
 
                 </div>
 
 
+                <div class="dashboard-body">
 
-                <!-- MOCKUP -->
-                <div class="hero-visual">
 
-                    <div class="dashboard-window">
+                    <aside class="dashboard-sidebar">
 
-                        <div class="dashboard-header">
+                        <div class="side-logo">
+                            A
+                        </div>
+
+                        <span class="side-active"></span>
+
+                        <span></span>
+
+                        <span></span>
+
+                        <span></span>
+
+                    </aside>
+
+
+                    <div class="dashboard-content">
+
+
+                        <div class="dashboard-welcome">
 
                             <div>
-                                <strong>Panel de barbería</strong>
-                                <small>Gestión del día</small>
-                            </div>
 
-                            <div class="status">
-                                <span></span>
-                                Activo
-                            </div>
+                                <small>
+                                    HOY
+                                </small>
 
-                        </div>
-
-
-                        <div class="dashboard-body">
-
-                            <div class="dashboard-sidebar">
-
-                                <div class="side-logo">
-                                    A
-                                </div>
-
-                                <span class="side-active"></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                                <h3>
+                                    Agenda
+                                </h3>
 
                             </div>
 
 
-                            <div class="dashboard-content">
-
-                                <div class="dashboard-welcome">
-
-                                    <div>
-                                        <small>HOY</small>
-                                        <h3>Agenda</h3>
-                                    </div>
-
-                                    <button>+ Nueva cita</button>
-
-                                </div>
-
-
-                                <div class="dashboard-cards">
-
-                                    <div class="mini-card">
-                                        <small>PRÓXIMA CITA</small>
-                                        <strong>10:30 AM</strong>
-                                        <span>Juan Pérez</span>
-                                    </div>
-
-                                    <div class="mini-card">
-                                        <small>SERVICIO</small>
-                                        <strong>Corte</strong>
-                                        <span>Barbero 01</span>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="agenda-preview">
-
-                                    <div class="agenda-title">
-                                        <strong>Agenda de hoy</strong>
-                                        <span>Ver agenda completa</span>
-                                    </div>
-
-
-                                    <div class="appointment">
-                                        <div class="appointment-time">
-                                            09:00
-                                        </div>
-
-                                        <div class="appointment-info">
-                                            <strong>Carlos Martínez</strong>
-                                            <span>Corte + Barba</span>
-                                        </div>
-
-                                        <div class="appointment-status">
-                                            Confirmada
-                                        </div>
-                                    </div>
-
-
-                                    <div class="appointment">
-                                        <div class="appointment-time">
-                                            10:30
-                                        </div>
-
-                                        <div class="appointment-info">
-                                            <strong>Juan Pérez</strong>
-                                            <span>Corte clásico</span>
-                                        </div>
-
-                                        <div class="appointment-status">
-                                            Confirmada
-                                        </div>
-                                    </div>
-
-
-                                    <div class="appointment">
-                                        <div class="appointment-time">
-                                            12:00
-                                        </div>
-
-                                        <div class="appointment-info">
-                                            <strong>Andrés Gómez</strong>
-                                            <span>Barba</span>
-                                        </div>
-
-                                        <div class="appointment-status">
-                                            Pendiente
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="floating-element floating-one">
-                        <span>✓</span>
-                        Cita confirmada
-                    </div>
-
-
-                    <div class="floating-element floating-two">
-                        <span>+</span>
-                        Nuevo cliente
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- RECORRIDO DEL PRODUCTO: interfaces HTML reemplazables por capturas reales -->
-        <section class="product-journey" id="recorrido" aria-label="Recorrido por el sistema ASYS">
-            <div class="journey-stage">
-                <div class="journey-copy">
-                    <span class="journey-kicker">ASYS EN ACCIÓN</span>
-                    <h2 class="journey-title journey-title-agenda">Todo empieza<br>con una cita.</h2>
-                    <h2 class="journey-title journey-title-clients">Conoce mejor<br>a tus clientes.</h2>
-                    <h2 class="journey-title journey-title-services">Define tus<br>servicios.</h2>
-                    <h2 class="journey-title journey-title-team">Tu equipo,<br>organizado.</h2>
-                    <h2 class="journey-title journey-title-connected">Todo conectado.<br><span>En un solo lugar.</span></h2>
-                    <p class="journey-description">Una agenda organizada cambia la forma de trabajar.</p>
-                </div>
-
-                <!-- IMAGEN: dashboard principal. Este mockup puede sustituirse por una captura real. -->
-                <div class="journey-dashboard" aria-label="Vista demostrativa de la plataforma">
-                    <div class="journey-window-bar"><span></span><span></span><span></span><strong>Mi barbería</strong><i>● Activo</i></div>
-
-                    <section class="journey-scene scene-agenda" aria-label="Agenda">
-                        <div class="scene-heading"><small>HOY · AGENDA</small><strong>Miércoles, 18</strong><button>+ Nueva cita</button></div>
-                        <div class="agenda-list">
-                            <div><time>09:00</time><span class="appointment blue">Corte · Cliente 01</span></div>
-                            <div><time>10:00</time><span class="appointment violet">Barba · Cliente 02</span></div>
-                            <div><time>11:00</time><span class="appointment blue">Corte + barba · Cliente 03</span></div>
-                            <div><time>12:00</time><span class="appointment soft">Disponible</span></div>
-                            <div><time>13:00</time><span class="appointment violet">Corte · Cliente 04</span></div>
-                        </div>
-                    </section>
-
-                    <section class="journey-scene scene-clients" aria-label="Clientes">
-                        <div class="scene-heading"><small>CLIENTES</small><strong>Directorio de clientes</strong><button>+ Agregar</button></div>
-                        <div class="client-list">
-                            <div><b>CA</b><span>Cliente 01<small>Última visita registrada</small></span><i>›</i></div>
-                            <div><b>CL</b><span>Cliente 02<small>Última visita registrada</small></span><i>›</i></div>
-                            <div><b>CL</b><span>Cliente 03<small>Última visita registrada</small></span><i>›</i></div>
-                            <div><b>CL</b><span>Cliente 04<small>Última visita registrada</small></span><i>›</i></div>
-                        </div>
-                    </section>
-
-                    <section class="journey-scene scene-services" aria-label="Servicios">
-                        <div class="scene-heading"><small>SERVICIOS</small><strong>Catálogo de la barbería</strong><button>+ Servicio</button></div>
-                        <div class="service-list"><div>✂<span>CORTE<small>Configuración disponible</small></span></div><div>♧<span>BARBA<small>Configuración disponible</small></span></div><div>✦<span>CORTE + BARBA<small>Configuración disponible</small></span></div><div>＋<span>OTROS SERVICIOS<small>Configuración disponible</small></span></div></div>
-                    </section>
-
-                    <section class="journey-scene scene-team" aria-label="Barberos">
-                        <div class="scene-heading"><small>BARBEROS</small><strong>Tu equipo</strong><button>+ Barbero</button></div>
-                        <div class="team-list"><div><b>01</b><span>Barbero 01<small>Disponible hoy</small></span><em>Activo</em></div><div><b>02</b><span>Barbero 02<small>Disponible hoy</small></span><em>Activo</em></div><div><b>03</b><span>Barbero 03<small>Disponible hoy</small></span><em>Activo</em></div></div>
-                    </section>
-
-                    <section class="journey-scene scene-connected" aria-label="Operación conectada">
-                        <div class="connection-map"><div>AGENDA</div><i></i><div>CLIENTES</div><i></i><div>SERVICIOS</div><i></i><div>BARBEROS</div></div>
-                        <strong>Una operación conectada</strong>
-                    </section>
-                </div>
-                <div class="journey-progress" aria-hidden="true"><span></span></div>
-            </div>
-        </section>
-
-
-
-        <!-- =====================================================
-             SOLUCIÓN
-        ====================================================== -->
-
-        <section class="section solution-section" id="solucion">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <div>
-                        <div class="eyebrow">
-                            <span class="eyebrow-dot"></span>
-                            UNA SOLUCIÓN PENSADA PARA TI
-                        </div>
-
-                        <h2>
-                            Menos complicaciones.
-                            <span>Más control.</span>
-                        </h2>
-                    </div>
-
-
-                    <p>
-                        Una herramienta diseñada para que la administración
-                        de tu barbería sea más sencilla y puedas concentrarte
-                        en lo que realmente importa: tus clientes.
-                    </p>
-
-                </div>
-
-
-
-                <div class="problem-grid">
-
-                    <article class="problem-card">
-
-                        <div class="problem-number">
-                            01
-                        </div>
-
-                        <div class="problem-icon">
-                            📅
-                        </div>
-
-                        <h3>
-                            Agenda organizada
-                        </h3>
-
-                        <p>
-                            Visualiza y administra tus citas desde
-                            un solo lugar.
-                        </p>
-
-                    </article>
-
-
-                    <article class="problem-card">
-
-                        <div class="problem-number">
-                            02
-                        </div>
-
-                        <div class="problem-icon">
-                            👤
-                        </div>
-
-                        <h3>
-                            Clientes centralizados
-                        </h3>
-
-                        <p>
-                            Mantén la información de tus clientes
-                            organizada y disponible.
-                        </p>
-
-                    </article>
-
-
-                    <article class="problem-card">
-
-                        <div class="problem-number">
-                            03
-                        </div>
-
-                        <div class="problem-icon">
-                            ✂
-                        </div>
-
-                        <h3>
-                            Servicios controlados
-                        </h3>
-
-                        <p>
-                            Administra tus servicios, precios y
-                            disponibilidad fácilmente.
-                        </p>
-
-                    </article>
-
-
-                    <article class="problem-card">
-
-                        <div class="problem-number">
-                            04
-                        </div>
-
-                        <div class="problem-icon">
-                            👥
-                        </div>
-
-                        <h3>
-                            Barberos organizados
-                        </h3>
-
-                        <p>
-                            Gestiona los profesionales que forman
-                            parte de tu barbería.
-                        </p>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             FUNCIONALIDADES
-        ====================================================== -->
-
-        <section class="section features-section" id="funcionalidades">
-
-            <div class="container">
-
-                <div class="center-heading">
-
-                    <div class="eyebrow">
-                        <span class="eyebrow-dot"></span>
-                        FUNCIONALIDADES
-                    </div>
-
-                    <h2>
-                        Todo lo que necesitas
-                        <span>en un solo lugar.</span>
-                    </h2>
-
-                    <p>
-                        Una plataforma creada para centralizar
-                        la operación de tu barbería.
-                    </p>
-
-                </div>
-
-
-
-                <div class="features-grid">
-
-                    <article class="feature-card">
-
-                        <div class="feature-icon">
-                            📅
-                        </div>
-
-                        <h3>
-                            Agenda digital
-                        </h3>
-
-                        <p>
-                            Organiza tus citas y consulta fácilmente
-                            la agenda de cada día.
-                        </p>
-
-                        <span class="feature-number">
-                            01
-                        </span>
-
-                    </article>
-
-
-                    <article class="feature-card">
-
-                        <div class="feature-icon">
-                            👤
-                        </div>
-
-                        <h3>
-                            Gestión de clientes
-                        </h3>
-
-                        <p>
-                            Registra y consulta la información
-                            de tus clientes desde la plataforma.
-                        </p>
-
-                        <span class="feature-number">
-                            02
-                        </span>
-
-                    </article>
-
-
-                    <article class="feature-card">
-
-                        <div class="feature-icon">
-                            ✂
-                        </div>
-
-                        <h3>
-                            Servicios
-                        </h3>
-
-                        <p>
-                            Configura los servicios que ofrece
-                            tu barbería y sus respectivos precios.
-                        </p>
-
-                        <span class="feature-number">
-                            03
-                        </span>
-
-                    </article>
-
-
-                    <article class="feature-card">
-
-                        <div class="feature-icon">
-                            👥
-                        </div>
-
-                        <h3>
-                            Gestión de barberos
-                        </h3>
-
-                        <p>
-                            Administra los usuarios y profesionales
-                            que hacen parte de tu equipo.
-                        </p>
-
-                        <span class="feature-number">
-                            04
-                        </span>
-
-                    </article>
-
-
-                    <article class="feature-card">
-
-                        <div class="feature-icon">
-                            🔔
-                        </div>
-
-                        <h3>
-                            Recordatorios
-                        </h3>
-
-                        <p>
-                            Facilita la comunicación con tus clientes
-                            mediante recordatorios de sus citas.
-                        </p>
-
-                        <span class="feature-number">
-                            05
-                        </span>
-
-                    </article>
-
-
-                    <article class="feature-card">
-
-                        <div class="feature-icon">
-                            📱
-                        </div>
-
-                        <h3>
-                            Adaptado a celular
-                        </h3>
-
-                        <p>
-                            Accede a la plataforma desde diferentes
-                            dispositivos sin complicaciones.
-                        </p>
-
-                        <span class="feature-number">
-                            06
-                        </span>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             DEMO DEL SISTEMA
-        ====================================================== -->
-
-        <section class="section demo-section">
-
-            <div class="container demo-grid">
-
-                <div class="demo-content">
-
-                    <div class="eyebrow">
-                        <span class="eyebrow-dot"></span>
-                        TU BARBERÍA
-                    </div>
-
-                    <h2>
-                        Una operación
-                        <span>más sencilla.</span>
-                    </h2>
-
-                    <p>
-                        Desde la agenda hasta la gestión de clientes,
-                        todo está organizado para que puedas administrar
-                        tu barbería desde una misma plataforma.
-                    </p>
-
-
-                    <ul class="check-list">
-
-                        <li>
-                            <span>✓</span>
-                            Agenda de citas
-                        </li>
-
-                        <li>
-                            <span>✓</span>
-                            Gestión de clientes
-                        </li>
-
-                        <li>
-                            <span>✓</span>
-                            Administración de servicios
-                        </li>
-
-                        <li>
-                            <span>✓</span>
-                            Gestión de barberos
-                        </li>
-
-                        <li>
-                            <span>✓</span>
-                            Sistema de usuarios
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-
-                <div class="phone-demo">
-
-                    <div class="phone">
-
-                        <div class="phone-top"></div>
-
-                        <div class="phone-screen">
-
-                            <div class="phone-header">
-
-                                <strong>Mi barbería</strong>
-
-                                <span>⋮</span>
-
-                            </div>
-
-
-                            <div class="phone-date">
-
-                                <small>MIÉRCOLES</small>
-
-                                <strong>18 SEPTIEMBRE</strong>
-
-                            </div>
-
-
-                            <div class="phone-appointment">
-
-                                <div>
-                                    <small>10:30 AM</small>
-                                    <strong>Juan Pérez</strong>
-                                </div>
-
-                                <span>
-                                    Corte
-                                </span>
-
-                            </div>
-
-
-                            <div class="phone-appointment">
-
-                                <div>
-                                    <small>11:30 AM</small>
-                                    <strong>Carlos Gómez</strong>
-                                </div>
-
-                                <span>
-                                    Barba
-                                </span>
-
-                            </div>
-
-
-                            <div class="phone-appointment">
-
-                                <div>
-                                    <small>01:00 PM</small>
-                                    <strong>Andrés Ruiz</strong>
-                                </div>
-
-                                <span>
-                                    Corte + Barba
-                                </span>
-
-                            </div>
-
-
-                            <button class="phone-button">
-                                + Nueva cita
+                            <button>
+                                + Cita
                             </button>
 
                         </div>
 
-                    </div>
 
-                </div>
+                        <div class="dashboard-cards">
 
-            </div>
+                            <div class="mini-card">
 
-        </section>
+                                <small>
+                                    CITAS HOY
+                                </small>
 
+                                <strong>
+                                    18
+                                </strong>
 
+                                <span>
+                                    Reservadas
+                                </span>
 
-        <!-- =====================================================
-             PLANES
-        ====================================================== -->
-
-        <section class="section plans-section" id="planes">
-
-            <div class="container">
-
-                <div class="center-heading">
-
-                    <div class="eyebrow">
-                        <span class="eyebrow-dot"></span>
-                        PLANES
-                    </div>
-
-                    <h2>
-                        Un solo plan,
-                        <span>un precio según tu equipo.</span>
-                    </h2>
-
-                    <p>
-                        Todas las funcionalidades incluidas.
-                        El precio cambia únicamente según la cantidad
-                        de barberos de tu barbería.
-                    </p>
-
-                </div>
+                            </div>
 
 
+                            <div class="mini-card">
 
-                <div class="plans-grid">
+                                <small>
+                                    CLIENTES
+                                </small>
 
-                    <!-- PLAN 1 -->
+                                <strong>
+                                    126
+                                </strong>
 
-                    <article class="plan-card" aria-label="Plan para 1 barbero: 35.000 pesos colombianos al mes">
+                                <span>
+                                    Registrados
+                                </span>
 
-                        <div class="barber-count" aria-hidden="true">
-                            <svg viewBox="0 0 76 44"><circle cx="38" cy="13" r="8"/><path d="M23 40c1-10 7-16 15-16s14 6 15 16H23Z"/></svg>
-                        </div>
+                            </div>
 
-                        <span class="plan-label">1 BARBERO</span>
-
-                        <div class="price">
-                            <strong data-price="35000">$35.000</strong>
-                            <span>COP / mes</span>
                         </div>
 
 
-                        <a
-                            href="https://wa.me/573117304768?text=Hola%20ASYS,%20quiero%20informaci%C3%B3n%20del%20plan%20para%201%20barbero."
-                            target="_blank"
-                            class="plan-button"
-                        >
-                            Elegir plan
-                        </a>
+                        <div class="agenda-preview">
 
-                    </article>
+                            <div class="agenda-title">
+
+                                <strong>
+                                    Próximas citas
+                                </strong>
+
+                                <span>
+                                    Ver agenda
+                                </span>
+
+                            </div>
 
 
+                            <div class="appointment">
 
-                    <!-- PLAN 2 -->
+                                <div class="appointment-time">
+                                    09:00
+                                </div>
 
-                    <article class="plan-card featured selected" aria-label="Plan para 2 barberos: 50.000 pesos colombianos al mes">
+                                <div class="appointment-info">
 
-                        <div class="barber-count" aria-hidden="true">
-                            <svg viewBox="0 0 76 44"><circle cx="27" cy="13" r="8"/><circle cx="49" cy="13" r="8"/><path d="M12 40c1-10 7-16 15-16s14 6 15 16H12Z"/><path d="M34 40c1-10 7-16 15-16s14 6 15 16H34Z"/></svg>
+                                    <strong>
+                                        Carlos Rodríguez
+                                    </strong>
+
+                                    <span>
+                                        Corte + Barba
+                                    </span>
+
+                                </div>
+
+                                <div class="appointment-status">
+                                    Confirmada
+                                </div>
+
+                            </div>
+
+
+                            <div class="appointment">
+
+                                <div class="appointment-time">
+                                    10:30
+                                </div>
+
+                                <div class="appointment-info">
+
+                                    <strong>
+                                        Juan Pérez
+                                    </strong>
+
+                                    <span>
+                                        Corte clásico
+                                    </span>
+
+                                </div>
+
+                                <div class="appointment-status">
+                                    Confirmada
+                                </div>
+
+                            </div>
+
+
+                            <div class="appointment">
+
+                                <div class="appointment-time">
+                                    12:00
+                                </div>
+
+                                <div class="appointment-info">
+
+                                    <strong>
+                                        Andrés Gómez
+                                    </strong>
+
+                                    <span>
+                                        Fade
+                                    </span>
+
+                                </div>
+
+                                <div class="appointment-status">
+                                    Confirmada
+                                </div>
+
+                            </div>
+
                         </div>
-
-                        <span class="plan-label">2 BARBEROS</span>
-
-                        <div class="price">
-                            <strong data-price="50000">$50.000</strong>
-                            <span>COP / mes</span>
-                        </div>
-
-
-                        <a
-                            href="https://wa.me/573117304768?text=Hola%20ASYS,%20quiero%20informaci%C3%B3n%20del%20plan%20para%202%20barberos."
-                            target="_blank"
-                            class="plan-button"
-                        >
-                            Elegir plan
-                        </a>
-
-                    </article>
-
-
-
-                    <!-- PLAN 3 -->
-
-                    <article class="plan-card" aria-label="Plan para 3 o más barberos: 70.000 pesos colombianos al mes">
-
-                        <div class="barber-count" aria-hidden="true">
-                            <svg viewBox="0 0 76 44"><circle cx="19" cy="14" r="7"/><circle cx="38" cy="10" r="9"/><circle cx="57" cy="14" r="7"/><path d="M7 40c1-9 6-14 12-14s11 5 12 14H7Z"/><path d="M22 40c1-11 7-17 16-17s15 6 16 17H22Z"/><path d="M45 40c1-9 6-14 12-14s11 5 12 14H45Z"/></svg>
-                        </div>
-
-                        <span class="plan-label">3 O MÁS BARBEROS</span>
-
-                        <div class="price">
-                            <strong data-price="70000">$70.000</strong>
-                            <span>COP / mes</span>
-                        </div>
-
-
-                        <a
-                            href="https://wa.me/573117304768?text=Hola%20ASYS,%20quiero%20informaci%C3%B3n%20del%20plan%20para%203%20o%20m%C3%A1s%20barberos."
-                            target="_blank"
-                            class="plan-button"
-                        >
-                            Elegir plan
-                        </a>
-
-                    </article>
-
-                </div>
-
-
-
-                <div class="selected-plan-summary" aria-live="polite">
-                    <span>Plan seleccionado: <strong id="selectedPlanName">2 BARBEROS · $50.000 COP / mes</strong></span>
-                    <a id="selectedPlanWhatsapp" target="_blank" href="https://wa.me/573117304768?text=Hola%20ASYS%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20plan%20para%202%20barberos.">Quiero este plan <span>→</span></a>
-                </div>
-
-                <!-- TODO INCLUIDO -->
-
-                <div class="included-box">
-
-                    <div>
-
-                        <div class="eyebrow">
-                            TODO INCLUIDO
-                        </div>
-
-                        <h3>
-                            Tu barbería,
-                            <span>en un solo lugar.</span>
-                        </h3>
-
-                    </div>
-
-
-                    <div class="included-list">
-
-                        <span>✓ Agenda digital de citas</span>
-
-                        <span>✓ Gestión de clientes</span>
-
-                        <span>✓ Gestión de servicios</span>
-
-                        <span>✓ Gestión de barberos</span>
-
-                        <span>✓ Historial de citas</span>
-
-                        <span>✓ Sistema de usuarios</span>
-
-                        <span>✓ Acceso desde celular</span>
-
-                        <span>✓ Plataforma disponible</span>
-
-                        <span>✓ Recordatorios</span>
-
-                        <span>✓ Soporte personalizado</span>
 
                     </div>
 
@@ -980,297 +395,1614 @@
 
             </div>
 
-        </section>
 
+            <div class="floating-element floating-one">
 
+                <span>✓</span>
 
-        <!-- =====================================================
-             CTA
-        ====================================================== -->
-
-        <section class="cta-section">
-
-            <div class="container">
-
-                <div class="cta-box">
-
-                    <div class="cta-glow"></div>
-
-                    <div class="cta-content">
-
-                        <div class="eyebrow">
-                            ASYS TECHNOLOGY
-                        </div>
-
-                        <h2>
-                            Tu barbería. Tu equipo.<br>
-                            Todo en un solo lugar.
-                        </h2>
-
-                        <p>
-                            Conoce la solución creada para organizar
-                            la operación de tu barbería.
-                        </p>
-
-                        <a
-                            href="https://wa.me/573117304768?text=Hola%20ASYS,%20quiero%20conocer%20el%20sistema%20para%20barber%C3%ADas."
-                            target="_blank"
-                            class="cta-button"
-                        >
-                            Quiero conocer la solución
-                            <span>→</span>
-                        </a>
-
-                        <a href="https://wa.me/573117304768" target="_blank" class="cta-secondary">
-                            Hablar por WhatsApp
-                        </a>
-
-                    </div>
-
-                </div>
+                Cita confirmada
 
             </div>
 
-        </section>
 
+            <div class="floating-element floating-two">
 
+                <span>+</span>
 
-        <!-- =====================================================
-             FAQ
-        ====================================================== -->
-
-        <section class="section faq-section" id="faq">
-
-            <div class="container faq-grid">
-
-                <div class="faq-intro">
-
-                    <div class="eyebrow">
-                        <span class="eyebrow-dot"></span>
-                        PREGUNTAS FRECUENTES
-                    </div>
-
-                    <h2>
-                        ¿Tienes
-                        <span>preguntas?</span>
-                    </h2>
-
-                    <p>
-                        Aquí puedes encontrar algunas respuestas
-                        sobre la solución para barberías.
-                    </p>
-
-                </div>
-
-
-                <div class="faq-list">
-
-                    <details open>
-
-                        <summary>
-                            ¿Qué incluye el sistema?
-                            <span>+</span>
-                        </summary>
-
-                        <p>
-                            Incluye herramientas para gestionar la agenda,
-                            clientes, servicios, barberos, usuarios y
-                            diferentes elementos relacionados con la
-                            administración de tu barbería.
-                        </p>
-
-                    </details>
-
-
-                    <details>
-
-                        <summary>
-                            ¿El precio depende de la cantidad de barberos?
-                            <span>+</span>
-                        </summary>
-
-                        <p>
-                            Sí. El precio se determina según la cantidad
-                            de barberos que tenga tu barbería.
-                        </p>
-
-                    </details>
-
-
-                    <details>
-
-                        <summary>
-                            ¿Puedo utilizarlo desde mi celular?
-                            <span>+</span>
-                        </summary>
-
-                        <p>
-                            La plataforma está diseñada para adaptarse
-                            a diferentes tamaños de pantalla, incluyendo
-                            dispositivos móviles.
-                        </p>
-
-                    </details>
-
-
-                    <details>
-
-                        <summary>
-                            ¿Cómo puedo adquirir el sistema?
-                            <span>+</span>
-                        </summary>
-
-                        <p>
-                            Puedes comunicarte directamente con ASYS
-                            Technology para conocer el proceso de
-                            implementación.
-                        </p>
-
-                    </details>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer class="footer">
-
-        <div class="container">
-
-            <div class="footer-main">
-
-                <div class="footer-brand">
-
-                    <div class="footer-logo">
-
-                        <img
-                            src="nuevo%20logo.png"
-                            alt="ASYS Technology"
-                        >
-
-                        <div>
-                            <strong>ASYS</strong>
-                            <small>TECHNOLOGY</small>
-                        </div>
-
-                    </div>
-
-                    <p>
-                        Ideas que se vuelven sistema.
-                    </p>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <strong>Barberías</strong>
-
-                    <a href="#solucion">
-                        Solución
-                    </a>
-
-                    <a href="#funcionalidades">
-                        Funcionalidades
-                    </a>
-
-                    <a href="#planes">
-                        Planes
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <strong>ASYS</strong>
-
-                    <a href="#inicio">
-                        Inicio
-                    </a>
-
-                    <a href="#faq">
-                        Preguntas
-                    </a>
-
-                    <a href="https://asysdigital.com/" target="_blank">
-                        Sitio web
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <strong>Contacto</strong>
-
-                    <a
-                        href="https://wa.me/573117304768"
-                        target="_blank"
-                    >
-                        WhatsApp
-                    </a>
-
-                    <a href="mailto:contacto@asysdigital.com">
-                        Correo
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div class="footer-bottom">
-
-                <span>
-                    © 2026 ASYS Technology S.A.S.
-                </span>
-
-                <span>
-                    Soluciones digitales para empresas.
-                </span>
+                Nuevo cliente
 
             </div>
 
         </div>
 
-    </footer>
+    </div>
+
+</section>
 
 
 
-    <!-- =====================================================
-         WHATSAPP FLOTANTE
-    ====================================================== -->
+<!-- =========================================================
+     SOLUCIÓN
+========================================================= -->
 
-    <a
-        href="https://wa.me/573117304768?text=Hola%20ASYS,%20quiero%20informaci%C3%B3n%20sobre%20la%20soluci%C3%B3n%20para%20barber%C3%ADas."
-        target="_blank"
-        class="whatsapp-button"
-        aria-label="Contactar por WhatsApp"
-    >
+<section
+    class="section solution-section"
+    id="solucion"
+>
 
-        <span class="whatsapp-icon">
-            <svg viewBox="0 0 448 512" aria-hidden="true" focusable="false">
-                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 438.7c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.4-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.4-138c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.4 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.7 23.5 9.1 31.5 11.7 13.2 4.2 25.2 3.6 34.7 2.2 10.6-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-            </svg>
-        </span>
+    <div class="container">
 
-        <span class="whatsapp-text">
-            ¿Hablamos?
-        </span>
+        <div class="section-heading">
 
-    </a>
+            <div>
 
-<script src="barberias.js"></script>
+                <div class="eyebrow">
+
+                    <span class="eyebrow-dot"></span>
+
+                    EL PROBLEMA
+
+                </div>
+
+                <h2>
+                    Menos desorden.
+                    <span>Más control.</span>
+                </h2>
+
+            </div>
+
+
+            <p>
+
+                Una barbería puede perder tiempo gestionando
+                citas por WhatsApp, organizando agendas
+                manualmente y buscando información de clientes.
+
+            </p>
+
+        </div>
+
+
+        <div class="problem-grid">
+
+
+            <article class="problem-card">
+
+                <span class="problem-number">
+                    01
+                </span>
+
+                <div class="problem-icon">
+                    📅
+                </div>
+
+                <h3>
+                    Citas manuales
+                </h3>
+
+                <p>
+                    Evita depender completamente de mensajes
+                    para organizar tu agenda.
+                </p>
+
+            </article>
+
+
+            <article class="problem-card">
+
+                <span class="problem-number">
+                    02
+                </span>
+
+                <div class="problem-icon">
+                    👥
+                </div>
+
+                <h3>
+                    Clientes dispersos
+                </h3>
+
+                <p>
+                    Centraliza la información de tus clientes
+                    en un solo lugar.
+                </p>
+
+            </article>
+
+
+            <article class="problem-card">
+
+                <span class="problem-number">
+                    03
+                </span>
+
+                <div class="problem-icon">
+                    ✂
+                </div>
+
+                <h3>
+                    Barberos
+                </h3>
+
+                <p>
+                    Organiza el trabajo de cada barbero
+                    desde una misma plataforma.
+                </p>
+
+            </article>
+
+
+            <article class="problem-card">
+
+                <span class="problem-number">
+                    04
+                </span>
+
+                <div class="problem-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Poco control
+                </h3>
+
+                <p>
+                    Obtén una visión más clara de la operación
+                    de tu barbería.
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FUNCIONALIDADES
+========================================================= -->
+
+<section
+    class="section features-section"
+    id="funcionalidades"
+>
+
+    <div class="container">
+
+        <div class="center-heading">
+
+            <div class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                ASYS BARBER
+
+            </div>
+
+            <h2>
+                Todo lo que necesitas
+                <span>en un solo lugar.</span>
+            </h2>
+
+            <p>
+                Una plataforma pensada para facilitar
+                la gestión diaria de tu barbería.
+            </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    📅
+                </div>
+
+                <h3>
+                    Agenda digital
+                </h3>
+
+                <p>
+                    Organiza las citas de tus clientes
+                    de manera sencilla y visual.
+                </p>
+
+                <span class="feature-number">
+                    01
+                </span>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    👤
+                </div>
+
+                <h3>
+                    Gestión de clientes
+                </h3>
+
+                <p>
+                    Mantén organizada la información
+                    de las personas que visitan tu barbería.
+                </p>
+
+                <span class="feature-number">
+                    02
+                </span>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    ✂
+                </div>
+
+                <h3>
+                    Multi-barbero
+                </h3>
+
+                <p>
+                    Administra diferentes barberos
+                    y sus respectivas agendas.
+                </p>
+
+                <span class="feature-number">
+                    03
+                </span>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    💈
+                </div>
+
+                <h3>
+                    Servicios
+                </h3>
+
+                <p>
+                    Configura los servicios disponibles
+                    y facilita la reserva.
+                </p>
+
+                <span class="feature-number">
+                    04
+                </span>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Acceso desde cualquier dispositivo
+                </h3>
+
+                <p>
+                    Consulta y administra tu operación
+                    desde computador, tablet o celular.
+                </p>
+
+                <span class="feature-number">
+                    05
+                </span>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Operación simplificada
+                </h3>
+
+                <p>
+                    Reduce tareas manuales y concentra
+                    la gestión en una sola plataforma.
+                </p>
+
+                <span class="feature-number">
+                    06
+                </span>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     DEMO
+========================================================= -->
+
+<section
+    class="section demo-section"
+    id="demo"
+>
+
+    <div class="container demo-grid">
+
+
+        <div class="demo-content">
+
+            <div class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                EXPERIENCIA
+
+            </div>
+
+
+            <h2>
+                Tus clientes pueden
+                <span>reservar fácilmente.</span>
+            </h2>
+
+
+            <p>
+
+                ASYS Barber permite ofrecer una experiencia
+                más organizada para tus clientes, mientras
+                tu equipo mantiene el control de la agenda.
+
+            </p>
+
+
+            <ul class="check-list">
+
+                <li>
+
+                    <span>✓</span>
+
+                    Consulta de disponibilidad
+
+                </li>
+
+
+                <li>
+
+                    <span>✓</span>
+
+                    Selección de servicio
+
+                </li>
+
+
+                <li>
+
+                    <span>✓</span>
+
+                    Selección de barbero
+
+                </li>
+
+
+                <li>
+
+                    <span>✓</span>
+
+                    Reserva de cita
+
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <div class="phone-demo">
+
+            <div class="phone">
+
+                <div class="phone-top"></div>
+
+
+                <div class="phone-screen">
+
+
+                    <div class="phone-header">
+
+                        <strong>
+                            ASYS Barber
+                        </strong>
+
+                        <span>
+                            ☰
+                        </span>
+
+                    </div>
+
+
+                    <div class="phone-date">
+
+                        <small>
+                            RESERVA TU CITA
+                        </small>
+
+                        <strong>
+                            Hoy
+                        </strong>
+
+                    </div>
+
+
+                    <div class="phone-appointment">
+
+                        <div>
+
+                            <small>
+                                09:30 AM
+                            </small>
+
+                            <strong>
+                                Corte clásico
+                            </strong>
+
+                            <span>
+                                Barbero disponible
+                            </span>
+
+                        </div>
+
+                        <span>
+                            →
+                        </span>
+
+                    </div>
+
+
+                    <div class="phone-appointment">
+
+                        <div>
+
+                            <small>
+                                11:00 AM
+                            </small>
+
+                            <strong>
+                                Corte + Barba
+                            </strong>
+
+                            <span>
+                                Barbero disponible
+                            </span>
+
+                        </div>
+
+                        <span>
+                            →
+                        </span>
+
+                    </div>
+
+
+                    <div class="phone-appointment">
+
+                        <div>
+
+                            <small>
+                                02:30 PM
+                            </small>
+
+                            <strong>
+                                Fade
+                            </strong>
+
+                            <span>
+                                Barbero disponible
+                            </span>
+
+                        </div>
+
+                        <span>
+                            →
+                        </span>
+
+                    </div>
+
+
+                    <button class="phone-button">
+                        Reservar cita
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     RECORRIDO INMERSIVO
+========================================================= -->
+
+<section class="product-journey">
+
+    <div class="journey-stage">
+
+
+        <div class="journey-copy">
+
+            <div class="journey-kicker">
+                ASYS BARBER / EXPERIENCIA
+            </div>
+
+
+            <h2 class="journey-title journey-title-agenda">
+                Una agenda
+                <span>más clara.</span>
+            </h2>
+
+
+            <h2 class="journey-title journey-title-clients">
+                Clientes
+                <span>organizados.</span>
+            </h2>
+
+
+            <h2 class="journey-title journey-title-services">
+                Servicios
+                <span>centralizados.</span>
+            </h2>
+
+
+            <h2 class="journey-title journey-title-team">
+                Tu equipo
+                <span>conectado.</span>
+            </h2>
+
+
+            <h2 class="journey-title journey-title-connected">
+                Todo
+                <span>conectado.</span>
+            </h2>
+
+
+            <p class="journey-description">
+                Una plataforma diseñada para convertir
+                la operación diaria de tu barbería
+                en un sistema más organizado.
+            </p>
+
+        </div>
+
+
+
+        <div class="journey-dashboard">
+
+
+            <div class="journey-window-bar">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+                <strong>
+                    ASYS Barber
+                </strong>
+
+                <i>
+                    ● Online
+                </i>
+
+            </div>
+
+
+
+            <!-- AGENDA -->
+
+            <div class="journey-scene scene-agenda">
+
+                <div class="scene-heading">
+
+                    <small>
+                        AGENDA
+                    </small>
+
+                    <strong>
+                        Citas de hoy
+                    </strong>
+
+                    <button>
+                        + Nueva cita
+                    </button>
+
+                </div>
+
+
+                <div class="agenda-list">
+
+                    <div>
+
+                        <time>
+                            09:00
+                        </time>
+
+                        <div class="appointment blue">
+                            Carlos · Corte + Barba
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <time>
+                            10:30
+                        </time>
+
+                        <div class="appointment violet">
+                            Juan · Corte clásico
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <time>
+                            12:00
+                        </time>
+
+                        <div class="appointment blue">
+                            Andrés · Fade
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <time>
+                            14:00
+                        </time>
+
+                        <div class="appointment soft">
+                            Disponible
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CLIENTES -->
+
+            <div class="journey-scene scene-clients">
+
+                <div class="scene-heading">
+
+                    <small>
+                        CLIENTES
+                    </small>
+
+                    <strong>
+                        Base de clientes
+                    </strong>
+
+                </div>
+
+
+                <div class="client-list">
+
+                    <div>
+
+                        <b>CR</b>
+
+                        <span>
+                            Carlos Rodríguez
+                            <small>
+                                12 visitas
+                            </small>
+                        </span>
+
+                        <i>→</i>
+
+                    </div>
+
+
+                    <div>
+
+                        <b>JP</b>
+
+                        <span>
+                            Juan Pérez
+                            <small>
+                                8 visitas
+                            </small>
+                        </span>
+
+                        <i>→</i>
+
+                    </div>
+
+
+                    <div>
+
+                        <b>AG</b>
+
+                        <span>
+                            Andrés Gómez
+                            <small>
+                                16 visitas
+                            </small>
+                        </span>
+
+                        <i>→</i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SERVICIOS -->
+
+            <div class="journey-scene scene-services">
+
+                <div class="scene-heading">
+
+                    <small>
+                        SERVICIOS
+                    </small>
+
+                    <strong>
+                        Servicios disponibles
+                    </strong>
+
+                </div>
+
+
+                <div class="service-list">
+
+                    <div>
+
+                        ✂
+
+                        <span>
+                            Corte clásico
+                        </span>
+
+                        <small>
+                            30 minutos
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        🧔
+
+                        <span>
+                            Corte + Barba
+                        </span>
+
+                        <small>
+                            45 minutos
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        💈
+
+                        <span>
+                            Fade
+                        </span>
+
+                        <small>
+                            40 minutos
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        ⭐
+
+                        <span>
+                            Servicio premium
+                        </span>
+
+                        <small>
+                            60 minutos
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- EQUIPO -->
+
+            <div class="journey-scene scene-team">
+
+                <div class="scene-heading">
+
+                    <small>
+                        EQUIPO
+                    </small>
+
+                    <strong>
+                        Barberos
+                    </strong>
+
+                </div>
+
+
+                <div class="team-list">
+
+                    <div>
+
+                        <b>JC</b>
+
+                        <span>
+                            Juan Carlos
+                            <small>
+                                5 citas hoy
+                            </small>
+                        </span>
+
+                        <em>
+                            Disponible
+                        </em>
+
+                    </div>
+
+
+                    <div>
+
+                        <b>DM</b>
+
+                        <span>
+                            Diego Martínez
+                            <small>
+                                7 citas hoy
+                            </small>
+                        </span>
+
+                        <em>
+                            Disponible
+                        </em>
+
+                    </div>
+
+
+                    <div>
+
+                        <b>AR</b>
+
+                        <span>
+                            Andrés Ruiz
+                            <small>
+                                4 citas hoy
+                            </small>
+                        </span>
+
+                        <em>
+                            Disponible
+                        </em>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONECTADO -->
+
+            <div class="journey-scene scene-connected">
+
+                <div class="connection-map">
+
+                    <div>
+                        CLIENTES
+                    </div>
+
+                    <i></i>
+
+                    <div>
+                        AGENDA
+                    </div>
+
+                    <i></i>
+
+                    <div>
+                        EQUIPO
+                    </div>
+
+                </div>
+
+
+                <strong>
+                    Todo conectado en ASYS Barber
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="journey-progress">
+
+            <span></span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PLANES
+========================================================= -->
+
+<section
+    class="section plans-section"
+    id="planes"
+>
+
+    <div class="container">
+
+        <div class="center-heading">
+
+            <div class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                PLANES
+
+            </div>
+
+
+            <h2>
+                Elige el tamaño
+                <span>de tu equipo.</span>
+            </h2>
+
+
+            <p>
+                Comienza con el plan que se adapte
+                a tu barbería.
+            </p>
+
+        </div>
+
+
+        <div class="plans-grid">
+
+
+            <article class="plan-card">
+
+                <div class="barber-count">
+
+                    <svg viewBox="0 0 64 48">
+                        <circle
+                            cx="32"
+                            cy="13"
+                            r="8"
+                        />
+                        <path
+                            d="M16 43c1-11 7-17 16-17s15 6 16 17Z"
+                        />
+                    </svg>
+
+                </div>
+
+
+                <span class="plan-label">
+                    1 BARBERO
+                </span>
+
+
+                <div
+                    class="price"
+                    data-price="35000"
+                >
+                    $35.000
+
+                    <span>
+                        COP / MES
+                    </span>
+                </div>
+
+
+                <a
+                    href="#"
+                    class="plan-button"
+                >
+                    Seleccionar
+                </a>
+
+            </article>
+
+
+
+            <article class="plan-card featured">
+
+                <div class="barber-count">
+
+                    <svg viewBox="0 0 64 48">
+
+                        <circle
+                            cx="32"
+                            cy="13"
+                            r="8"
+                        />
+
+                        <path
+                            d="M16 43c1-11 7-17 16-17s15 6 16 17Z"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <span class="plan-label">
+                    2 BARBEROS
+                </span>
+
+
+                <div
+                    class="price"
+                    data-price="50000"
+                >
+                    $50.000
+
+                    <span>
+                        COP / MES
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="#"
+                    class="plan-button"
+                >
+                    Seleccionar
+                </a>
+
+            </article>
+
+
+
+            <article class="plan-card">
+
+                <div class="barber-count">
+
+                    <svg viewBox="0 0 64 48">
+
+                        <circle
+                            cx="32"
+                            cy="13"
+                            r="8"
+                        />
+
+                        <path
+                            d="M16 43c1-11 7-17 16-17s15 6 16 17Z"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <span class="plan-label">
+                    3+ BARBEROS
+                </span>
+
+
+                <div
+                    class="price"
+                    data-price="70000"
+                >
+                    $70.000
+
+                    <span>
+                        COP / MES
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="#"
+                    class="plan-button"
+                >
+                    Seleccionar
+                </a>
+
+            </article>
+
+        </div>
+
+
+        <div class="selected-plan-summary">
+
+            <div>
+
+                Plan seleccionado:
+
+                <strong id="selectedPlanName">
+                    Selecciona un plan
+                </strong>
+
+            </div>
+
+
+            <a
+                id="selectedPlanWhatsapp"
+                href="#"
+            >
+                Hablar por WhatsApp →
+            </a>
+
+        </div>
+
+
+        <div class="included-box">
+
+            <div>
+
+                <div class="eyebrow">
+
+                    <span class="eyebrow-dot"></span>
+
+                    INCLUYE
+
+                </div>
+
+
+                <h3>
+                    Todo lo necesario para
+                    <span>comenzar.</span>
+                </h3>
+
+            </div>
+
+
+            <div class="included-list">
+
+                <span>✓ Agenda digital</span>
+
+                <span>✓ Gestión de clientes</span>
+
+                <span>✓ Gestión de barberos</span>
+
+                <span>✓ Gestión de servicios</span>
+
+                <span>✓ Acceso desde celular</span>
+
+                <span>✓ Panel de administración</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section
+    class="cta-section"
+    id="contacto"
+>
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <div class="cta-content">
+
+                <div class="eyebrow">
+
+                    <span class="eyebrow-dot"></span>
+
+                    ASYS TECHNOLOGY
+
+                </div>
+
+
+                <h2>
+                    Lleva tu barbería
+                    a una nueva forma
+                    de trabajar.
+                </h2>
+
+
+                <p>
+                    Conoce ASYS Barber y descubre cómo
+                    organizar mejor las citas y la operación
+                    de tu negocio.
+                </p>
+
+
+                <a
+                    href="#"
+                    class="cta-button"
+                >
+
+                    <span class="whatsapp-icon">
+                        ✓
+                    </span>
+
+                    Hablar con ASYS
+
+                </a>
+
+
+                <a
+                    href="#planes"
+                    class="cta-secondary"
+                >
+                    Ver planes
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section
+    class="section faq-section"
+    id="faq"
+>
+
+    <div class="container faq-grid">
+
+
+        <div class="faq-intro">
+
+            <div class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                FAQ
+
+            </div>
+
+
+            <h2>
+                Preguntas
+                <span>frecuentes.</span>
+            </h2>
+
+
+            <p>
+                Respuestas rápidas sobre ASYS Barber
+                y el funcionamiento de la plataforma.
+            </p>
+
+        </div>
+
+
+
+        <div class="faq-list">
+
+
+            <details>
+
+                <summary>
+
+                    ¿Qué es ASYS Barber?
+
+                    <span>+</span>
+
+                </summary>
+
+                <p>
+                    Es una plataforma de gestión y
+                    agendamiento diseñada para barberías.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+
+                    ¿Puedo tener varios barberos?
+
+                    <span>+</span>
+
+                </summary>
+
+                <p>
+                    Sí. La plataforma está diseñada para
+                    trabajar con equipos de diferentes tamaños.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+
+                    ¿Mis clientes pueden reservar?
+
+                    <span>+</span>
+
+                </summary>
+
+                <p>
+                    Sí. El sistema está pensado para facilitar
+                    la reserva de citas por parte de tus clientes.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+
+                    ¿Puedo administrar mis servicios?
+
+                    <span>+</span>
+
+                </summary>
+
+                <p>
+                    Sí. Puedes organizar los servicios que
+                    ofrece tu barbería y utilizarlos dentro
+                    del proceso de reserva.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+
+                    ¿Cómo puedo conocer el sistema?
+
+                    <span>+</span>
+
+                </summary>
+
+                <p>
+                    Puedes contactar directamente con ASYS
+                    Technology para conocer la plataforma.
+                </p>
+
+            </details>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+
+                    <img
+                        src="nuevo logo.png"
+                        alt="ASYS Technology"
+                    >
+
+                    <div>
+
+                        <strong>
+                            ASYS
+                        </strong>
+
+                        <small>
+                            TECHNOLOGY
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <p>
+                    Tecnología y software para ayudar
+                    a las empresas a trabajar mejor.
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <strong>
+                    ASYS Barber
+                </strong>
+
+                <a href="#inicio">
+                    Inicio
+                </a>
+
+                <a href="#funcionalidades">
+                    Funcionalidades
+                </a>
+
+                <a href="#planes">
+                    Planes
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <strong>
+                    Información
+                </strong>
+
+                <a href="#solucion">
+                    Solución
+                </a>
+
+                <a href="#faq">
+                    Preguntas frecuentes
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <strong>
+                    Contacto
+                </strong>
+
+                <a
+                    href="https://wa.me/573117304768"
+                    target="_blank"
+                >
+                    WhatsApp
+                </a>
+
+                <a
+                    href="https://asysdigital.com/"
+                    target="_blank"
+                >
+                    asysdigital.com
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 ASYS Technology.
+                Todos los derechos reservados.
+            </span>
+
+            <span>
+                ASYS Barber
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     WHATSAPP
+========================================================= -->
+
+<a
+    href="#"
+    class="whatsapp-button"
+    aria-label="Contactar por WhatsApp"
+>
+
+    <span class="whatsapp-icon">
+        ✓
+    </span>
+
+    <span class="whatsapp-text">
+        Hablar con ASYS
+    </span>
+
+</a>
+
+
+
+<script src="script.js"></script>
+
 </body>
 
 </html>
