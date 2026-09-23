@@ -1,833 +1,447 @@
-/* =========================================================
-   ASYS TECHNOLOGY
-   SOFTWARE PARA BARBERÍAS
-   JAVASCRIPT
-========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
 
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
 
-/* =========================================================
-   CONFIGURACIÓN
-========================================================= */
-
-const WHATSAPP_NUMBER = "573117304768";
-
-
-/* =========================================================
-   RECORRIDO INMERSIVO DEL PRODUCTO
-   Un único listener ligero actualiza la escena durante el scroll.
-========================================================= */
-
-const productJourney = document.querySelector(".product-journey");
-let journeyFramePending = false;
-
-function actualizarRecorrido() {
-
-    journeyFramePending = false;
-
-    if (!productJourney) return;
-
-    const rect = productJourney.getBoundingClientRect();
-    const distancia = Math.max(productJourney.offsetHeight - window.innerHeight, 1);
-    const progreso = Math.min(1, Math.max(0, -rect.top / distancia));
-    const paso = Math.min(4, Math.floor(progreso * 5));
-
-    productJourney.dataset.step = paso;
-
-    const barra = productJourney.querySelector(".journey-progress span");
-
-    if (barra) {
-        barra.style.width = `${progreso * 100}%`;
-    }
-
-}
-
-if (productJourney) {
-
-    actualizarRecorrido();
+    const navbar = document.getElementById("navbar");
 
     window.addEventListener("scroll", () => {
 
-        if (journeyFramePending) return;
+        if (!navbar) return;
 
-        journeyFramePending = true;
-        requestAnimationFrame(actualizarRecorrido);
-
-    }, { passive: true });
-
-    window.addEventListener("resize", actualizarRecorrido);
-
-}
-
-
-/* =========================================================
-   MENÚ MÓVIL
-========================================================= */
-
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.querySelector(".nav-links");
-
-if (menuToggle && navLinks) {
-
-    menuToggle.addEventListener("click", () => {
-
-        navLinks.classList.toggle("open");
-
-        const abierto = navLinks.classList.contains("open");
-
-        menuToggle.textContent = abierto ? "✕" : "☰";
+        if (window.scrollY > 20) {
+            navbar.classList.add("scrolled");
+        } else {
+            navbar.classList.remove("scrolled");
+        }
 
     });
 
 
-    // Cerrar menú al seleccionar una opción
+    /* =====================================================
+       MENÚ MÓVIL
+    ===================================================== */
 
-    navLinks.querySelectorAll("a").forEach(link => {
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.querySelector(".nav-links");
 
-        link.addEventListener("click", () => {
+    if (menuToggle && navLinks) {
 
-            navLinks.classList.remove("open");
+        menuToggle.addEventListener("click", () => {
 
-            menuToggle.textContent = "☰";
+            navLinks.classList.toggle("open");
 
-        });
+            const isOpen =
+                navLinks.classList.contains("open");
 
-    });
-
-}
-
-
-/* =========================================================
-   CAMBIO DEL HEADER AL HACER SCROLL
-========================================================= */
-
-const navbar = document.getElementById("navbar");
-
-function actualizarNavbar() {
-
-    if (!navbar) return;
-
-    if (window.scrollY > 40) {
-
-        navbar.style.background =
-            "rgba(255,255,255,.94)";
-
-        navbar.style.boxShadow =
-            "0 10px 30px rgba(27,34,79,.07)";
-
-    } else {
-
-        navbar.style.background =
-            "rgba(255,255,255,.80)";
-
-        navbar.style.boxShadow =
-            "none";
-
-    }
-
-}
-
-window.addEventListener(
-    "scroll",
-    actualizarNavbar
-);
-
-actualizarNavbar();
-
-
-/* =========================================================
-   SCROLL SUAVE
-========================================================= */
-
-document.querySelectorAll(
-    'a[href^="#"]'
-).forEach(link => {
-
-    link.addEventListener("click", function (event) {
-
-        const destino =
-            document.querySelector(
-                this.getAttribute("href")
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen
             );
 
-        if (!destino) return;
+        });
 
-        event.preventDefault();
+        navLinks.querySelectorAll("a").forEach(link => {
 
-        const headerHeight =
-            navbar
-                ? navbar.offsetHeight
-                : 0;
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("open");
 
-        const posicion =
-            destino.offsetTop -
-            headerHeight -
-            15;
-
-        window.scrollTo({
-
-            top: posicion,
-
-            behavior: "smooth"
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+            });
 
         });
 
-    });
-
-});
-
-
-/* =========================================================
-   ANIMACIONES AL APARECER
-========================================================= */
-
-const elementosAnimados = document.querySelectorAll(
-    ".problem-card, " +
-    ".feature-card, " +
-    ".plan-card, " +
-    ".included-box, " +
-    ".demo-content, " +
-    ".phone-demo, " +
-    ".faq-list, " +
-    ".section-heading, " +
-    ".cta-box"
-);
-
-
-elementosAnimados.forEach(elemento => {
-
-    elemento.classList.add("animate-on-scroll");
-
-});
-
-
-const observer = new IntersectionObserver(
-
-    (entries) => {
-
-        entries.forEach(entry => {
-
-            if (!entry.isIntersecting) return;
-
-            entry.target.classList.add("is-shown");
-
-            // Las tarjetas de precio tienen su propia animación y hover en CSS.
-            // Se eliminan estos estilos inline al entrar en pantalla para no
-            // bloquear sus transformaciones.
-            if (entry.target.classList.contains("plan-card")) {
-
-                entry.target.classList.add("price-card-ready");
-                animarPrecio(entry.target);
-
-            }
-
-            observer.unobserve(entry.target);
-
-        });
-
-    },
-
-    {
-        threshold: 0.12
     }
 
-);
 
+    /* =====================================================
+       ANIMACIONES AL HACER SCROLL
+    ===================================================== */
 
-elementosAnimados.forEach(elemento => {
-
-    observer.observe(elemento);
-
-});
-
-
-/* Respaldo de scroll real: mantiene activas las entradas en cualquier navegador. */
-const elementosScroll = [...elementosAnimados];
-let scrollRevealPending = false;
-
-function revelarConScroll() {
-
-    scrollRevealPending = false;
-
-    elementosScroll.forEach(elemento => {
-
-        if (elemento.classList.contains("is-shown")) return;
-
-        const limite = window.innerHeight * .88;
-
-        if (elemento.getBoundingClientRect().top < limite) {
-            elemento.classList.add("is-shown");
-
-            if (elemento.classList.contains("plan-card")) {
-                elemento.classList.add("price-card-ready");
-                animarPrecio(elemento);
-            }
-
-        }
-
-    });
-
-}
-
-window.addEventListener("scroll", () => {
-
-    if (scrollRevealPending) return;
-
-    scrollRevealPending = true;
-    requestAnimationFrame(revelarConScroll);
-
-}, { passive: true });
-
-revelarConScroll();
-
-
-/* =========================================================
-   REVELADO SUAVE DE CONTENIDO AL HACER SCROLL
-========================================================= */
-
-const bloquesRevelables = document.querySelectorAll(
-    ".center-heading, .cta-content, .faq-grid, .footer-main"
-);
-
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-if (reduceMotion.matches) {
-
-    bloquesRevelables.forEach(bloque => {
-        bloque.classList.add("scroll-reveal", "is-visible");
-    });
-
-} else {
-
-    const revealObserver = new IntersectionObserver(entries => {
-
-        entries.forEach(entry => {
-
-            if (!entry.isIntersecting) return;
-
-            entry.target.classList.add("is-visible");
-            revealObserver.unobserve(entry.target);
-
-        });
-
-    }, { threshold: .16 });
-
-    bloquesRevelables.forEach((bloque, indice) => {
-
-        bloque.classList.add("scroll-reveal");
-        bloque.style.transitionDelay = `${Math.min(indice % 3, 2) * .08}s`;
-        revealObserver.observe(bloque);
-
-    });
-
-}
-
-
-/* =========================================================
-   EFECTO DEL DASHBOARD
-========================================================= */
-
-const dashboard =
-    document.querySelector(".dashboard-window");
-
-
-const heroVisual =
-    document.querySelector(".hero-visual");
-
-
-if (dashboard && heroVisual) {
-
-    heroVisual.addEventListener(
-        "mousemove",
-        (event) => {
-
-            const rect =
-                heroVisual.getBoundingClientRect();
-
-            const x =
-                event.clientX -
-                rect.left;
-
-            const y =
-                event.clientY -
-                rect.top;
-
-            const porcentajeX =
-                (x / rect.width) - 0.5;
-
-            const porcentajeY =
-                (y / rect.height) - 0.5;
-
-            const rotacionY =
-                porcentajeX * 5;
-
-            const rotacionX =
-                porcentajeY * -3;
-
-            dashboard.style.transform =
-                `
-                perspective(1200px)
-                rotateY(${rotacionY - 3}deg)
-                rotateX(${rotacionX + 2}deg)
-                `;
-
-        }
-    );
-
-
-    heroVisual.addEventListener(
-        "mouseleave",
-        () => {
-
-            dashboard.style.transform =
-                `
-                perspective(1200px)
-                rotateY(-5deg)
-                rotateX(2deg)
-                `;
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   BOTONES DE PLANES
-========================================================= */
-
-const planButtons =
-    document.querySelectorAll(".plan-button");
-
-
-const selectedPlanName = document.getElementById("selectedPlanName");
-const selectedPlanWhatsapp = document.getElementById("selectedPlanWhatsapp");
-
-planButtons.forEach(button => {
-
-    button.addEventListener("click", function () {
-
-        const plan =
-            this
-                .closest(".plan-card")
-                ?.querySelector(".plan-label")
-                ?.textContent
-                .trim();
-
-        if (!plan) return;
-
-        let mensaje = "";
-
-        if (plan.includes("1 BARBERO")) {
-
-            mensaje =
-                "Hola ASYS, quiero información sobre el plan para 1 barbero.";
-
-        }
-
-        else if (plan.includes("2 BARBEROS")) {
-
-            mensaje =
-                "Hola ASYS, quiero información sobre el plan para 2 barberos.";
-
-        }
-
-        else {
-
-            mensaje =
-                "Hola ASYS, quiero información sobre el plan para 3 o más barberos.";
-
-        }
-
-        const enlace = generarWhatsApp(mensaje);
-        const card = this.closest(".plan-card");
-        const precio = card?.querySelector("[data-price]")?.dataset.price;
-
-        this.href = enlace;
-
-        document.querySelectorAll(".plan-card").forEach(otraTarjeta => {
-            otraTarjeta.classList.toggle("selected", otraTarjeta === card);
-        });
-
-        if (selectedPlanName && precio) {
-            selectedPlanName.textContent =
-                `${plan} · $${formatearPrecio(Number(precio))} COP / mes`;
-        }
-
-        if (selectedPlanWhatsapp) {
-            selectedPlanWhatsapp.href = enlace;
-        }
-
-    });
-
-});
-
-
-/* =========================================================
-   GENERADOR DE WHATSAPP
-========================================================= */
-
-function generarWhatsApp(mensaje) {
-
-    return (
-        "https://wa.me/" +
-        WHATSAPP_NUMBER +
-        "?text=" +
-        encodeURIComponent(mensaje)
-    );
-
-}
-
-
-/* =========================================================
-   WHATSAPP FLOTANTE
-========================================================= */
-
-const whatsappButton =
-    document.querySelector(".whatsapp-button");
-
-
-if (whatsappButton) {
-
-    whatsappButton.addEventListener(
-        "click",
-        () => {
-
-            const mensaje =
-                "Hola ASYS, quiero conocer la solución para barberías.";
-
-            whatsappButton.href =
-                generarWhatsApp(mensaje);
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   CTA PRINCIPAL
-========================================================= */
-
-const ctaButton =
-    document.querySelector(".cta-button");
-
-const ctaSecondary =
-    document.querySelector(".cta-secondary");
-
-
-if (ctaButton) {
-
-    ctaButton.addEventListener(
-        "click",
-        () => {
-
-            ctaButton.href = selectedPlanWhatsapp
-                ? selectedPlanWhatsapp.href
-                : generarWhatsApp(
-                    "Hola ASYS, quiero conocer el sistema para barberías."
-                );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   INTERACCIÓN CON LAS TARJETAS
-========================================================= */
-
-const cards =
-    document.querySelectorAll(
-        ".feature-card, .problem-card"
-    );
-
-
-cards.forEach(card => {
-
-    card.addEventListener(
-        "mouseenter",
-        () => {
-
-            card.style.transform =
-                "translateY(-7px)";
-
-        }
-    );
-
-
-    card.addEventListener(
-        "mouseleave",
-        () => {
-
-            card.style.transform =
-                "translateY(0)";
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   FAQ
-========================================================= */
-
-const preguntas =
-    document.querySelectorAll(
-        ".faq-list details"
-    );
-
-
-preguntas.forEach(pregunta => {
-
-    pregunta.addEventListener(
-        "toggle",
-        () => {
-
-            if (!pregunta.open) return;
-
-            preguntas.forEach(otraPregunta => {
-
-                if (
-                    otraPregunta !== pregunta &&
-                    otraPregunta.open
-                ) {
-
-                    otraPregunta.open = false;
-
-                }
-
-            });
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   EFECTO DE LOS PLANES
-========================================================= */
-
-const planes =
-    document.querySelectorAll(".plan-card");
-
-
-planes.forEach(plan => {
-
-    plan.addEventListener(
-        "mouseenter",
-        () => {
-
-            planes.forEach(otro => {
-
-                if (otro !== plan) {
-
-                    otro.style.opacity = ".72";
-
-                }
-
-            });
-
-        }
-    );
-
-
-    plan.addEventListener(
-        "mouseleave",
-        () => {
-
-            planes.forEach(otro => {
-
-                otro.style.opacity = "1";
-
-            });
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   DETECCIÓN DE SECCIÓN ACTIVA
-========================================================= */
-
-const secciones =
-    document.querySelectorAll(
-        "main section[id]"
-    );
-
-
-const enlacesNavegacion =
-    document.querySelectorAll(
-        '.nav-links a[href^="#"]'
-    );
-
-
-const sectionObserver =
-    new IntersectionObserver(
-
+    const observer = new IntersectionObserver(
         entries => {
 
             entries.forEach(entry => {
 
-                if (!entry.isIntersecting) return;
+                if (entry.isIntersecting) {
 
-                const id =
-                    entry.target.getAttribute("id");
+                    entry.target.classList.add("is-visible");
+                    entry.target.classList.add("is-shown");
 
-                // Algunas escenas narrativas no tienen enlace propio en el
-                // menú. En ellas se conserva el último enlace navegable.
-                const enlaceDeSeccion = Array.from(enlacesNavegacion).find(
-                    enlace => enlace.getAttribute("href") === `#${id}`
-                );
-
-                if (!enlaceDeSeccion) return;
-
-                enlacesNavegacion.forEach(enlace => {
-
-                    enlace.classList.remove(
-                        "active"
-                    );
-
-                });
-
-                enlaceDeSeccion.classList.add("active");
+                }
 
             });
 
         },
-
         {
-            threshold: 0.35
-        }
-
-    );
-
-
-secciones.forEach(seccion => {
-
-    sectionObserver.observe(seccion);
-
-});
-
-
-/* =========================================================
-   BOTONES DE CTA
-========================================================= */
-
-const botonesCTA =
-    document.querySelectorAll(
-        ".btn-primary, .nav-cta"
-    );
-
-
-botonesCTA.forEach(boton => {
-
-    boton.addEventListener(
-        "mouseenter",
-        () => {
-
-            boton.style.transform =
-                "translateY(-2px)";
-
+            threshold: 0.12
         }
     );
 
+    document
+        .querySelectorAll(
+            ".animate-on-scroll, .scroll-reveal"
+        )
+        .forEach(element => {
 
-    boton.addEventListener(
-        "mouseleave",
-        () => {
+            observer.observe(element);
 
-            boton.style.transform =
-                "translateY(0)";
+        });
 
-        }
+
+    /* =====================================================
+       DASHBOARD HERO
+    ===================================================== */
+
+    const dashboard = document.querySelector(
+        ".dashboard-window"
     );
 
-});
+    const heroVisual = document.querySelector(
+        ".hero-visual"
+    );
+
+    if (dashboard && heroVisual) {
+
+        heroVisual.addEventListener(
+            "mousemove",
+            event => {
+
+                if (window.innerWidth <= 700) return;
+
+                const rect =
+                    heroVisual.getBoundingClientRect();
+
+                const x =
+                    event.clientX - rect.left;
+
+                const y =
+                    event.clientY - rect.top;
+
+                const rotateY =
+                    ((x / rect.width) - 0.5) * 5;
+
+                const rotateX =
+                    ((y / rect.height) - 0.5) * -4;
+
+                dashboard.style.transform =
+                    `perspective(1200px)
+                     rotateY(${rotateY - 5}deg)
+                     rotateX(${rotateX + 2}deg)`;
+
+            }
+        );
+
+        heroVisual.addEventListener(
+            "mouseleave",
+            () => {
+
+                if (window.innerWidth <= 700) return;
+
+                dashboard.style.transform =
+                    "perspective(1200px) rotateY(-5deg) rotateX(2deg)";
+
+            }
+        );
+
+    }
 
 
-/* =========================================================
-   CONTADOR VISUAL DE PLANES
-   Preparado para futuras modificaciones
-========================================================= */
+    /* =====================================================
+       PLAN ASYS BARBER
+       UN SOLO PLAN
+    ===================================================== */
 
-const precios = {
+    const planCard = document.querySelector(
+        ".plan-card"
+    );
 
-    uno: 35000,
+    const planButton = document.querySelector(
+        ".plan-button"
+    );
 
-    dos: 50000,
+    const selectedPlanWhatsapp =
+        document.getElementById(
+            "selectedPlanWhatsapp"
+        );
 
-    tres: 70000
+    const whatsappNumber =
+        "573117304768";
 
-};
+    const planPrice =
+        "$40.000 COP / mes";
 
 
-function formatearPrecio(valor) {
+    function createWhatsappLink() {
 
-    return new Intl.NumberFormat(
-        "es-CO"
-    ).format(valor);
+        const message =
+            `Hola ASYS Technology, estoy interesado en ASYS Barber. Quiero conocer más sobre el plan de ${planPrice}.`;
 
-}
+        return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-if (ctaSecondary) {
+    }
 
-    ctaSecondary.addEventListener("click", () => {
 
-        if (selectedPlanWhatsapp) {
-            ctaSecondary.href = selectedPlanWhatsapp.href;
-        }
+    if (planCard) {
+
+        planCard.classList.add("selected");
+
+    }
+
+
+    if (planButton) {
+
+        planButton.href =
+            createWhatsappLink();
+
+        planButton.target =
+            "_blank";
+
+        planButton.rel =
+            "noopener noreferrer";
+
+    }
+
+
+    if (selectedPlanWhatsapp) {
+
+        selectedPlanWhatsapp.href =
+            createWhatsappLink();
+
+        selectedPlanWhatsapp.target =
+            "_blank";
+
+        selectedPlanWhatsapp.rel =
+            "noopener noreferrer";
+
+    }
+
+
+    /* =====================================================
+       CTA WHATSAPP
+    ===================================================== */
+
+    const ctaButton =
+        document.querySelector(".cta-button");
+
+    if (ctaButton) {
+
+        ctaButton.href =
+            createWhatsappLink();
+
+        ctaButton.target =
+            "_blank";
+
+        ctaButton.rel =
+            "noopener noreferrer";
+
+    }
+
+
+    /* =====================================================
+       BOTÓN WHATSAPP FLOTANTE
+    ===================================================== */
+
+    const whatsappButton =
+        document.querySelector(
+            ".whatsapp-button"
+        );
+
+    if (whatsappButton) {
+
+        whatsappButton.href =
+            createWhatsappLink();
+
+        whatsappButton.target =
+            "_blank";
+
+        whatsappButton.rel =
+            "noopener noreferrer";
+
+    }
+
+
+    /* =====================================================
+       FAQ
+    ===================================================== */
+
+    const faqDetails =
+        document.querySelectorAll(
+            ".faq-list details"
+        );
+
+    faqDetails.forEach(detail => {
+
+        detail.addEventListener(
+            "toggle",
+            () => {
+
+                if (!detail.open) return;
+
+                faqDetails.forEach(other => {
+
+                    if (
+                        other !== detail &&
+                        other.open
+                    ) {
+                        other.open = false;
+                    }
+
+                });
+
+            }
+        );
 
     });
 
-}
 
+    /* =====================================================
+       PRODUCT JOURNEY
+    ===================================================== */
 
-function animarPrecio(tarjeta) {
+    const journey =
+        document.querySelector(
+            ".product-journey"
+        );
 
-    const precio = tarjeta.querySelector("[data-price]");
+    if (journey) {
 
-    if (!precio || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        return;
-    }
+        const totalSteps = 5;
 
-    const total = Number(precio.dataset.price);
-    const inicio = performance.now();
-    const duracion = 700;
+        function updateJourney() {
 
-    function actualizarPrecio(ahora) {
+            const rect =
+                journey.getBoundingClientRect();
 
-        const progreso = Math.min((ahora - inicio) / duracion, 1);
-        const suavizado = 1 - Math.pow(1 - progreso, 3);
-        const valor = Math.round((total * suavizado) / 1000) * 1000;
+            const viewportHeight =
+                window.innerHeight;
 
-        precio.textContent = `$${formatearPrecio(valor)}`;
+            const totalHeight =
+                journey.offsetHeight;
 
-        if (progreso < 1) {
-            requestAnimationFrame(actualizarPrecio);
+            const scrollable =
+                totalHeight - viewportHeight;
+
+            const progress =
+                Math.min(
+                    Math.max(
+                        -rect.top / scrollable,
+                        0
+                    ),
+                    1
+                );
+
+            const step =
+                Math.min(
+                    totalSteps - 1,
+                    Math.floor(
+                        progress * totalSteps
+                    )
+                );
+
+            journey.dataset.step =
+                String(step);
+
+            const progressBar =
+                journey.querySelector(
+                    ".journey-progress span"
+                );
+
+            if (progressBar) {
+
+                progressBar.style.width =
+                    `${progress * 100}%`;
+
+            }
+
         }
 
+        window.addEventListener(
+            "scroll",
+            updateJourney,
+            { passive: true }
+        );
+
+        window.addEventListener(
+            "resize",
+            updateJourney
+        );
+
+        updateJourney();
+
     }
 
-    precio.textContent = "$0";
-    requestAnimationFrame(actualizarPrecio);
 
-}
+    /* =====================================================
+       SMOOTH SCROLL
+    ===================================================== */
+
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    const targetId =
+                        link.getAttribute("href");
+
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+                        return;
+                    }
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+                    if (!target) return;
+
+                    event.preventDefault();
+
+                    const navbarHeight =
+                        navbar
+                            ? navbar.offsetHeight
+                            : 0;
+
+                    const targetPosition =
+                        target.getBoundingClientRect().top +
+                        window.scrollY -
+                        navbarHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: "smooth"
+                    });
+
+                }
+            );
+
+        });
 
 
-/* =========================================================
-   CONSOLA DE DESARROLLO
-========================================================= */
+    /* =====================================================
+       AÑO DEL FOOTER
+    ===================================================== */
 
-console.log(
-    "ASYS Technology | Sistema para Barberías cargado correctamente."
-);
+    const footerYear =
+        document.querySelector(
+            ".footer-bottom span"
+        );
 
-console.log(
-    "Planes:",
-    precios
-);
+    if (footerYear) {
+
+        footerYear.textContent =
+            `© ${new Date().getFullYear()} ASYS Technology. Todos los derechos reservados.`;
+
+    }
+
+});
