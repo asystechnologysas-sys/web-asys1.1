@@ -302,10 +302,6 @@ nav{display:flex;gap:.3rem}
 .modal-content h4{font-family:var(--f-display);margin:1.3rem 0 .3rem;font-size:1rem}
 .modal-content p,.modal-content li{color:var(--ink-2);font-size:.94rem;margin-bottom:.4rem}
 .modal-content ul{padding-left:1.2rem}
-.tabs{display:flex;gap:.4rem;margin:.6rem 0 1.2rem;flex-wrap:wrap}
-.tabs button{padding:.55rem 1rem;border-radius:999px;background:var(--soft);font-weight:700;font-size:.78rem}
-.tabs button.on{background:var(--blue);color:#fff}
-.draft-note{padding:.7rem 1rem;border-radius:14px;background:#fff6e0;color:#7a5200;font-size:.8rem;margin-bottom:1rem}
 
 /* FOOTER */
 footer{background:var(--dark);color:#b9c6ee;padding:60px max(20px,5vw) 30px}
@@ -315,14 +311,14 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
 .footer-top>div{display:flex;gap:1.2rem;flex-wrap:wrap}.footer-top>div a:hover{color:#fff}
 .footer-top p span{font-size:.8rem;color:#7f90c4}
 .footer-bottom{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:3rem;font-size:.76rem;align-items:center}
-.footer-bottom button{color:#b9c6ee;text-decoration:underline;text-underline-offset:3px;font-size:.76rem}.footer-bottom button:hover{color:#fff}
+.footer-bottom a{color:#b9c6ee;text-decoration:underline;text-underline-offset:3px;font-size:.76rem}.footer-bottom a:hover{color:#fff}
 .footer-line{height:2px;margin-top:1.6rem;background:linear-gradient(90deg,var(--blue),var(--cyan),transparent)}
 
 /* BANNER DE DATOS */
 .consent-bar{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));right:max(14px,env(safe-area-inset-right,0px));max-width:560px;z-index:70;background:var(--ink);color:#e6ecff;border-radius:28px 8px 28px 8px;padding:1.1rem 1.2rem;display:none;gap:.8rem;box-shadow:0 20px 60px -10px rgba(0,0,0,.6);font-size:.82rem}
 .consent-bar.show{display:grid;animation:pop .4s}
 .consent-bar div{display:flex;gap:.5rem;flex-wrap:wrap}
-.consent-bar button{padding:.55rem 1.1rem;border-radius:999px;font-weight:800;font-size:.74rem}
+.consent-bar button,.consent-bar a{padding:.55rem 1.1rem;border-radius:999px;font-weight:800;font-size:.74rem}
 .consent-bar .ok{background:var(--cyan);color:var(--ink)}.consent-bar .more{border:1px solid rgba(255,255,255,.3)}
 
 /* REVEAL */
@@ -519,8 +515,8 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
       <label>TELÉFONO<input type="tel" name="telefono" placeholder="+57" autocomplete="tel" /><span class="error-text">Este campo es obligatorio</span></label>
       <label class="full">CUÉNTANOS SOBRE TU PROYECTO<textarea name="mensaje" placeholder="Una idea puede cambiarlo todo."></textarea><span class="error-text">Cuéntanos un poco sobre tu idea</span></label>
       <div class="consent" id="consent-box">
-        <label class="check"><input type="checkbox" id="accept-terms" /><span>He leído y acepto los <button type="button" class="linklike" data-legal="terminos">Términos y Condiciones</button>.</span></label>
-        <label class="check"><input type="checkbox" id="accept-data" /><span>Autorizo el tratamiento de mis datos personales según la <button type="button" class="linklike" data-legal="datos">Política de Tratamiento de Datos</button> (Ley 1581 de 2012).</span></label>
+        <label class="check"><input type="checkbox" id="accept-terms" /><span>He leído y acepto los <a class="linklike" href="terminos-condiciones.html" target="_blank" rel="noopener">Términos y Condiciones</a>.</span></label>
+        <label class="check"><input type="checkbox" id="accept-data" /><span>Autorizo el tratamiento de mis datos personales según la <a class="linklike" href="politica-privacidad.html" target="_blank" rel="noopener">Política de Privacidad y Tratamiento de Datos</a> (Ley 1581 de 2012).</span></label>
         <span class="error-text">Debes aceptar los términos y la política de datos para continuar.</span>
       </div>
       <button class="form-submit" type="submit" disabled>INICIAR CONVERSACIÓN <b>→</b></button>
@@ -531,11 +527,11 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
 
 <div class="detail-modal" aria-hidden="true"><div class="modal-backdrop"></div><section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" aria-label="Cerrar detalle">×</button><p class="eyebrow"><span></span> ASYS / DETALLE</p><div class="modal-content"></div></section></div>
 
-<div class="consent-bar" id="consent-bar" role="region" aria-label="Aviso de datos"><p>Usamos almacenamiento local para recordar tu preferencia y tratamos tus datos según la Ley 1581 de 2012.</p><div><button class="ok" type="button">Entendido</button><button class="more" type="button" data-legal="datos">Ver política</button></div></div>
+<div class="consent-bar" id="consent-bar" role="region" aria-label="Aviso de datos"><p>Usamos almacenamiento local para recordar tu preferencia y tratamos tus datos según la Ley 1581 de 2012.</p><div><button class="ok" type="button">Entendido</button><a class="more" href="politica-privacidad.html">Ver política</a></div></div>
 
 <footer>
   <div class="footer-top"><a class="brand" href="#inicio"><svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="16" fill="#1554ff"/><use href="#asys-mark" x="6" y="6" width="36" height="36"/></svg><span>ASYS<span class="brand-dot">.</span></span></a><p>ASYS Technology S.A.S.<br><span>Automatización. Soluciones. Sistemas inteligentes.</span></p><div><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#proyectos">Proyectos</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div></div>
-  <div class="footer-bottom"><span>© 2026 ASYS TECHNOLOGY S.A.S.</span><button type="button" data-legal="datos">Política de Privacidad</button><button type="button" data-legal="terminos">Términos y Condiciones</button><span>COLOMBIA</span></div>
+  <div class="footer-bottom"><span>© 2026 ASYS TECHNOLOGY S.A.S.</span><a href="politica-privacidad.html">Política de Privacidad</a><a href="terminos-condiciones.html">Términos y Condiciones</a><span>COLOMBIA</span></div>
   <div class="footer-line"></div>
 </footer>
 
@@ -598,22 +594,12 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
     jmbarber:['JMbarber','Agenda y administración de citas para barberías y servicios.'],
     unimagdalena:['Chatbot Unimagdalena','Asistente virtual para la atención académica de Ingeniería de Sistemas.']
   };
-  var legal={
-    terminos:{t:'Términos y Condiciones',h:'<h4>1. Objeto</h4><p>Estos términos regulan el uso del sitio web de ASYS Technology S.A.S. (“ASYS”) y del formulario de contacto.</p><h4>2. Uso del sitio</h4><p>El usuario se compromete a usar el sitio de forma lícita, sin afectar su funcionamiento ni la seguridad de la información.</p><h4>3. Propiedad intelectual</h4><p>Marcas, logotipos, textos, diseños y software publicados son de ASYS o de sus titulares y no pueden reproducirse sin autorización escrita.</p><h4>4. Información y propuestas</h4><p>El contenido del sitio es informativo. Las propuestas comerciales se formalizan por escrito entre las partes.</p><h4>5. Enlaces a terceros</h4><p>ASYS no responde por el contenido de sitios externos enlazados, como WhatsApp, LinkedIn o Instagram.</p><h4>6. Limitación de responsabilidad</h4><p>ASYS procura mantener el sitio disponible y actualizado, sin garantizar ausencia de interrupciones o errores.</p><h4>7. Ley aplicable</h4><p>Estos términos se rigen por las leyes de la República de Colombia.</p>'},
-    datos:{t:'Política de Tratamiento de Datos',h:'<h4>1. Responsable</h4><p>ASYS Technology S.A.S. Correo: contacto@asysdigital.com.</p><h4>2. Datos que recolectamos</h4><p>Nombre, empresa, correo, teléfono y el mensaje que escribes en el formulario.</p><h4>3. Finalidades</h4><ul><li>Responder tu solicitud y contactarte.</li><li>Elaborar propuestas comerciales.</li><li>Enviar información relacionada con el servicio solicitado.</li></ul><h4>4. Derechos del titular</h4><p>Puedes conocer, actualizar, rectificar y suprimir tus datos, solicitar prueba de la autorización y revocarla, y presentar quejas ante la Superintendencia de Industria y Comercio.</p><h4>5. Cómo ejercer tus derechos</h4><p>Escribe a contacto@asysdigital.com indicando tu nombre y tu solicitud.</p><h4>6. Vigencia</h4><p>Conservaremos tus datos mientras sea necesario para las finalidades descritas o la ley lo exija.</p>'}
-  };
   function esc(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
   function open(html){lastFocus=d.activeElement;mc.innerHTML=html;modal.classList.add('open');modal.setAttribute('aria-hidden','false');$('.modal-close').focus()}
   function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');if(lastFocus)lastFocus.focus()}
-  function openLegal(which){
-    var tabs='<div class="tabs"><button type="button" data-tab="terminos" class="'+(which==='terminos'?'on':'')+'">Términos y Condiciones</button><button type="button" data-tab="datos" class="'+(which==='datos'?'on':'')+'">Tratamiento de datos</button></div>';
-    open('<h3 id="modal-title">'+legal[which].t+'</h3><p class="draft-note">Texto de demostración. Debe ser revisado por un abogado antes de publicarse.</p>'+tabs+legal[which].h);
-  }
   d.addEventListener('click',function(e){
-    var b=e.target.closest('[data-service],[data-project],[data-legal],[data-tab]');
+    var b=e.target.closest('[data-service],[data-project]');
     if(b){
-      if(b.dataset.legal){e.preventDefault();openLegal(b.dataset.legal);return}
-      if(b.dataset.tab){openLegal(b.dataset.tab);return}
       var k=b.dataset.service||b.dataset.project,i=info[k];
       if(i)open('<h3 id="modal-title">'+esc(i[0])+'</h3><p>'+esc(i[1])+'</p><p><a class="linklike" style="color:var(--blue)" href="#contacto">Hablemos de tu proyecto →</a></p>');
     }
