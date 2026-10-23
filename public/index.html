@@ -167,11 +167,9 @@ nav{display:flex;gap:.3rem}
 .project-controls,.carousel-controls{display:flex;gap:.6rem}
 .project-controls button,.carousel-controls button{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--ink);font-size:1.1rem;transition:background .2s,color .2s,transform .2s}
 .project-controls button:hover,.carousel-controls button:hover{background:var(--ink);color:#fff;transform:scale(1.06)}
-.project-showcase{overflow:hidden;padding:14px 0 34px}
-.project-track{display:flex;gap:0;width:max-content;will-change:transform}
-.project-showcase.static{overflow-x:auto;scrollbar-width:none}
-.project-showcase.static .project-track{gap:1.4rem;padding-inline:max(20px,5vw)}
-.project-card{flex:0 0 min(560px,86vw);border-radius:60px 16px 60px 16px;padding:2rem;display:grid;gap:1.4rem;min-height:520px;color:#fff;position:relative;overflow:hidden;transition:transform .4s}
+.project-showcase{display:flex;gap:1.4rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px max(20px,5vw) 30px;scrollbar-width:none}
+.project-showcase::-webkit-scrollbar{display:none}
+.project-card{flex:0 0 min(560px,86vw);scroll-snap-align:center;border-radius:60px 16px 60px 16px;padding:2rem;display:grid;gap:1.4rem;min-height:520px;color:#fff;position:relative;overflow:hidden;transition:transform .4s}
 .project-card:hover{transform:translateY(-8px) rotate(-.6deg)}
 .project-card.zylo{background:linear-gradient(150deg,#0f2a8a,#1554ff)}
 .project-card.cafe{background:linear-gradient(150deg,#1a1a2e,#3a2a6b)}
@@ -552,7 +550,7 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
       <article class="project-card zylo" data-proj="tienda"><div class="project-copy"><p>01 / SOFTWARE DE GESTIÓN</p><h3>SISTEMA<br><i>DE TIENDA</i></h3><span>Inventario, ventas y gestión diaria para una tienda de barrio.</span><button class="project-open" data-project="tienda">VER PROYECTO <b>→</b></button></div><div class="shot" title="Ampliar imagen"><div class="shot-bar"><i></i><i></i><i></i></div><img class="project-real" src="proyectos/tienda-dashboard.jpeg" alt="Panel de gestión de productos del Sistema de Tienda" loading="lazy" /></div><div class="thumbs"><button type="button" class="thumb on" data-src="proyectos/tienda-dashboard.jpeg" data-alt="Panel de gestión de productos del Sistema de Tienda" aria-label="Panel de gestión de productos del Sistema de Tienda"><img src="proyectos/tienda-dashboard.jpeg" alt="" loading="lazy" /></button><button type="button" class="thumb" data-src="proyectos/tienda-pos.jpeg" data-alt="Punto de venta del Sistema de Tienda" aria-label="Punto de venta del Sistema de Tienda"><img src="proyectos/tienda-pos.jpeg" alt="" loading="lazy" /></button><button type="button" class="thumb" data-src="proyectos/tienda-ventas.jpeg" data-alt="Reporte de ventas del Sistema de Tienda" aria-label="Reporte de ventas del Sistema de Tienda"><img src="proyectos/tienda-ventas.jpeg" alt="" loading="lazy" /></button></div></article>
       <article class="project-card cafe" data-proj="jmbarber"><div class="project-copy"><p>02 / PRODUCTO DIGITAL</p><h3>JM<i>BARBER</i></h3><span>Agenda y administración de citas para barberías y servicios.</span><button class="project-open" data-project="jmbarber">VER PROYECTO <b>→</b></button></div><div class="shot" title="Ampliar imagen"><div class="shot-bar"><i></i><i></i><i></i></div><img class="project-real" src="proyectos/jmbarber-login.jpeg" alt="Pantalla de acceso de JMbarber" loading="lazy" /></div><div class="thumbs"><button type="button" class="thumb on" data-src="proyectos/jmbarber-login.jpeg" data-alt="Pantalla de acceso de JMbarber" aria-label="Pantalla de acceso de JMbarber"><img src="proyectos/jmbarber-login.jpeg" alt="" loading="lazy" /></button><button type="button" class="thumb" data-src="proyectos/jmbarber-panel.jpeg" data-alt="Panel de JMbarber" aria-label="Panel de JMbarber"><img src="proyectos/jmbarber-panel.jpeg" alt="" loading="lazy" /></button><button type="button" class="thumb" data-src="proyectos/jmbarber-horarios.jpeg" data-alt="Horarios de JMbarber" aria-label="Horarios de JMbarber"><img src="proyectos/jmbarber-horarios.jpeg" alt="" loading="lazy" /></button></div></article>
       <article class="project-card chatbot" data-proj="unimagdalena"><div class="project-copy"><p>03 / INTELIGENCIA ARTIFICIAL</p><h3>CHATBOT<br><i>UNIMAGDALENA</i></h3><span>Asistente virtual para atención académica de Ingeniería de Sistemas.</span><button class="project-open" data-project="unimagdalena">VER PROYECTO <b>→</b></button></div><div class="shot" title="Ampliar imagen"><div class="shot-bar"><i></i><i></i><i></i></div><img class="project-real" src="proyectos/unimagdalena-chat.jpeg" alt="Chatbot de Ingeniería de Sistemas de Unimagdalena" loading="lazy" /></div><div class="thumbs"><button type="button" class="thumb on" data-src="proyectos/unimagdalena-chat.jpeg" data-alt="Chatbot de Ingeniería de Sistemas de Unimagdalena" aria-label="Chatbot de Ingeniería de Sistemas de Unimagdalena"><img src="proyectos/unimagdalena-chat.jpeg" alt="" loading="lazy" /></button><button type="button" class="thumb" data-src="proyectos/unimagdalena-opciones.jpeg" data-alt="Opciones del chatbot de Unimagdalena" aria-label="Opciones del chatbot de Unimagdalena"><img src="proyectos/unimagdalena-opciones.jpeg" alt="" loading="lazy" /></button><button type="button" class="thumb" data-src="proyectos/unimagdalena-web.jpeg" data-alt="Versión web del chatbot de Unimagdalena" aria-label="Versión web del chatbot de Unimagdalena"><img src="proyectos/unimagdalena-web.jpeg" alt="" loading="lazy" /></button></div></article>
-      <article class="project-card dashboard"><div class="project-copy"><p>04 / DATA INTELLIGENCE</p><h3>DASHBOARD<br><i>ANALÍTICO</i></h3><span>Plataforma de análisis y visualización de datos.</span><a href="#contacto">VER PROYECTO <b>→</b></a></div><div class="dash"><div class="dash-side"></div><div class="dash-main"><small>Resumen operativo</small><div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="dash-donut"></div></div></div></article>
+      <article class="project-card dashboard" data-proj="dashboard"><div class="project-copy"><p>04 / DATA INTELLIGENCE</p><h3>DASHBOARD<br><i>ANALÍTICO</i></h3><span>Plataforma de análisis y visualización de datos.</span><button class="project-open" data-project="dashboard">VER PROYECTO <b>→</b></button></div><div class="dash"><div class="dash-side"></div><div class="dash-main"><small>Resumen operativo</small><div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="dash-donut"></div></div></div></article>
     </div>
   </section>
 
@@ -683,32 +681,20 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
     function step(){var c=t.children[0];return c?c.getBoundingClientRect().width+16:300}
     $(prev).addEventListener('click',function(){t.scrollBy({left:-step(),behavior:'smooth'})});
     $(next).addEventListener('click',function(){t.scrollBy({left:step(),behavior:'smooth'})})}
-  /* ---------- proyectos: carrusel continuo pegado, derecha → izquierda ---------- */
+  carousel('.project-showcase','.project-prev','.project-next');
+  /* avance automático, de derecha a izquierda, una tarjeta cada 4.5 s */
   (function(){
-    var box=$('.project-showcase');if(!box)return;
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches){box.classList.add('static');carousel('.project-showcase','.project-prev','.project-next');return}
-    var track=d.createElement('div');track.className='project-track';
-    $$('.project-card',box).forEach(function(c){track.appendChild(c)});box.appendChild(track);
-    var orig=$$('.project-card',track),n=orig.length,k,j;
-    for(k=0;k<2;k++)orig.forEach(function(c){var cl=c.cloneNode(true);cl.setAttribute('aria-hidden','true');cl.removeAttribute('data-proj');
-      $$('button,a',cl).forEach(function(x){x.tabIndex=-1});track.appendChild(cl)});
-    var SPEED=40,off=0,kick=0,setW=0,hover=false,vis=true,last=0;   /* SPEED = px por segundo (~1 m cada 10 s) */
-    function measure(){setW=0;for(j=0;j<n;j++)setW+=orig[j].getBoundingClientRect().width}
-    measure();addEventListener('resize',measure);
+    var box=$('.project-showcase');if(!box||reduce)return;
+    var hover=false,vis=true;
     box.addEventListener('mouseenter',function(){hover=true});box.addEventListener('mouseleave',function(){hover=false});
-    box.addEventListener('focusin',function(){hover=true});box.addEventListener('focusout',function(){hover=false});
+    box.addEventListener('touchstart',function(){hover=true},{passive:true});box.addEventListener('touchend',function(){setTimeout(function(){hover=false},4000)},{passive:true});
     new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(box);
-    function nudge(dir){var c=orig[0];kick+=dir*(c?c.getBoundingClientRect().width:560)}
-    $('.project-prev').addEventListener('click',function(){nudge(-1)});
-    $('.project-next').addEventListener('click',function(){nudge(1)});
-    (function loop(ms){requestAnimationFrame(loop);
-      var dt=Math.min(.05,(ms-last)/1000);last=ms;if(!vis||!setW)return;
-      var paused=hover||d.querySelector('.detail-modal.open');
-      if(!paused)off+=SPEED*dt;
-      if(Math.abs(kick)>.5){var st=kick*.1;off+=st;kick-=st}
-      off=((off%setW)+setW)%setW;
-      track.style.transform='translate3d('+(-off).toFixed(2)+'px,0,0)';
-    })(0);
+    setInterval(function(){
+      if(hover||!vis||d.querySelector('.detail-modal.open'))return;
+      var c=box.children[0],step=c?c.getBoundingClientRect().width+22:560;
+      if(box.scrollLeft+box.clientWidth>=box.scrollWidth-12)box.scrollTo({left:0,behavior:'smooth'});
+      else box.scrollBy({left:step,behavior:'smooth'});
+    },4500);
   })();
   carousel('.review-track','.review-prev','.review-next');
 
@@ -721,7 +707,8 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
     integration:['Integración de sistemas','Conectamos tus herramientas para que la información fluya en un solo lugar.'],
     tienda:['Sistema de tienda','Inventario, ventas y gestión diaria para una tienda de barrio, en un solo panel.'],
     jmbarber:['JMbarber','Agenda y administración de citas para barberías y servicios.'],
-    unimagdalena:['Chatbot Unimagdalena','Asistente virtual para la atención académica de Ingeniería de Sistemas.']
+    unimagdalena:['Chatbot Unimagdalena','Asistente virtual para la atención académica de Ingeniería de Sistemas.'],
+    dashboard:['Dashboard analítico','Plataforma de análisis y visualización de datos para entender la operación de un vistazo.']
   };
   function esc(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
   function open(html){lastFocus=d.activeElement;mc.innerHTML=html;modal.classList.add('open');modal.setAttribute('aria-hidden','false');$('.modal-close').focus()}
@@ -739,9 +726,11 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
     var b=e.target.closest('[data-service],[data-project]');
     if(b){
       var k=b.dataset.service||b.dataset.project,i=info[k],g='';
+      var cat='';
       if(b.dataset.project){var card2=$('.project-card[data-proj="'+k+'"]');
-        g='<div class="gal">'+$$('.thumb',card2).map(function(x){return '<button type="button" data-zoom="'+x.dataset.src+'" data-alt="'+esc(x.dataset.alt)+'"><img src="'+x.dataset.src+'" alt="'+esc(x.dataset.alt)+'" /></button>'}).join('')+'</div>'}
-      if(i)open('<h3 id="modal-title">'+esc(i[0])+'</h3><p>'+esc(i[1])+'</p>'+g+'<p><a class="linklike" style="color:var(--blue)" href="#contacto">Hablemos de tu proyecto →</a></p>');
+        var cp=$('.project-copy p',card2);cat=cp?'<p class="eyebrow" style="margin-bottom:.6rem">'+esc(cp.textContent)+'</p>':'';
+        if($$('.thumb',card2).length)g='<div class="gal">'+$$('.thumb',card2).map(function(x){return '<button type="button" data-zoom="'+x.dataset.src+'" data-alt="'+esc(x.dataset.alt)+'"><img src="'+x.dataset.src+'" alt="'+esc(x.dataset.alt)+'" /></button>'}).join('')+'</div>'}
+      if(i)open(cat+'<h3 id="modal-title">'+esc(i[0])+'</h3><p>'+esc(i[1])+'</p>'+g+'<p><a class="linklike" style="color:var(--blue)" href="#contacto">Hablemos de tu proyecto →</a></p>');
     }
     if(e.target.closest('.modal-close')||e.target.classList.contains('modal-backdrop'))close();
     if(e.target.closest('.modal-content a[href^="#"]'))close();
