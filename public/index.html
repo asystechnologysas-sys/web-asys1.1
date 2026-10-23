@@ -360,6 +360,14 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
 .gal img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top}
 .modal-content .lb{width:100%;border-radius:16px;margin-top:.8rem}
 
+/* COHETE + VIDEO DE FONDO */
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity 1.2s;filter:brightness(.55) saturate(1.1)}
+.hero-video.ok{opacity:.55}
+.smoke{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.rocket{position:absolute;left:0;top:0;width:54px;z-index:2;opacity:0;will-change:transform;pointer-events:none;filter:drop-shadow(0 0 14px rgba(39,200,255,.45))}
+.rocket svg{display:block;overflow:visible}
+.rk-flame{transform-box:fill-box;transform-origin:50% 0}
+
 /* REVEAL */
 .js .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .js .reveal.in{opacity:1;transform:none}
@@ -444,6 +452,22 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
       <div class="hero-signature"><div><b>ASYS</b><span>Automatización<br>Soluciones<br>Sistemas inteligentes</span></div><p>DISEÑADO PARA<br><em>LO QUE SIGUE</em></p></div>
     </div>
     <div class="logo-stage" aria-label="Símbolo ASYS flotante"><canvas class="galaxy" data-stars="5200" data-shoot="1" aria-hidden="true"></canvas><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="logo-object"><div class="logo-disc"><img src="nuevo-logo-transparente.png" alt="" /></div></div><span class="stage-label top">SISTEMAS<br>INTELIGENTES</span><span class="stage-label bottom">COLOMBIA · 2026</span></div>
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="hero.mp4" type="video/mp4"></video>
+    <canvas class="smoke" aria-hidden="true"></canvas>
+    <div class="rocket" aria-hidden="true">
+      <svg viewBox="0 0 60 200" width="54" height="180">
+        <defs>
+          <linearGradient id="rk-body" x1="0" x2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset=".45" stop-color="#ffffff"/><stop offset="1" stop-color="#9db6f0"/></linearGradient>
+          <linearGradient id="rk-fire" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".25" stop-color="#ffe29a"/><stop offset=".6" stop-color="#ff7a3d"/><stop offset="1" stop-color="#ff4d2e" stop-opacity="0"/></linearGradient>
+        </defs>
+        <g class="rk-flame"><path d="M22 136 Q30 206 38 136 Z" fill="url(#rk-fire)"/><path d="M26 136 Q30 176 34 136 Z" fill="#fff" opacity=".85"/></g>
+        <path d="M13 106 L1 142 L17 130 Z" fill="#1554ff"/><path d="M47 106 L59 142 L43 130 Z" fill="#1554ff"/>
+        <path d="M30 2 C45 22 47 60 44 128 L16 128 C13 60 15 22 30 2 Z" fill="url(#rk-body)"/>
+        <path d="M15.4 92 L44.6 92 L44.4 100 L15.6 100 Z" fill="#1554ff"/>
+        <circle cx="30" cy="52" r="7.5" fill="#0a1230" stroke="#27c8ff" stroke-width="2.2"/>
+        <path d="M20 128 L40 128 L36 137 L24 137 Z" fill="#2a3558"/>
+      </svg>
+    </div>
     <a class="scroll-cue" href="#filosofia"><span></span>SCROLL PARA EXPLORAR</a>
   </section>
 
@@ -723,6 +747,45 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
   $$('canvas.galaxy').forEach(function(c){gx.push(Gal(c))});
   if(!reduce){(function loop(ms){smx+=(mx-smx)*.05;smy+=(my-smy)*.05;
     var t=ms/1000;for(var i=0;i<gx.length;i++)if(gx[i].vis)gx[i].draw(t);requestAnimationFrame(loop)})(0)}
+
+
+  /* ---------- cohete ---------- */
+  (function(){
+    var hero=$('#identidad'),rk=$('.rocket',hero),cv=$('.smoke',hero),fl=$('.rk-flame',hero),vid=$('.hero-video',hero);
+    if(!hero||!rk)return;
+    if(vid){vid.addEventListener('loadeddata',function(){vid.classList.add('ok')});}
+    var ctx=cv.getContext('2d'),W=0,H=0,vis=false,P=[],T=11,rw=54,rh=180,TAU=Math.PI*2;
+    function size(){var dpr=Math.min(devicePixelRatio||1,1.5);W=hero.clientWidth;H=hero.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);rw=rk.offsetWidth||54;rh=rk.offsetHeight||180}
+    size();addEventListener('resize',size);
+    new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(hero);
+    function place(x,nozzleY,shake,op){rk.style.transform='translate('+(x-rw/2+shake)+'px,'+(nozzleY-rh*.685)+'px)';rk.style.opacity=op}
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){size();place(innerWidth<960?W*.84:W*.58,H-70,0,1);fl.style.transform='scaleY(.5)';return}
+    function spawn(x,y,onPad,burn){
+      var n=burn>=1?3:2,i;
+      for(i=0;i<n&&P.length<420;i++)P.push({x:x+(Math.random()-.5)*8,y:y,vx:(Math.random()-.5)*(onPad?5.5:1.3),vy:onPad?-Math.random()*.9:Math.random()*.7,r:4+Math.random()*6,l:70+Math.random()*50,m:120});
+      if(burn>0&&P.length<420)P.push({x:x,y:y,vx:(Math.random()-.5)*2.6,vy:2+Math.random()*3,r:1.3,l:26,m:26,sp:1});
+    }
+    (function frame(ms){
+      requestAnimationFrame(frame);if(!vis)return;
+      var t=((ms/1000)%T)/T,ground=H-70,x=innerWidth<960?W*.84:W*.58,y=0,op=1,shake=0,burn=0;
+      if(t<.12){op=Math.min(1,t/.04)}
+      else if(t<.22){burn=(t-.12)/.1;shake=burn}
+      else if(t<.92){var k=(t-.22)/.7;y=-Math.pow(k,2.2)*(H+rh*1.3);burn=1;shake=Math.max(0,1-k*4)*.6}
+      else op=0;
+      var nozzle=ground+y;
+      place(x,nozzle,Math.sin(ms/28)*shake*1.8,op);
+      fl.style.transform='scaleY('+(op?(.12+burn*(.9+Math.random()*.25)):0)+')';
+      if(burn>0&&op)spawn(x,nozzle+rh*.04,y>-40,burn);
+      ctx.clearRect(0,0,W,H);
+      for(var i=P.length-1;i>=0;i--){
+        var p=P[i];p.x+=p.vx;p.y+=p.vy;p.vx*=.985;p.l--;
+        if(p.l<=0){P.splice(i,1);continue}
+        var a=p.l/p.m;
+        if(p.sp){ctx.fillStyle='rgba(255,200,110,'+a+')';ctx.fillRect(p.x,p.y,p.r,p.r*2)}
+        else{p.r+=.32;ctx.fillStyle='rgba(205,225,255,'+(a*.14)+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,TAU);ctx.fill()}
+      }
+    })(0);
+  })();
 
   /* ---------- aviso de datos ---------- */
   var bar=$('#consent-bar'),seen=false;try{seen=localStorage.getItem('asys-aviso')==='1'}catch(_){}
