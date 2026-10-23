@@ -1,235 +1,650 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ffffff" />
-    <meta name="description" content="ASYS Technology S.A.S. — Automatización, software, inteligencia artificial e integración de sistemas en Colombia." />
-    <meta property="og:title" content="ASYS Technology — Creamos el futuro" />
-    <meta property="og:description" content="Soluciones tecnológicas personalizadas que generan impacto real." />
-    <title>ASYS Technology — Creamos el futuro</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles2.css" />
-    <link rel="stylesheet" href="hero-refresh.css" />
-    <link rel="stylesheet" href="enhancements.css" />
-    <link rel="stylesheet" href="controls.css" />
-    <link rel="stylesheet" href="home-refresh.css" />
-    <link rel="stylesheet" href="final-polish.css" />
-    <link rel="stylesheet" href="streamline.css" />
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="description" content="ASYS Technology S.A.S. — Automatización, software, inteligencia artificial e integración de sistemas en Colombia." />
+<title>ASYS Technology — Creamos el futuro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* DEMO ASYS — rediseño dinámico. Mismos nombres de clases que el sitio actual.
+   Layout: secciones orgánicas (blobs, curvas, radios asimétricos) + animación ligada al scroll. */
+:root{
+  --blue:#1554ff; --blue-2:#3d7bff; --cyan:#27c8ff; --ink:#0a1230; --ink-2:#2a3558;
+  --muted:#6a7595; --line:#e3e8f5; --soft:#f3f6ff; --bg:#ffffff; --dark:#070d24; --dark-2:#0d1636;
+  --ok:#12b76a; --err:#e5484d;
+  --f-display:'Sora','Manrope',system-ui,sans-serif; --f-body:'Manrope',system-ui,sans-serif;
+  --blob-a:62% 38% 55% 45% / 48% 58% 42% 52%;
+  --blob-b:40% 60% 42% 58% / 58% 40% 60% 42%;
+  --card-r:44px 14px 44px 14px;
+  --sy:0; /* progreso de scroll 0–1, lo escribe app.js */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:var(--f-body);color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:8px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h2{font-size:clamp(2rem,5vw,3.6rem)}
+h2 em,h1 em{font-style:normal;color:var(--blue)}
+section{position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:1.2rem}
+.eyebrow span,.eyebrow-line{width:34px;height:2px;background:currentColor;border-radius:2px;display:inline-block}
+.on-dark{color:var(--cyan)}
+.wrap{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 
-    <link rel="icon" type="image/png" href="asys-logo.png?v=2" />
-    <script>
-  // Redondear bordes del logo automáticamente para la pestaña
-  (() => {
-    const img = new Image();
-    img.src = 'asys-logo.png';
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const size = 64; // Tamaño óptimo para pestaña
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext('2d');
+/* progreso + cursor + grano */
+.progress{position:fixed;top:0;left:0;height:3px;width:calc(var(--sy)*100%);background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:100;border-radius:0 3px 3px 0}
+.cursor-glow{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(39,200,255,.16),transparent 65%);transform:translate(-50%,-50%);left:var(--mx,50%);top:var(--my,30%);transition:left .25s ease-out,top .25s ease-out}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-      // Bordes redondeados: 16 para esquinas redondeadas, o 32 para círculo perfecto
-      const radio = 32; 
+/* header */
+.site-header{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1180px,calc(100% - 28px));z-index:60;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.6rem .7rem .6rem 1.1rem;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(16px);border:1px solid rgba(21,84,255,.12);box-shadow:0 10px 40px -18px rgba(21,84,255,.35);transition:padding .3s,box-shadow .3s}
+.site-header.scrolled{box-shadow:0 14px 50px -14px rgba(10,18,48,.4)}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand-logo{width:38px;height:38px}
+.brand-naming{display:flex;flex-direction:column;line-height:1}
+.brand-title{font-family:var(--f-display);font-weight:700;font-size:1.15rem;letter-spacing:.08em}
+.brand-sub{font-size:.55rem;letter-spacing:.34em;color:var(--blue);font-weight:700;margin-top:3px}
+nav{display:flex;gap:.3rem}
+.nav-item{position:relative;font-size:.72rem;font-weight:700;letter-spacing:.12em;padding:.55rem .9rem;border-radius:999px;color:var(--ink-2);transition:background .2s,color .2s}
+.nav-item:hover{background:var(--soft)}
+.nav-item.active{color:var(--blue);background:var(--soft)}
+.header-cta-pill{background:var(--blue);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.12em;padding:.75rem 1.2rem;border-radius:999px;display:inline-flex;gap:.4rem;align-items:center;transition:transform .2s,box-shadow .2s}
+.header-cta-pill:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px var(--blue)}
+.header-cta-pill i{font-style:normal;transition:transform .2s}
+.header-cta-pill:hover i{transform:translate(2px,-2px)}
+.menu-toggle{display:none;font-size:1.3rem;width:42px;height:42px;border-radius:50%;background:var(--soft)}
 
-      ctx.beginPath();
-      if (ctx.roundRect) {
-        ctx.roundRect(0, 0, size, size, radio);
-      } else {
-        ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
-      }
-      ctx.clip();
-      ctx.drawImage(img, 0, 0, size, size);
+/* blobs reutilizables */
+.blob{position:absolute;border-radius:var(--blob-a);filter:blur(2px);animation:morph 14s ease-in-out infinite;z-index:0}
+@keyframes morph{0%,100%{border-radius:62% 38% 55% 45%/48% 58% 42% 52%}33%{border-radius:40% 60% 42% 58%/58% 40% 60% 42%}66%{border-radius:55% 45% 62% 38%/42% 55% 45% 58%}}
 
-      // Asignar a la pestaña
-      let link = document.querySelector("link[rel~='icon']");
-      if (!link) {
-        link = document.createElement('link');
-        link.rel = 'icon';
-        document.head.appendChild(link);
-      }
-      link.href = canvas.toDataURL('image/png');
-    };
-  })();
+/* HERO MODERN */
+.hero-modern{min-height:100svh;padding-block:140px 90px;overflow:hidden;background:linear-gradient(180deg,#fff 0%,var(--soft) 100%)}
+.hero-modern .blob.b1{width:520px;height:520px;right:-140px;top:60px;background:radial-gradient(circle at 30% 30%,rgba(39,200,255,.5),rgba(21,84,255,.18));transform:translateY(calc(var(--sy)*-160px))}
+.hero-modern .blob.b2{width:300px;height:300px;left:-90px;bottom:40px;background:radial-gradient(circle,rgba(21,84,255,.22),transparent 70%);transform:translateY(calc(var(--sy)*120px))}
+.hero-container{position:relative;z-index:2;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center}
+.hero-headline{font-size:clamp(2.3rem,5.6vw,4.4rem);margin-bottom:1.4rem}
+.neon-blue-gradient{background:linear-gradient(100deg,var(--blue) 10%,var(--cyan) 90%);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.hero-subtitle{font-size:1.12rem;color:var(--ink-2);max-width:34rem;margin-bottom:2.2rem}
+.features-bar{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem}
+.feat-item{display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem .7rem .7rem;background:#fff;border:1px solid var(--line);border-radius:999px;transition:transform .25s,box-shadow .25s}
+.feat-item:hover{transform:translateY(-4px);box-shadow:0 14px 30px -16px rgba(21,84,255,.5)}
+.feat-circle{width:42px;height:42px;border-radius:50%;background:var(--soft);display:grid;place-items:center;flex:none}
+.feat-copy{display:flex;flex-direction:column;line-height:1.2;font-size:.86rem}
+.feat-copy b{font-weight:800}.feat-copy span{color:var(--muted);font-size:.78rem}
+.hero-right{position:relative;min-height:440px}
+.barber-card-wrap{position:relative;border-radius:var(--blob-b);background:linear-gradient(150deg,var(--dark),#13245e);padding:2.2rem;color:#fff;overflow:hidden;box-shadow:0 40px 80px -30px rgba(10,18,48,.6);transform:rotate(calc(var(--sy)*-6deg + 2deg));transition:transform .2s}
+.barber-card-wrap::before{content:"";position:absolute;inset:-30%;background:conic-gradient(from 0deg,transparent,rgba(39,200,255,.3),transparent 40%);animation:spin 12s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.barber-img{position:relative;display:grid;gap:.8rem}
+.mock-row{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1rem;border-radius:18px 6px 18px 6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:.85rem}
+.mock-row b{font-weight:700}.mock-row small{color:#a9b8e8}
+.mock-pill{padding:.2rem .7rem;border-radius:999px;background:rgba(39,200,255,.2);color:var(--cyan);font-size:.7rem;font-weight:800}
+.mock-title{font-family:var(--f-display);font-size:1.5rem;margin-bottom:.4rem;position:relative}
+.btn-conoce-hotspot{position:relative;margin-top:1rem;display:inline-flex;align-self:flex-start;padding:.8rem 1.4rem;border-radius:999px;background:#fff;color:var(--ink);font-weight:800;font-size:.82rem;letter-spacing:.06em;transition:transform .2s}
+.btn-conoce-hotspot:hover{transform:translateX(4px)}
+.btn-conoce-hotspot::after{content:" →"}
+
+/* HERO identidad */
+.hero{min-height:92svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:2rem;padding:120px max(20px,5vw);background:var(--dark);color:#fff;overflow:hidden;clip-path:ellipse(130% 100% at 50% 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(circle at 60% 50%,#000 20%,transparent 70%)}
+.hero-aura{position:absolute;width:700px;height:700px;right:-200px;top:-100px;border-radius:50%;background:radial-gradient(circle,rgba(21,84,255,.55),transparent 65%)}
+.hero-copy{position:relative;z-index:2}
+.hero h1{font-size:clamp(3rem,8vw,6.4rem);margin-bottom:1.2rem}
+.hero h1 em{color:var(--cyan)}
+.lede{font-size:1.15rem;color:#b9c6ee;max-width:30rem}
+.hero-signature{display:flex;gap:2rem;margin-top:2.4rem;align-items:flex-end;flex-wrap:wrap}
+.hero-signature b{font-family:var(--f-display);font-size:2rem;display:block}
+.hero-signature span,.hero-signature p{font-size:.72rem;letter-spacing:.16em;color:#8fa3df;text-transform:uppercase;line-height:1.7}
+.hero-signature p em{color:var(--cyan);font-style:normal;font-weight:800}
+.logo-stage{position:relative;aspect-ratio:1;max-width:520px;width:100%;margin-inline:auto;display:grid;place-items:center;z-index:2}
+.orbit{position:absolute;border-radius:50%;border:1px dashed rgba(143,163,223,.4)}
+.orbit-one{inset:6%;animation:spin 40s linear infinite}
+.orbit-two{inset:20%;animation:spin 26s linear infinite reverse;border-style:solid;border-color:rgba(39,200,255,.3)}
+.orbit-one::after,.orbit-two::after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:var(--cyan);top:-7px;left:50%;box-shadow:0 0 18px var(--cyan)}
+.logo-object{transform:translateY(calc(var(--sy)*-70px)) rotate(calc(var(--sy)*40deg))}
+.logo-disc{width:170px;height:170px;border-radius:var(--blob-a);background:linear-gradient(140deg,var(--blue),var(--cyan));display:grid;place-items:center;animation:morph 10s ease-in-out infinite;box-shadow:0 0 80px rgba(39,200,255,.5)}
+.logo-disc svg{width:84px;height:84px}
+.stage-label{position:absolute;font-size:.68rem;letter-spacing:.2em;color:#8fa3df;font-weight:700}
+.stage-label.top{top:2%;right:4%;text-align:right}.stage-label.bottom{bottom:3%;left:4%}
+.scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-size:.66rem;letter-spacing:.24em;color:#8fa3df;display:flex;flex-direction:column;align-items:center;gap:.6rem;z-index:3}
+.scroll-cue span{width:1px;height:38px;background:linear-gradient(var(--cyan),transparent);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* FILOSOFÍA: palabras que se desplazan con el scroll */
+.philosophy{padding:120px 0 100px;background:var(--bg);overflow:hidden;text-align:center}
+.dark-eyebrow{color:var(--blue)}
+.word-stack{margin:2rem 0 3rem;display:grid;gap:.2rem}
+.word-stack div{font-family:var(--f-display);font-weight:700;font-size:clamp(2.2rem,9.5vw,8rem);line-height:1;white-space:nowrap;letter-spacing:-.03em;color:transparent;-webkit-text-stroke:2px var(--ink);transition:color .4s}
+.word-stack div:nth-child(1){transform:translateX(calc(var(--p1,0)*1px))}
+.word-stack div:nth-child(2){transform:translateX(calc(var(--p1,0)*-1px));-webkit-text-stroke-color:var(--blue)}
+.word-stack div:nth-child(3){transform:translateX(calc(var(--p1,0)*1px))}
+.word-stack div:hover{color:var(--blue)}
+.word-stack span{color:var(--cyan);-webkit-text-stroke:0}
+.word-stack i{font-style:normal;color:var(--blue);-webkit-text-stroke:0}
+.philosophy-end p{font-family:var(--f-display);font-size:clamp(1.4rem,3.2vw,2.3rem);margin-bottom:1rem}
+.philosophy-end em{font-style:normal;color:var(--blue)}
+.philosophy-end small{letter-spacing:.2em;color:var(--muted);font-weight:700}
+
+/* SERVICIOS */
+.services{padding:100px max(20px,5vw);background:var(--soft);border-radius:80px 80px 0 0}
+.section-intro{max-width:1180px;margin:0 auto 3rem;display:grid;gap:1rem}
+.section-intro>p:last-child{color:var(--ink-2);max-width:36rem;font-size:1.05rem}
+.service-list{max-width:1180px;margin:0 auto;display:grid;gap:1rem}
+.service{display:grid;grid-template-columns:70px 1.2fr 1fr 56px;align-items:center;gap:1.2rem;padding:1.4rem 1.6rem;background:#fff;border:1px solid var(--line);border-radius:var(--card-r);transition:transform .35s,box-shadow .35s,background .35s}
+.service:hover,.service.active{transform:translateX(10px);box-shadow:0 24px 50px -26px rgba(21,84,255,.55);background:linear-gradient(100deg,#fff,#eaf0ff)}
+.service-num{font-family:var(--f-display);font-weight:700;font-size:1.6rem;color:var(--blue)}
+.service-title h3{font-size:1.2rem;margin-bottom:.3rem}
+.service-title p{color:var(--ink-2);font-size:.95rem}
+.service-art{height:70px;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.service-art span,.service-art i{display:block;border-radius:50%;background:var(--blue);width:14px;height:14px;animation:bob 2.4s ease-in-out infinite}
+.service-art span:nth-child(2),.service-art i:nth-child(2){animation-delay:.2s;background:var(--blue-2)}
+.service-art span:nth-child(3),.service-art i:nth-child(3){animation-delay:.4s;background:var(--cyan)}
+.service-art i:nth-child(4){animation-delay:.6s}.service-art i:nth-child(5){animation-delay:.8s}
+.service-art.software span{border-radius:6px;width:34px;height:12px}
+.service-art.integration span{width:36px;height:36px;color:#fff;font-weight:800;font-size:.8rem;display:grid;place-items:center;animation:none}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.service button{width:52px;height:52px;border-radius:50%;background:var(--ink);color:#fff;font-size:1.2rem;transition:transform .25s,background .25s}
+.service button:hover{background:var(--blue);transform:rotate(45deg) scale(1.08)}
+
+/* ECOSISTEMA */
+.ecosystem{display:grid;grid-template-columns:.9fr 1.1fr;gap:2rem;align-items:center;padding:110px max(20px,5vw);background:var(--dark);color:#fff;overflow:hidden;border-radius:0 0 80px 80px}
+.ecosystem h2 em{color:var(--cyan)}
+.ecosystem-copy p:last-child{color:#b9c6ee;margin-top:1rem;max-width:28rem}
+.network{position:relative;aspect-ratio:700/560;width:100%;max-width:680px;margin-inline:auto}
+.network svg{position:absolute;inset:0;width:100%;height:100%}
+.network svg path{fill:none;stroke:rgba(39,200,255,.45);stroke-width:1.4;stroke-dasharray:6 8;animation:dash 18s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-400}}
+.network-core{position:absolute;left:50%;top:48.2%;transform:translate(-50%,-50%);width:23%;aspect-ratio:1;border-radius:var(--blob-a);background:linear-gradient(140deg,var(--blue),var(--cyan));display:grid;place-items:center;animation:morph 9s ease-in-out infinite;box-shadow:0 0 70px rgba(39,200,255,.5);z-index:2}
+.network-core svg{position:static;width:50%;height:50%}
+.node{position:absolute;transform:translate(-50%,-50%);padding:.55rem 1rem;border-radius:999px;font-size:.68rem;font-weight:800;letter-spacing:.14em;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);animation:bob 5s ease-in-out infinite;z-index:2}
+.node:hover{background:var(--cyan);color:var(--dark)}
+.node.ai{left:18%;top:19%}.node.auto{left:81%;top:18%;animation-delay:.6s}.node.soft{left:16%;top:66%;animation-delay:1.2s}
+.node.data{left:85%;top:72%;animation-delay:1.8s}.node.cloud{left:36%;top:90%;animation-delay:2.4s}.node.integ{left:64%;top:91%;animation-delay:3s}
+
+/* PROYECTOS: carrusel horizontal con snap */
+.projects{padding:110px 0 90px}
+.project-heading{max-width:1180px;margin:0 auto 2.4rem;padding-inline:max(20px,5vw);display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+.project-heading>div{color:var(--ink-2);display:grid;gap:1rem}
+.project-controls,.carousel-controls{display:flex;gap:.6rem}
+.project-controls button,.carousel-controls button{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--ink);font-size:1.1rem;transition:background .2s,color .2s,transform .2s}
+.project-controls button:hover,.carousel-controls button:hover{background:var(--ink);color:#fff;transform:scale(1.06)}
+.project-showcase{display:flex;gap:1.4rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px max(20px,5vw) 30px;scrollbar-width:none}
+.project-showcase::-webkit-scrollbar{display:none}
+.project-card{flex:0 0 min(560px,86vw);scroll-snap-align:center;border-radius:60px 16px 60px 16px;padding:2rem;display:grid;gap:1.4rem;min-height:520px;color:#fff;position:relative;overflow:hidden;transition:transform .4s}
+.project-card:hover{transform:translateY(-8px) rotate(-.6deg)}
+.project-card.zylo{background:linear-gradient(150deg,#0f2a8a,#1554ff)}
+.project-card.cafe{background:linear-gradient(150deg,#1a1a2e,#3a2a6b)}
+.project-card.chatbot{background:linear-gradient(150deg,#06485e,#139fc0)}
+.project-card.dashboard{background:linear-gradient(150deg,#0a1230,#243a8f)}
+.project-copy p{font-size:.7rem;letter-spacing:.18em;opacity:.8;margin-bottom:.8rem}
+.project-copy h3{font-size:2.1rem;margin-bottom:.7rem}.project-copy h3 i{font-style:normal;color:var(--cyan)}
+.project-copy span{display:block;opacity:.85;max-width:26rem;margin-bottom:1.2rem}
+.project-open,.project-copy a{display:inline-flex;gap:.5rem;padding:.7rem 1.2rem;border-radius:999px;background:#fff;color:var(--ink);font-weight:800;font-size:.76rem;letter-spacing:.1em;transition:gap .2s}
+.project-open:hover,.project-copy a:hover{gap:.9rem}
+.project-real{display:none}
+.screen{margin-top:auto;border-radius:22px 22px 0 0;background:rgba(255,255,255,.95);color:var(--ink);padding:1rem;display:grid;gap:.5rem;font-size:.78rem;box-shadow:0 -10px 40px -10px rgba(0,0,0,.4);transform:translateY(calc(var(--sy)*-12px))}
+.screen .ln{display:flex;justify-content:space-between;padding:.5rem .7rem;background:var(--soft);border-radius:12px}
+.screen .ln b{font-weight:700}
+.dash{margin-top:auto;display:grid;grid-template-columns:50px 1fr;gap:.6rem;border-radius:22px 22px 0 0;background:rgba(255,255,255,.95);color:var(--ink);padding:1rem}
+.dash-side{background:var(--soft);border-radius:12px}
+.dash-main small{font-weight:700;color:var(--muted)}
+.bars{display:flex;align-items:flex-end;gap:.5rem;height:100px;margin:.6rem 0}
+.bars i{flex:1;border-radius:8px 8px 2px 2px;background:linear-gradient(var(--cyan),var(--blue));transform-origin:bottom;animation:grow 1.6s ease-out both}
+.bars i:nth-child(1){height:40%}.bars i:nth-child(2){height:65%}.bars i:nth-child(3){height:50%}.bars i:nth-child(4){height:85%}.bars i:nth-child(5){height:60%}.bars i:nth-child(6){height:95%}
+@keyframes grow{from{transform:scaleY(0)}}
+.dash-donut{width:52px;height:52px;border-radius:50%;background:conic-gradient(var(--blue) 0 68%,var(--line) 0);mask:radial-gradient(circle,transparent 55%,#000 56%)}
+
+/* TESTIMONIOS */
+.testimonials{padding:90px max(20px,5vw);background:var(--soft);border-radius:80px;margin-inline:max(10px,1.5vw)}
+.testimonials-heading{max-width:1180px;margin:0 auto 2.4rem;display:flex;justify-content:space-between;align-items:flex-end;gap:1.4rem;flex-wrap:wrap}
+.review-track{max-width:1180px;margin:0 auto;display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:8px}
+.review-track::-webkit-scrollbar{display:none}
+.review{flex:0 0 min(380px,82vw);scroll-snap-align:start;background:#fff;border-radius:40px 12px 40px 12px;padding:2rem;display:grid;gap:1rem;align-content:space-between;border:1px solid var(--line);transition:transform .3s}
+.review:hover{transform:translateY(-6px)}
+.review>span{font-family:var(--f-display);font-size:4rem;line-height:.6;color:var(--blue)}
+.review footer b{display:block}.review footer small{color:var(--muted)}
+
+/* PROCESO / IMPACTO */
+.process{padding:120px max(20px,5vw);max-width:1280px;margin:0 auto}
+.process h2{margin-bottom:3rem}
+.process-rail{display:flex;align-items:stretch;gap:.8rem;flex-wrap:wrap;margin-bottom:3rem}
+.process-rail>div{flex:1 1 180px;padding:1.4rem;border-radius:30px 8px 30px 8px;background:var(--soft);border:1px solid var(--line);transition:transform .3s}
+.process-rail>div:hover{transform:translateY(-6px)}
+.process-rail small{color:var(--blue);font-weight:800}.process-rail b{display:block;font-family:var(--f-display);margin:.3rem 0}
+.process-rail p{color:var(--muted);font-size:.92rem}
+.process-rail>i{align-self:center;font-style:normal;color:var(--blue);font-size:1.5rem}
+.process-rail .result{background:var(--blue);color:#fff;border-color:var(--blue)}.process-rail .result small,.process-rail .result p{color:#cfe0ff}
+.impact-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.impact-stats article{padding:2rem 1.4rem;border-radius:var(--blob-b);background:var(--dark);color:#fff;text-align:center;transition:transform .3s}
+.impact-stats article:nth-child(even){border-radius:var(--blob-a);background:linear-gradient(140deg,var(--blue),#0d3bd0)}
+.impact-stats article:hover{transform:scale(1.04)}
+.impact-stats b{font-family:var(--f-display);font-size:clamp(2.2rem,5vw,3.4rem);display:block;font-variant-numeric:tabular-nums}
+.impact-stats span{font-size:.85rem;color:#b9c6ee}
+.impact-note{color:var(--ink-2);max-width:42rem}
+
+/* NOSOTROS */
+.about{display:grid;grid-template-columns:.8fr 1.2fr .8fr;gap:2rem;align-items:center;padding:110px max(20px,5vw);background:linear-gradient(160deg,var(--soft),#fff)}
+.about-stamp{font-family:var(--f-display);font-weight:700;font-size:1.6rem;line-height:1.1;padding:2.4rem;border-radius:var(--blob-a);background:var(--ink);color:#fff;text-align:center;justify-self:center;animation:morph 12s ease-in-out infinite;aspect-ratio:1;display:grid;place-content:center}
+.about-stamp span{display:block;font-size:.6rem;letter-spacing:.3em;color:var(--cyan);margin-top:.8rem}
+.about-copy>p:not(.eyebrow){color:var(--ink-2);margin:1rem 0 1.6rem;max-width:34rem}
+.manifesto{font-family:var(--f-display);font-size:1.3rem;line-height:1.6}.manifesto b{color:var(--blue)}
+.about-orbit{aspect-ratio:1;border-radius:50%;border:1px dashed var(--blue);display:grid;place-items:center;animation:spin 30s linear infinite;max-width:260px;justify-self:center;width:100%}
+.about-orbit svg{width:46%;animation:spin 30s linear infinite reverse}
+
+/* PRINCIPIOS */
+.principles{padding:90px max(20px,5vw)}
+.principles-grid{max-width:1180px;margin:1rem auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+.principles-grid article{padding:2rem;background:#fff;border:1px solid var(--line);border-radius:var(--card-r)}
+.principles-grid article:nth-child(even){border-radius:14px 44px 14px 44px}
+.principles-grid article:hover{background:var(--blue);color:#fff;transform:translateY(-8px) rotate(-1deg)}
+.principles-grid article{transition:all .35s}
+.principles-grid b{color:var(--blue);font-family:var(--f-display)}.principles-grid article:hover b,.principles-grid article:hover p{color:#fff}
+.principles-grid h3{margin:.6rem 0;font-size:1.1rem}.principles-grid p{color:var(--muted)}
+
+/* CTA FINAL */
+.final-cta{text-align:center;padding:130px max(20px,5vw);background:var(--dark);color:#fff;border-radius:80px 80px 0 0;overflow:hidden}
+.final-cta::before{content:"";position:absolute;left:50%;top:-200px;width:800px;height:800px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(21,84,255,.5),transparent 65%)}
+.final-cta>*{position:relative}
+.final-logo{width:90px;height:90px;margin:0 auto 1.6rem;border-radius:var(--blob-a);background:linear-gradient(140deg,var(--blue),var(--cyan));display:grid;place-items:center;animation:morph 9s ease-in-out infinite}
+.final-logo svg{width:46px;height:46px}
+.final-cta h2{font-size:clamp(2.2rem,6vw,4.6rem);margin-bottom:1.2rem}.final-cta h2 em{color:var(--cyan)}
+.final-cta>p:not(.eyebrow){color:#b9c6ee;max-width:34rem;margin:0 auto 2rem}
+.final-cta>div{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.button{display:inline-flex;gap:.5rem;align-items:center;padding:1rem 1.7rem;border-radius:999px;font-weight:800;font-size:.8rem;letter-spacing:.1em;transition:transform .2s,box-shadow .2s}
+.button.primary{background:var(--blue);color:#fff}.button.primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px var(--blue)}
+.button.ghost{border:1.5px solid rgba(255,255,255,.4)}.button.ghost:hover{background:#fff;color:var(--dark)}
+
+/* CONTACTO + FORM + LEGAL */
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem;padding:110px max(20px,5vw);background:var(--dark);color:#fff;border-top:1px solid rgba(255,255,255,.08)}
+.contact h2 span{color:var(--cyan)}
+.contact-intro>p:not(.eyebrow){color:#b9c6ee;margin:1rem 0 1.6rem}
+.contact-data{display:grid;gap:.6rem}
+.contact-data a{padding:.8rem 1.2rem;border-radius:999px;border:1px solid rgba(255,255,255,.16);font-size:.9rem;transition:background .2s,transform .2s;width:fit-content;max-width:100%;overflow-wrap:anywhere}
+.contact-data a:hover{background:rgba(255,255,255,.1);transform:translateX(6px)}
+.contact form{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:2rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:60px 16px 60px 16px;align-content:start}
+.contact label{display:grid;gap:.4rem;font-size:.68rem;font-weight:800;letter-spacing:.14em;color:#9fb2ec;min-width:0}
+.contact label.full{grid-column:1/-1}
+.contact input:not([type=checkbox]),.contact textarea{font:inherit;font-size:.95rem;letter-spacing:0;color:#fff;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.14);border-radius:16px;padding:.85rem 1rem;width:100%;transition:border-color .2s,background .2s}
+.contact textarea{min-height:120px;resize:vertical}
+.contact input::placeholder,.contact textarea::placeholder{color:#6f81b8}
+.contact input:focus,.contact textarea:focus{outline:none;border-color:var(--cyan);background:rgba(255,255,255,.12)}
+.error-text{display:none;color:#ff8d92;font-size:.72rem;font-weight:600;letter-spacing:0}
+.invalid input,.invalid textarea{border-color:var(--err)}.invalid .error-text{display:block}
+.consent{grid-column:1/-1;display:grid;gap:.6rem;padding:1rem 1.1rem;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.consent label.check{display:flex;align-items:flex-start;gap:.8rem;font-size:.82rem;font-weight:500;letter-spacing:0;color:#d6e0ff;cursor:pointer;line-height:1.5}
+.consent input[type=checkbox]{appearance:none;flex:none;width:22px;height:22px;margin-top:2px;border-radius:8px;border:2px solid #6f81b8;background:transparent;cursor:pointer;display:grid;place-items:center;transition:all .2s}
+.consent input[type=checkbox]:checked{background:var(--blue);border-color:var(--blue)}
+.consent input[type=checkbox]:checked::after{content:"✓";color:#fff;font-size:.8rem;font-weight:800}
+.consent.invalid{border-color:var(--err)}.consent .error-text{padding-left:2.1rem}
+.linklike{color:var(--cyan);text-decoration:underline;text-underline-offset:3px;font-weight:700}
+.form-submit{grid-column:1/-1;padding:1.05rem;border-radius:999px;background:linear-gradient(100deg,var(--blue),var(--cyan));color:#fff;font-weight:800;letter-spacing:.12em;font-size:.82rem;transition:transform .2s,box-shadow .2s,opacity .2s}
+.form-submit:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 34px -12px var(--cyan)}
+.form-submit:disabled{opacity:.45;cursor:not-allowed}
+.form-ok{grid-column:1/-1;display:none;padding:1rem 1.2rem;border-radius:18px;background:rgba(18,183,106,.15);border:1px solid var(--ok);color:#9af0c6;font-size:.9rem}
+.form-ok.show{display:block}
+
+/* MODAL */
+.detail-modal{position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:16px}
+.detail-modal.open{display:grid}
+.modal-backdrop{position:absolute;inset:0;background:rgba(7,13,36,.7);backdrop-filter:blur(6px)}
+.modal-panel{position:relative;width:min(760px,100%);max-height:88svh;overflow:auto;background:#fff;color:var(--ink);border-radius:50px 14px 50px 14px;padding:2.4rem;animation:pop .35s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.96)}}
+.modal-close{position:absolute;right:18px;top:16px;width:42px;height:42px;border-radius:50%;background:var(--soft);font-size:1.4rem}
+.modal-content h3{font-size:1.7rem;margin-bottom:.8rem}
+.modal-content h4{font-family:var(--f-display);margin:1.3rem 0 .3rem;font-size:1rem}
+.modal-content p,.modal-content li{color:var(--ink-2);font-size:.94rem;margin-bottom:.4rem}
+.modal-content ul{padding-left:1.2rem}
+.tabs{display:flex;gap:.4rem;margin:.6rem 0 1.2rem;flex-wrap:wrap}
+.tabs button{padding:.55rem 1rem;border-radius:999px;background:var(--soft);font-weight:700;font-size:.78rem}
+.tabs button.on{background:var(--blue);color:#fff}
+.draft-note{padding:.7rem 1rem;border-radius:14px;background:#fff6e0;color:#7a5200;font-size:.8rem;margin-bottom:1rem}
+
+/* FOOTER */
+footer{background:var(--dark);color:#b9c6ee;padding:60px max(20px,5vw) 30px}
+.footer-top{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:flex-start}
+footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:1.3rem}
+.brand-dot{color:var(--cyan)}
+.footer-top>div{display:flex;gap:1.2rem;flex-wrap:wrap}.footer-top>div a:hover{color:#fff}
+.footer-top p span{font-size:.8rem;color:#7f90c4}
+.footer-bottom{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:3rem;font-size:.76rem;align-items:center}
+.footer-bottom button{color:#b9c6ee;text-decoration:underline;text-underline-offset:3px;font-size:.76rem}.footer-bottom button:hover{color:#fff}
+.footer-line{height:2px;margin-top:1.6rem;background:linear-gradient(90deg,var(--blue),var(--cyan),transparent)}
+
+/* BANNER DE DATOS */
+.consent-bar{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));right:max(14px,env(safe-area-inset-right,0px));max-width:560px;z-index:70;background:var(--ink);color:#e6ecff;border-radius:28px 8px 28px 8px;padding:1.1rem 1.2rem;display:none;gap:.8rem;box-shadow:0 20px 60px -10px rgba(0,0,0,.6);font-size:.82rem}
+.consent-bar.show{display:grid;animation:pop .4s}
+.consent-bar div{display:flex;gap:.5rem;flex-wrap:wrap}
+.consent-bar button{padding:.55rem 1.1rem;border-radius:999px;font-weight:800;font-size:.74rem}
+.consent-bar .ok{background:var(--cyan);color:var(--ink)}.consent-bar .more{border:1px solid rgba(255,255,255,.3)}
+
+/* REVEAL */
+.js .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+.js .reveal[data-d="1"]{transition-delay:.1s}.js .reveal[data-d="2"]{transition-delay:.2s}.js .reveal[data-d="3"]{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media (max-width:960px){
+  nav{display:none}.menu-toggle{display:block}
+  .site-header.open nav{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;padding:.8rem;background:#fff;border-radius:28px;box-shadow:0 20px 50px -20px rgba(10,18,48,.5)}
+  .hero-container,.hero,.ecosystem,.contact,.about{grid-template-columns:1fr}
+  .hero{padding-top:130px;clip-path:none}
+  .logo-stage{max-width:340px}
+  .service{grid-template-columns:50px 1fr 52px}.service-art{display:none}
+  .about-orbit{display:none}
+  .header-cta-pill{display:none}
+  .services,.testimonials,.final-cta{border-radius:44px}
+  .ecosystem{border-radius:0 0 44px 44px}
+}
+@media (max-width:560px){
+  .features-bar,.contact form{grid-template-columns:1fr}
+  .project-card{min-height:480px;padding:1.4rem}
+  .word-stack div{-webkit-text-stroke-width:1.2px}
+  .modal-panel{padding:1.6rem 1.2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- SÍMBOLO DE MARCA PROVISIONAL: reemplazar por asys-logo.png en el sitio real -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="asys-mark" viewBox="0 0 48 48"><path d="M24 5 6 41h8l3.4-7.4h13.2L34 41h8L24 5Zm0 15 4.2 9.6h-8.4L24 20Z" fill="#fff"/></symbol>
+</defs></svg>
+
+<header class="site-header">
+  <a class="brand" href="#inicio" aria-label="ASYS Technology, inicio">
+    <svg class="brand-logo" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="16" fill="#1554ff"/><use href="#asys-mark" x="6" y="6" width="36" height="36"/></svg>
+    <div class="brand-naming"><span class="brand-title">ASYS</span><span class="brand-sub">TECHNOLOGY</span></div>
+  </a>
+  <nav aria-label="Navegación principal">
+    <a href="#inicio" class="nav-item active">INICIO</a>
+    <a href="#servicios" class="nav-item">SERVICIOS</a>
+    <a href="#proyectos" class="nav-item">PROYECTOS</a>
+    <a href="#impacto" class="nav-item">IMPACTO</a>
+    <a href="#contacto" class="nav-item">CONTACTO</a>
+  </nav>
+  <a href="#contacto" class="header-cta-pill">HABLEMOS <i>↗</i></a>
+  <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+</header>
+
+<main>
+  <section class="hero-modern" id="inicio">
+    <div class="blob b1" aria-hidden="true"></div><div class="blob b2" aria-hidden="true"></div>
+    <div class="hero-container wrap">
+      <div class="hero-left">
+        <div class="eyebrow-modern eyebrow reveal"><span class="eyebrow-line"></span><span style="width:auto;height:auto;background:none">EL PRÓXIMO SISTEMA PODRÍA SER EL TUYO</span></div>
+        <h1 class="hero-headline reveal" data-d="1">¿Tienes una idea?<br><span class="neon-blue-gradient">Construyamos algo extraordinario juntos.</span></h1>
+        <p class="hero-subtitle reveal" data-d="2">Cuéntanos tu idea y nuestro equipo te ayudará a convertirla en una solución tecnológica de alto impacto.</p>
+        <div class="features-bar reveal" data-d="3">
+          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="feat-copy"><b>Desarrollo</b><span>a la medida</span></div></div>
+          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><div class="feat-copy"><b>Seguro y</b><span>confiable</span></div></div>
+          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div class="feat-copy"><b>Disponible 24/7</b><span>cuando lo necesites</span></div></div>
+          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div><div class="feat-copy"><b>Soporte</b><span>personalizado</span></div></div>
+        </div>
+      </div>
+      <div class="hero-right reveal" data-d="2">
+        <div class="barber-card-wrap">
+          <div class="barber-img" role="img" aria-label="Vista previa del software para barbería ASYS">
+            <div class="mock-title">Software para Barbería</div>
+            <div class="mock-row"><div><b>Corte + barba</b><br><small>10:30 · Andrés R.</small></div><span class="mock-pill">CONFIRMADA</span></div>
+            <div class="mock-row"><div><b>Corte clásico</b><br><small>11:15 · Camilo P.</small></div><span class="mock-pill">EN SILLA</span></div>
+            <div class="mock-row"><div><b>Perfilado</b><br><small>12:00 · Libre</small></div><span class="mock-pill">DISPONIBLE</span></div>
+          </div>
+          <a href="#proyectos" class="btn-conoce-hotspot" title="Ver Software de Barbería">Conoce más</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero" id="identidad">
+    <div class="hero-grid" aria-hidden="true"></div><div class="hero-aura" aria-hidden="true"></div>
+    <div class="hero-copy reveal">
+      <p class="eyebrow on-dark"><span></span> ASYS TECHNOLOGY S.A.S. / COLOMBIA</p>
+      <h1>Ideas que<br>se vuelven<br><em>sistema.</em></h1>
+      <p class="lede">Automatización, software e inteligencia aplicada para empresas que prefieren anticipar el futuro.</p>
+      <div class="hero-signature"><div><b>ASYS</b><span>Automatización<br>Soluciones<br>Sistemas inteligentes</span></div><p>DISEÑADO PARA<br><em>LO QUE SIGUE</em></p></div>
+    </div>
+    <div class="logo-stage" aria-label="Símbolo ASYS flotante"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="logo-object"><div class="logo-disc"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#asys-mark"/></svg></div></div><span class="stage-label top">SISTEMAS<br>INTELIGENTES</span><span class="stage-label bottom">COLOMBIA · 2026</span></div>
+    <a class="scroll-cue" href="#filosofia"><span></span>SCROLL PARA EXPLORAR</a>
+  </section>
+
+  <section class="philosophy" id="filosofia">
+    <p class="eyebrow dark-eyebrow"><span></span> NUESTRA ESENCIA</p>
+    <div class="word-stack" aria-label="Automatización, Soluciones, Sistemas Inteligentes"><div>AUTOMATIZACIÓN<span>.</span></div><div>SOLUCIONES<span>.</span></div><div>SISTEMAS <i>INTELIGENTES</i><span>.</span></div></div>
+    <div class="philosophy-end wrap reveal"><p>Construimos tecnología<br>que trabaja <em>para las personas.</em></p><small>UNA IDEA, UN SISTEMA, UN NUEVO FUTURO.</small></div>
+  </section>
+
+  <section class="services" id="servicios">
+    <div class="section-intro reveal"><p class="eyebrow"><span></span> 01 — SOLUCIONES</p><h2>Soluciones que<br>generan <em>impacto.</em></h2><p>Combinamos tecnología, innovación y estrategia para llevar cada negocio al siguiente nivel.</p></div>
+    <div class="service-list">
+      <article class="service active reveal"><div class="service-num">01</div><div class="service-title"><h3>AUTOMATIZACIÓN</h3><p>Automatizamos procesos repetitivos para que tu equipo se enfoque en lo que realmente importa.</p></div><div class="service-art automation"><span></span><span></span><span></span><i style="display:none"></i></div><button data-service="automation" aria-label="Conocer más sobre Automatización">↗</button></article>
+      <article class="service reveal" data-d="1"><div class="service-num">02</div><div class="service-title"><h3>DESARROLLO DE SOFTWARE</h3><p>Creamos aplicaciones web y móviles escalables, modernas y seguras.</p></div><div class="service-art software"><span></span><span></span><span></span></div><button data-service="software" aria-label="Conocer más sobre Desarrollo de Software">↗</button></article>
+      <article class="service reveal" data-d="2"><div class="service-num">03</div><div class="service-title"><h3>SISTEMAS INTELIGENTES</h3><p>Implementamos soluciones inteligentes con IA, automatización y analítica de datos.</p></div><div class="service-art intelligence"><i></i><i></i><i></i><i></i><i></i></div><button data-service="intelligence" aria-label="Conocer más sobre Sistemas Inteligentes">↗</button></article>
+      <article class="service reveal" data-d="3"><div class="service-num">04</div><div class="service-title"><h3>INTEGRACIÓN DE SISTEMAS</h3><p>Conectamos herramientas y sistemas para crear operaciones unificadas y eficientes.</p></div><div class="service-art integration"><span style="background:var(--blue)">A</span><span style="background:var(--blue-2)">S</span><span style="background:var(--cyan)">Y</span><span style="background:var(--ink)">S</span></div><button data-service="integration" aria-label="Conocer más sobre Integración de Sistemas">↗</button></article>
+    </div>
+  </section>
+
+  <section class="ecosystem">
+    <div class="ecosystem-copy reveal"><p class="eyebrow on-dark"><span></span> 02 — ECOSISTEMA</p><h2>TECNOLOGÍA<br>QUE <em>CONECTA.</em></h2><p>Un ecosistema diseñado para que cada parte de tu negocio se mueva con inteligencia.</p></div>
+    <div class="network reveal" data-d="1" aria-label="Ecosistema tecnológico ASYS">
+      <div class="network-core"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#asys-mark"/></svg></div>
+      <span class="node ai">AI</span><span class="node auto">AUTOMATION</span><span class="node soft">SOFTWARE</span><span class="node data">DATA</span><span class="node cloud">CLOUD</span><span class="node integ">INTEGRATION</span>
+      <svg viewBox="0 0 700 560" aria-hidden="true"><path d="M350,270 L126,106 M350,270 L567,101 M350,270 L112,370 M350,270 L595,403 M350,270 L252,504 M350,270 L448,510"/></svg>
+    </div>
+  </section>
+
+  <section class="projects" id="proyectos">
+    <div class="project-heading reveal"><div><p class="eyebrow"><span></span> 03 — PROYECTOS</p><h2>Lo que<br><em>construimos.</em></h2></div><div><p>Soluciones reales. Tecnología aplicada.<br>Resultados que generan impacto.</p><div class="project-controls"><button class="project-prev" aria-label="Proyecto anterior">←</button><button class="project-next" aria-label="Siguiente proyecto">→</button></div></div></div>
+    <div class="project-showcase">
+      <article class="project-card zylo"><div class="project-copy"><p>01 / SOFTWARE DE GESTIÓN</p><h3>SISTEMA<br><i>DE TIENDA</i></h3><span>Inventario, ventas y gestión diaria para una tienda de barrio.</span><button class="project-open" data-project="tienda">VER PROYECTO <b>→</b></button></div><div class="screen" role="img" aria-label="Vista previa del panel de productos"><div class="ln"><b>Arroz 500 g</b><span>Stock 48</span></div><div class="ln"><b>Aceite 1 L</b><span>Stock 12</span></div><div class="ln"><b>Panela</b><span>Stock 5 · bajo</span></div></div></article>
+      <article class="project-card cafe"><div class="project-copy"><p>02 / PRODUCTO DIGITAL</p><h3>JM<i>BARBER</i></h3><span>Agenda y administración de citas para barberías y servicios.</span><button class="project-open" data-project="jmbarber">VER PROYECTO <b>→</b></button></div><div class="screen" role="img" aria-label="Vista previa de la agenda"><div class="ln"><b>10:30 Corte</b><span>Confirmada</span></div><div class="ln"><b>11:15 Barba</b><span>Confirmada</span></div><div class="ln"><b>12:00</b><span>Libre</span></div></div></article>
+      <article class="project-card chatbot"><div class="project-copy"><p>03 / INTELIGENCIA ARTIFICIAL</p><h3>CHATBOT<br><i>UNIMAGDALENA</i></h3><span>Asistente virtual para atención académica de Ingeniería de Sistemas.</span><button class="project-open" data-project="unimagdalena">VER PROYECTO <b>→</b></button></div><div class="screen" role="img" aria-label="Vista previa del chat"><div class="ln"><b>Estudiante</b><span>¿Cuándo son las inscripciones?</span></div><div class="ln"><b>Asistente</b><span>Te muestro el calendario…</span></div></div></article>
+      <article class="project-card dashboard"><div class="project-copy"><p>04 / DATA INTELLIGENCE</p><h3>DASHBOARD<br><i>ANALÍTICO</i></h3><span>Plataforma de análisis y visualización de datos.</span><a href="#contacto">VER PROYECTO <b>→</b></a></div><div class="dash"><div class="dash-side"></div><div class="dash-main"><small>Resumen operativo</small><div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="dash-donut"></div></div></div></article>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="testimonials-heading reveal"><div><p class="eyebrow"><span></span> 03.1 — EXPERIENCIAS REALES</p><h2>La tecnología se<br><em>mide en impacto.</em></h2></div><div class="carousel-controls"><button class="review-prev" aria-label="Reseña anterior">←</button><button class="review-next" aria-label="Siguiente reseña">→</button></div></div>
+    <div class="review-track">
+      <article class="review"><span>“</span><p>Un sistema pensado para tener el inventario, las ventas y el día a día del negocio en un solo lugar.</p><footer><b>Sra. Luzmila</b><small>Propietaria · Tienda de barrio</small></footer></article>
+      <article class="review"><span>“</span><p>Una experiencia de agenda moderna que organiza las citas y le da al barbero control de su operación.</p><footer><b>Jorge Mendoza</b><small>Barbero profesional · JMbarber</small></footer></article>
+      <article class="review"><span>“</span><p>Un asistente digital diseñado para orientar a estudiantes y hacer más ágil la atención académica.</p><footer><b>Universidad del Magdalena</b><small>Proyecto académico · Ingeniería de Sistemas</small></footer></article>
+    </div>
+  </section>
+
+  <section class="process" id="impacto">
+    <p class="eyebrow reveal"><span></span> 04 — VALOR REAL</p>
+    <h2 class="reveal">No solo construimos software.<br><em>Resolvemos lo que te frena.</em></h2>
+    <div class="process-rail">
+      <div class="reveal"><small>01</small><b>PROBLEMA</b><p>Procesos manuales</p></div><i>→</i>
+      <div class="reveal" data-d="1"><small>02</small><b>ESTRATEGIA</b><p>Visión clara</p></div><i>→</i>
+      <div class="reveal" data-d="2"><small>03</small><b>TECNOLOGÍA</b><p>Automatización</p></div><i>→</i>
+      <div class="result reveal" data-d="3"><small>04</small><b>RESULTADO</b><p>Mayor eficiencia</p></div>
+    </div>
+    <div class="impact-stats">
+      <article><b data-count="92" data-prefix="+" data-suffix="%">+92%</b><span>Ganancia de eficiencia</span></article>
+      <article><b>24/7</b><span>Operaciones disponibles</span></article>
+      <article><b data-count="100" data-suffix="%">100%</b><span>Visibilidad de la información</span></article>
+      <article><b data-count="1">1</b><span>Equipo conectado</span></article>
+    </div>
+    <p class="impact-note">Cada proyecto ASYS parte de una necesidad real, se diseña con precisión y se mide por el cambio que genera en la operación.</p>
+  </section>
+
+  <section class="about" id="nosotros">
+    <div class="about-stamp reveal">ASYS<br>TECHNOLOGY<br><span>DESDE COLOMBIA</span></div>
+    <div class="about-copy reveal" data-d="1"><p class="eyebrow"><span></span> 05 — NOSOTROS</p><h2>Somos <em>ASYS.</em></h2><p>Una empresa de tecnología e innovación enfocada en transformar procesos, conectar sistemas y convertir ideas en soluciones digitales que generan impacto.</p><div class="manifesto">Automatizamos lo repetitivo.<br>Digitalizamos lo complejo.<br><b>Inteligentizamos lo posible.</b></div></div>
+    <div class="about-orbit" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5 6 41h8l3.4-7.4h13.2L34 41h8L24 5Zm0 15 4.2 9.6h-8.4L24 20Z" fill="#1554ff"/></svg></div>
+  </section>
+
+  <section class="principles">
+    <p class="eyebrow reveal"><span></span> 06 — POR QUÉ ASYS</p>
+    <div class="principles-grid">
+      <article class="reveal"><b>01</b><h3>INNOVACIÓN</h3><p>Pensamos más allá de lo convencional.</p></article>
+      <article class="reveal" data-d="1"><b>02</b><h3>PERSONALIZACIÓN</h3><p>Cada solución se adapta al negocio.</p></article>
+      <article class="reveal" data-d="2"><b>03</b><h3>TECNOLOGÍA</h3><p>Construimos con herramientas modernas.</p></article>
+      <article class="reveal" data-d="3"><b>04</b><h3>IMPACTO</h3><p>La tecnología debe generar resultados.</p></article>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="final-logo"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#asys-mark"/></svg></div>
+    <p class="eyebrow on-dark"><span></span> EL PRÓXIMO SISTEMA PODRÍA SER EL TUYO</p>
+    <h2>¿Tienes una idea?<br><em>Construyamos algo<br>extraordinario juntos.</em></h2>
+    <p>Cuéntanos tu idea y nuestro equipo te ayudará a convertirla en una solución tecnológica de alto impacto.</p>
+    <div><a class="button primary" href="#contacto">AGENDAR UNA REUNIÓN <b>→</b></a><a class="button ghost" href="https://wa.me/573117304768" target="_blank" rel="noopener">ESCRÍBENOS POR WHATSAPP</a></div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div class="contact-intro"><p class="eyebrow on-dark"><span></span> 07 — CONTACTO</p><h2>Hablemos<span>.</span></h2><p>Cuéntanos qué quieres construir.</p>
+      <div class="contact-data"><a href="mailto:contacto@asysdigital.com">contacto@asysdigital.com</a><a class="whatsapp-link" href="https://wa.me/573117304768" target="_blank" rel="noopener">◉ WhatsApp · +57 311 730 4768 ↗</a><a class="whatsapp-link" href="https://wa.me/573012915093" target="_blank" rel="noopener">◉ WhatsApp · +57 301 291 5093 ↗</a><a href="https://www.linkedin.com/company/asys-technology-s-a-s/posts/?feedView=all" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.instagram.com/asys.tech/" target="_blank" rel="noopener">Instagram ↗</a></div>
+    </div>
+    <form id="contact-form" novalidate>
+      <label>NOMBRE<input type="text" name="nombre" placeholder="¿Cómo te llamas?" autocomplete="name" /><span class="error-text">Este campo es obligatorio</span></label>
+      <label>EMPRESA<input type="text" name="empresa" placeholder="Nombre de tu empresa" autocomplete="organization" /></label>
+      <label>CORREO<input type="email" name="correo" placeholder="correo@empresa.com" autocomplete="email" /><span class="error-text">Ingresa un correo válido</span></label>
+      <label>TELÉFONO<input type="tel" name="telefono" placeholder="+57" autocomplete="tel" /><span class="error-text">Este campo es obligatorio</span></label>
+      <label class="full">CUÉNTANOS SOBRE TU PROYECTO<textarea name="mensaje" placeholder="Una idea puede cambiarlo todo."></textarea><span class="error-text">Cuéntanos un poco sobre tu idea</span></label>
+      <div class="consent" id="consent-box">
+        <label class="check"><input type="checkbox" id="accept-terms" /><span>He leído y acepto los <button type="button" class="linklike" data-legal="terminos">Términos y Condiciones</button>.</span></label>
+        <label class="check"><input type="checkbox" id="accept-data" /><span>Autorizo el tratamiento de mis datos personales según la <button type="button" class="linklike" data-legal="datos">Política de Tratamiento de Datos</button> (Ley 1581 de 2012).</span></label>
+        <span class="error-text">Debes aceptar los términos y la política de datos para continuar.</span>
+      </div>
+      <button class="form-submit" type="submit" disabled>INICIAR CONVERSACIÓN <b>→</b></button>
+      <div class="form-ok" id="form-ok" role="status">Gracias. Recibimos tu mensaje y te escribiremos pronto. (Demo: el envío real se conecta al backend del sitio.)</div>
+    </form>
+  </section>
+</main>
+
+<div class="detail-modal" aria-hidden="true"><div class="modal-backdrop"></div><section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" aria-label="Cerrar detalle">×</button><p class="eyebrow"><span></span> ASYS / DETALLE</p><div class="modal-content"></div></section></div>
+
+<div class="consent-bar" id="consent-bar" role="region" aria-label="Aviso de datos"><p>Usamos almacenamiento local para recordar tu preferencia y tratamos tus datos según la Ley 1581 de 2012.</p><div><button class="ok" type="button">Entendido</button><button class="more" type="button" data-legal="datos">Ver política</button></div></div>
+
+<footer>
+  <div class="footer-top"><a class="brand" href="#inicio"><svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="16" fill="#1554ff"/><use href="#asys-mark" x="6" y="6" width="36" height="36"/></svg><span>ASYS<span class="brand-dot">.</span></span></a><p>ASYS Technology S.A.S.<br><span>Automatización. Soluciones. Sistemas inteligentes.</span></p><div><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#proyectos">Proyectos</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div></div>
+  <div class="footer-bottom"><span>© 2026 ASYS TECHNOLOGY S.A.S.</span><button type="button" data-legal="datos">Política de Privacidad</button><button type="button" data-legal="terminos">Términos y Condiciones</button><span>COLOMBIA</span></div>
+  <div class="footer-line"></div>
+</footer>
+
+<script>
+(function(){
+  var d=document,root=d.documentElement;root.classList.add('js');
+  var $=function(s,c){return (c||d).querySelector(s)},$$=function(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s))};
+
+  /* ---------- scroll: progreso, parallax, palabras ---------- */
+  var header=$('.site-header'),words=$('.philosophy'),ticking=false;
+  function onScroll(){
+    var h=d.body.scrollHeight-innerHeight,y=scrollY;
+    root.style.setProperty('--sy',(h>0?Math.min(1,y/h):0).toFixed(4));
+    header.classList.toggle('scrolled',y>30);
+    if(words){var r=words.getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);
+      root.style.setProperty('--p1',Math.round((p-.5)*Math.min(innerWidth,1200)*.5));}
+    ticking=false;
+  }
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
+  addEventListener('resize',onScroll);onScroll();
+  addEventListener('pointermove',function(e){root.style.setProperty('--mx',e.clientX+'px');root.style.setProperty('--my',e.clientY+'px')},{passive:true});
+
+  /* ---------- reveal ---------- */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  $$('.reveal').forEach(function(el){io.observe(el)});
+  setTimeout(function(){$$('.reveal:not(.in)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add('in')})},1200);
+
+  /* ---------- nav activa ---------- */
+  var links=$$('.nav-item'),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&map[e.target.id]){links.forEach(function(l){l.classList.remove('active')});map[e.target.id].classList.add('active')}})},{rootMargin:'-45% 0px -50% 0px'});
+  ['inicio','servicios','proyectos','impacto','contacto'].forEach(function(id){var s=d.getElementById(id);if(s)so.observe(s)});
+  $('.menu-toggle').addEventListener('click',function(){header.classList.toggle('open')});
+  $$('nav a').forEach(function(a){a.addEventListener('click',function(){header.classList.remove('open')})});
+
+  /* ---------- contadores ---------- */
+  var co=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;co.unobserve(e.target);
+    var el=e.target,to=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',t0=performance.now();
+    (function step(t){var k=Math.min(1,(t-t0)/1400),v=Math.round(to*(1-Math.pow(1-k,3)));el.textContent=pre+v+suf;if(k<1)requestAnimationFrame(step)})(t0)})},{threshold:.6});
+  $$('[data-count]').forEach(function(el){co.observe(el)});
+
+  /* ---------- servicios ---------- */
+  $$('.service').forEach(function(s){s.addEventListener('mouseenter',function(){$$('.service').forEach(function(x){x.classList.remove('active')});s.classList.add('active')})});
+
+  /* ---------- carruseles ---------- */
+  function carousel(track,prev,next){var t=$(track);if(!t)return;
+    function step(){var c=t.children[0];return c?c.getBoundingClientRect().width+16:300}
+    $(prev).addEventListener('click',function(){t.scrollBy({left:-step(),behavior:'smooth'})});
+    $(next).addEventListener('click',function(){t.scrollBy({left:step(),behavior:'smooth'})})}
+  carousel('.project-showcase','.project-prev','.project-next');
+  carousel('.review-track','.review-prev','.review-next');
+
+  /* ---------- modal ---------- */
+  var modal=$('.detail-modal'),mc=$('.modal-content'),lastFocus=null;
+  var info={
+    automation:['Automatización','Flujos que ejecutan solos las tareas repetitivas: facturación, recordatorios, reportes y sincronización entre herramientas.'],
+    software:['Desarrollo de software','Aplicaciones web y móviles a la medida, escalables y seguras, con acompañamiento después del lanzamiento.'],
+    intelligence:['Sistemas inteligentes','Asistentes con IA, analítica de datos y automatización inteligente aplicada a tu operación.'],
+    integration:['Integración de sistemas','Conectamos tus herramientas para que la información fluya en un solo lugar.'],
+    tienda:['Sistema de tienda','Inventario, ventas y gestión diaria para una tienda de barrio, en un solo panel.'],
+    jmbarber:['JMbarber','Agenda y administración de citas para barberías y servicios.'],
+    unimagdalena:['Chatbot Unimagdalena','Asistente virtual para la atención académica de Ingeniería de Sistemas.']
+  };
+  var legal={
+    terminos:{t:'Términos y Condiciones',h:'<h4>1. Objeto</h4><p>Estos términos regulan el uso del sitio web de ASYS Technology S.A.S. (“ASYS”) y del formulario de contacto.</p><h4>2. Uso del sitio</h4><p>El usuario se compromete a usar el sitio de forma lícita, sin afectar su funcionamiento ni la seguridad de la información.</p><h4>3. Propiedad intelectual</h4><p>Marcas, logotipos, textos, diseños y software publicados son de ASYS o de sus titulares y no pueden reproducirse sin autorización escrita.</p><h4>4. Información y propuestas</h4><p>El contenido del sitio es informativo. Las propuestas comerciales se formalizan por escrito entre las partes.</p><h4>5. Enlaces a terceros</h4><p>ASYS no responde por el contenido de sitios externos enlazados, como WhatsApp, LinkedIn o Instagram.</p><h4>6. Limitación de responsabilidad</h4><p>ASYS procura mantener el sitio disponible y actualizado, sin garantizar ausencia de interrupciones o errores.</p><h4>7. Ley aplicable</h4><p>Estos términos se rigen por las leyes de la República de Colombia.</p>'},
+    datos:{t:'Política de Tratamiento de Datos',h:'<h4>1. Responsable</h4><p>ASYS Technology S.A.S. Correo: contacto@asysdigital.com.</p><h4>2. Datos que recolectamos</h4><p>Nombre, empresa, correo, teléfono y el mensaje que escribes en el formulario.</p><h4>3. Finalidades</h4><ul><li>Responder tu solicitud y contactarte.</li><li>Elaborar propuestas comerciales.</li><li>Enviar información relacionada con el servicio solicitado.</li></ul><h4>4. Derechos del titular</h4><p>Puedes conocer, actualizar, rectificar y suprimir tus datos, solicitar prueba de la autorización y revocarla, y presentar quejas ante la Superintendencia de Industria y Comercio.</p><h4>5. Cómo ejercer tus derechos</h4><p>Escribe a contacto@asysdigital.com indicando tu nombre y tu solicitud.</p><h4>6. Vigencia</h4><p>Conservaremos tus datos mientras sea necesario para las finalidades descritas o la ley lo exija.</p>'}
+  };
+  function esc(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+  function open(html){lastFocus=d.activeElement;mc.innerHTML=html;modal.classList.add('open');modal.setAttribute('aria-hidden','false');$('.modal-close').focus()}
+  function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');if(lastFocus)lastFocus.focus()}
+  function openLegal(which){
+    var tabs='<div class="tabs"><button type="button" data-tab="terminos" class="'+(which==='terminos'?'on':'')+'">Términos y Condiciones</button><button type="button" data-tab="datos" class="'+(which==='datos'?'on':'')+'">Tratamiento de datos</button></div>';
+    open('<h3 id="modal-title">'+legal[which].t+'</h3><p class="draft-note">Texto de demostración. Debe ser revisado por un abogado antes de publicarse.</p>'+tabs+legal[which].h);
+  }
+  d.addEventListener('click',function(e){
+    var b=e.target.closest('[data-service],[data-project],[data-legal],[data-tab]');
+    if(b){
+      if(b.dataset.legal){e.preventDefault();openLegal(b.dataset.legal);return}
+      if(b.dataset.tab){openLegal(b.dataset.tab);return}
+      var k=b.dataset.service||b.dataset.project,i=info[k];
+      if(i)open('<h3 id="modal-title">'+esc(i[0])+'</h3><p>'+esc(i[1])+'</p><p><a class="linklike" style="color:var(--blue)" href="#contacto">Hablemos de tu proyecto →</a></p>');
+    }
+    if(e.target.closest('.modal-close')||e.target.classList.contains('modal-backdrop'))close();
+    if(e.target.closest('.modal-content a[href^="#"]'))close();
+  });
+  d.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))close()});
+
+  /* ---------- formulario ---------- */
+  var form=$('#contact-form'),terms=$('#accept-terms'),data=$('#accept-data'),submit=$('.form-submit',form),box=$('#consent-box');
+  function sync(){submit.disabled=!(terms.checked&&data.checked);if(terms.checked&&data.checked)box.classList.remove('invalid')}
+  terms.addEventListener('change',sync);data.addEventListener('change',sync);
+  function field(i){return i.closest('label')}
+  function check(i){var v=i.value.trim(),ok=true;
+    if(i.name==='empresa')return true;
+    if(!v)ok=false;else if(i.type==='email')ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    field(i).classList.toggle('invalid',!ok);return ok}
+  $$('input:not([type=checkbox]),textarea',form).forEach(function(i){i.addEventListener('blur',function(){check(i)});i.addEventListener('input',function(){if(field(i).classList.contains('invalid'))check(i)})});
+  form.addEventListener('submit',function(e){e.preventDefault();
+    var ok=true;$$('input:not([type=checkbox]),textarea',form).forEach(function(i){if(!check(i))ok=false});
+    if(!(terms.checked&&data.checked)){box.classList.add('invalid');ok=false}
+    if(!ok)return;
+    $('#form-ok').classList.add('show');form.reset();submit.disabled=true;
+  });
+
+  /* ---------- aviso de datos ---------- */
+  var bar=$('#consent-bar'),seen=false;try{seen=localStorage.getItem('asys-aviso')==='1'}catch(_){}
+  if(!seen)setTimeout(function(){bar.classList.add('show')},1600);
+  $('.ok',bar).addEventListener('click',function(){bar.classList.remove('show');try{localStorage.setItem('asys-aviso','1')}catch(_){}});
+  $('.more',bar).addEventListener('click',function(){bar.classList.remove('show')});
+})();
 </script>
-  </head>
-  <body>
-    <div class="cursor-glow" aria-hidden="true"></div>
-    <div class="grain" aria-hidden="true"></div>
-    <header class="site-header">
-      <!-- LOGO + ASYS TECHNOLOGY -->
-      <a class="brand" href="#inicio" aria-label="ASYS Technology, inicio">
-        <img src="asys-logo.png" alt="Logotipo ASYS" class="brand-logo" />
-        <div class="brand-naming">
-          <span class="brand-title">ASYS</span>
-          <span class="brand-sub">TECHNOLOGY</span>
-        </div>
-      </a>
-
-      <!-- MENÚ DE NAVEGACIÓN CON LÍNEA ACTIVA -->
-      <nav aria-label="Navegación principal">
-        <a href="#inicio" class="nav-item active">INICIO</a>
-        <a href="#servicios" class="nav-item">SERVICIOS</a>
-        <a href="#proyectos" class="nav-item">PROYECTOS</a>
-        <a href="#impacto" class="nav-item">IMPACTO</a>
-        <a href="#contacto" class="nav-item">CONTACTO</a>
-      </nav>
-
-      <!-- BOTÓN REDONDEADO HABLEMOS -->
-      <a href="#contacto" class="header-cta-pill">HABLEMOS <i>↗</i></a>
-      <button class="menu-toggle" aria-label="Abrir menú">☰</button>
-    </header>
-
-    <main>
-      <!-- NUEVA PRIMERA VISTA CON EL DISEÑO OFICIAL -->
-      <section class="hero-modern" id="inicio">
-        <div class="hero-container">
-          
-          <!-- LADO IZQUIERDO: TEXTOS Y CARACTERÍSTICAS -->
-          <div class="hero-left">
-            <div class="eyebrow-modern">
-              <span class="eyebrow-line"></span>
-              <span>EL PRÓXIMO SISTEMA PODRÍA SER EL TUYO</span>
-            </div>
-
-            <h1 class="hero-headline">
-              ¿Tienes una idea?<br>
-              <span class="neon-blue-gradient">Construyamos algo extraordinario juntos.</span>
-            </h1>
-
-            <p class="hero-subtitle">
-              Cuéntanos tu idea y nuestro equipo te ayudará a convertirla en una solución tecnológica de alto impacto.
-            </p>
-
-            <!-- 4 CARACTERÍSTICAS INFERIORES -->
-            <div class="features-bar">
-              <div class="feat-item">
-                <div class="feat-circle">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                </div>
-                <div class="feat-copy"><b>Desarrollo</b><span>a la medida</span></div>
-              </div>
-
-              <div class="feat-item">
-                <div class="feat-circle">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                </div>
-                <div class="feat-copy"><b>Seguro y</b><span>confiable</span></div>
-              </div>
-
-              <div class="feat-item">
-                <div class="feat-circle">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-                </div>
-                <div class="feat-copy"><b>Disponible 24/7</b><span>cuando lo necesites</span></div>
-              </div>
-
-              <div class="feat-item">
-                <div class="feat-circle">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-                </div>
-                <div class="feat-copy"><b>Soporte</b><span>personalizado</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- LADO DERECHO: IMAGEN CON BOTÓN FUNCIONAL -->
-          <div class="hero-right">
-            <div class="barber-card-wrap">
-              <img src="barberia-hero.png" alt="Software para Barbería ASYS" class="barber-img" />
-              <!-- Enlace interactivo colocado exactamente sobre "Conoce más →" -->
-              <a href="barberias.html" class="btn-conoce-hotspot" title="Ver Software de Barbería"></a>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-
-      <section class="hero" id="identidad">
-        <div class="hero-grid" aria-hidden="true"></div><div class="hero-aura" aria-hidden="true"></div>
-        <div class="hero-copy reveal">
-          <p class="eyebrow"><span></span> ASYS TECHNOLOGY S.A.S. / COLOMBIA</p>
-          <h1>Ideas que<br>se vuelven<br><em>sistema.</em></h1>
-          <p class="lede">Automatización, software e inteligencia aplicada para empresas que prefieren anticipar el futuro.</p>
-          <div class="hero-signature"><div><b>ASYS</b><span>Automatización<br>Soluciones<br>Sistemas inteligentes</span></div><p>DISEÑADO PARA<br><em>LO QUE SIGUE</em></p></div>
-        </div>
-        <div class="logo-stage" aria-label="Símbolo ASYS flotante"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="logo-object"><div class="logo-disc"><img src="asys-logo.png" alt="" /></div></div><span class="stage-label top">SISTEMAS<br>INTELIGENTES</span><span class="stage-label bottom">COLOMBIA · 2026</span></div>
-        <a class="scroll-cue" href="#filosofia"><span></span>SCROLL PARA EXPLORAR</a>
-      </section>
-
-      <section class="philosophy" id="filosofia">
-        <p class="eyebrow dark-eyebrow"><span></span> NUESTRA ESENCIA</p>
-        <div class="word-stack" aria-label="Automatización, Soluciones, Sistemas Inteligentes"><div>AUTOMATIZACIÓN<span>.</span></div><div>SOLUCIONES<span>.</span></div><div>SISTEMAS <i>INTELIGENTES</i><span>.</span></div></div>
-        <div class="philosophy-end"><p>Construimos tecnología<br>que trabaja <em>para las personas.</em></p><small>UNA IDEA, UN SISTEMA, UN NUEVO FUTURO.</small></div>
-      </section>
-
-      <section class="services" id="servicios">
-        <div class="section-intro"><p class="eyebrow"><span></span> 01 — SOLUCIONES</p><h2>Soluciones que<br>generan <em>impacto.</em></h2><p>Combinamos tecnología, innovación y estrategia para llevar cada negocio al siguiente nivel.</p></div>
-        <div class="service-list">
-          <article class="service active"><div class="service-num">01</div><div class="service-title"><h3>AUTOMATIZACIÓN</h3><p>Automatizamos procesos repetitivos para que tu equipo se enfoque en lo que realmente importa.</p></div><div class="service-art automation"><span></span><span></span><span></span><i></i></div><button data-service="automation" aria-label="Conocer más sobre Automatización">↗</button></article>
-          <article class="service"><div class="service-num">02</div><div class="service-title"><h3>DESARROLLO DE SOFTWARE</h3><p>Creamos aplicaciones web y móviles escalables, modernas y seguras.</p></div><div class="service-art software"><span></span><span></span><span></span></div><button data-service="software" aria-label="Conocer más sobre Desarrollo de Software">↗</button></article>
-          <article class="service"><div class="service-num">03</div><div class="service-title"><h3>SISTEMAS INTELIGENTES</h3><p>Implementamos soluciones inteligentes con IA, automatización y analítica de datos.</p></div><div class="service-art intelligence"><i></i><i></i><i></i><i></i><i></i></div><button data-service="intelligence" aria-label="Conocer más sobre Sistemas Inteligentes">↗</button></article>
-          <article class="service"><div class="service-num">04</div><div class="service-title"><h3>INTEGRACIÓN DE SISTEMAS</h3><p>Conectamos herramientas y sistemas para crear operaciones unificadas y eficientes.</p></div><div class="service-art integration"><span>A</span><span>S</span><span>Y</span><span>S</span></div><button data-service="integration" aria-label="Conocer más sobre Integración de Sistemas">↗</button></article>
-        </div>
-      </section>
-
-      <section class="ecosystem"><div class="ecosystem-copy"><p class="eyebrow on-dark"><span></span> 02 — ECOSISTEMA</p><h2>TECNOLOGÍA<br>QUE <em>CONECTA.</em></h2><p>Un ecosistema diseñado para que cada parte de tu negocio se mueva con inteligencia.</p></div><div class="network" aria-label="Ecosistema tecnológico ASYS"><div class="network-core"><img src="asys-logo.png" alt="" /></div><span class="node ai">AI</span><span class="node auto">AUTOMATION</span><span class="node soft">SOFTWARE</span><span class="node data">DATA</span><span class="node cloud">CLOUD</span><span class="node integ">INTEGRATION</span><svg viewBox="0 0 700 560" aria-hidden="true"><path d="M350,270 L128,105 M350,270 L564,100 M350,270 L112,370 M350,270 L595,403 M350,270 L255,505 M350,270 L445,510" /></svg></div></section>
-
-      <section class="projects" id="proyectos"><div class="project-heading"><p class="eyebrow"><span></span> 03 — PROYECTOS</p><h2>Lo que<br><em>construimos.</em></h2><div><p>Soluciones reales. Tecnología aplicada.<br>Resultados que generan impacto.</p><div class="project-controls"><button class="project-prev" aria-label="Proyecto anterior">←</button><button class="project-next" aria-label="Siguiente proyecto">→</button></div></div></div><div class="project-showcase">
-        <article class="project-card zylo"><div class="project-copy"><p>01 / SOFTWARE DE GESTIÓN</p><h3>SISTEMA<br><i>DE TIENDA</i></h3><span>Inventario, ventas y gestión diaria para una tienda de barrio.</span><button class="project-open" data-project="tienda">VER PROYECTO <b>→</b></button></div><img class="project-real" src="proyectos/tienda-dashboard.jpeg" alt="Panel de gestión de productos del Sistema de Tienda" /></article>
-        <article class="project-card cafe"><div class="project-copy"><p>02 / PRODUCTO DIGITAL</p><h3>JM<i>BARBER</i></h3><span>Agenda y administración de citas para barberías y servicios.</span><button class="project-open" data-project="jmbarber">VER PROYECTO <b>→</b></button></div><img class="project-real" src="proyectos/jmbarber-login.jpeg" alt="Pantalla de acceso de JMbarber" /></article>
-        <article class="project-card chatbot"><div class="project-copy"><p>03 / INTELIGENCIA ARTIFICIAL</p><h3>CHATBOT<br><i>UNIMAGDALENA</i></h3><span>Asistente virtual para atención académica de Ingeniería de Sistemas.</span><button class="project-open" data-project="unimagdalena">VER PROYECTO <b>→</b></button></div><img class="project-real" src="proyectos/unimagdalena-chat.jpeg" alt="Chatbot de Ingeniería de Sistemas de Unimagdalena" /></article>
-        <article class="project-card dashboard"><div class="project-copy"><p>04 / DATA INTELLIGENCE</p><h3>DASHBOARD<br><i>ANALÍTICO</i></h3><span>Plataforma de análisis y visualización de datos.</span><a href="#contacto">VER PROYECTO <b>→</b></a></div><div class="dash"><div class="dash-side"></div><div class="dash-main"><small>Resumen operativo</small><div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="dash-donut"></div></div></div></article>
-      </div></section>
-
-      <section class="testimonials"><div class="testimonials-heading"><p class="eyebrow"><span></span> 03.1 — EXPERIENCIAS REALES</p><h2>La tecnología se<br><em>mide en impacto.</em></h2><div class="carousel-controls"><button class="review-prev" aria-label="Reseña anterior">←</button><button class="review-next" aria-label="Siguiente reseña">→</button></div></div><div class="review-track"><article class="review"><span>“</span><p>Un sistema pensado para tener el inventario, las ventas y el día a día del negocio en un solo lugar.</p><footer><b>Sra. Luzmila</b><small>Propietaria · Tienda de barrio</small></footer></article><article class="review"><span>“</span><p>Una experiencia de agenda moderna que organiza las citas y le da al barbero control de su operación.</p><footer><b>Jorge Mendoza</b><small>Barbero profesional · JMbarber</small></footer></article><article class="review"><span>“</span><p>Un asistente digital diseñado para orientar a estudiantes y hacer más ágil la atención académica.</p><footer><b>Universidad del Magdalena</b><small>Proyecto académico · Ingeniería de Sistemas</small></footer></article></div></section>
-
-      <section class="process" id="impacto"><p class="eyebrow"><span></span> 04 — VALOR REAL</p><h2>No solo construimos software.<br><em>Resolvemos lo que te frena.</em></h2><div class="process-rail"><div><small>01</small><b>PROBLEMA</b><p>Procesos manuales</p></div><i>→</i><div><small>02</small><b>ESTRATEGIA</b><p>Visión clara</p></div><i>→</i><div><small>03</small><b>TECNOLOGÍA</b><p>Automatización</p></div><i>→</i><div class="result"><small>04</small><b>RESULTADO</b><p>Mayor eficiencia</p></div></div><div class="impact-stats"><article><b>+92%</b><span>Ganancia de eficiencia</span></article><article><b>24/7</b><span>Operaciones disponibles</span></article><article><b>100%</b><span>Visibilidad de la información</span></article><article><b>1</b><span>Equipo conectado</span></article></div><p class="impact-note">Cada proyecto ASYS parte de una necesidad real, se diseña con precisión y se mide por el cambio que genera en la operación.</p></section>
-
-      <section class="about" id="nosotros"><div class="about-stamp">ASYS<br>TECHNOLOGY<br><span>DESDE COLOMBIA</span></div><div class="about-copy"><p class="eyebrow"><span></span> 05 — NOSOTROS</p><h2>Somos <em>ASYS.</em></h2><p>Una empresa de tecnología e innovación enfocada en transformar procesos, conectar sistemas y convertir ideas en soluciones digitales que generan impacto.</p><div class="manifesto">Automatizamos lo repetitivo.<br>Digitalizamos lo complejo.<br><b>Inteligentizamos lo posible.</b></div></div><div class="about-orbit"><img src="asys-logo.png" alt="" /></div></section>
-
-      <section class="principles"><p class="eyebrow"><span></span> 06 — POR QUÉ ASYS</p><div class="principles-grid"><article><b>01</b><h3>INNOVACIÓN</h3><p>Pensamos más allá de lo convencional.</p></article><article><b>02</b><h3>PERSONALIZACIÓN</h3><p>Cada solución se adapta al negocio.</p></article><article><b>03</b><h3>TECNOLOGÍA</h3><p>Construimos con herramientas modernas.</p></article><article><b>04</b><h3>IMPACTO</h3><p>La tecnología debe generar resultados.</p></article></div></section>
-
-      <section class="final-cta"><div class="final-logo"><img src="asys-logo.png" alt="" /></div><p class="eyebrow on-dark"><span></span> EL PRÓXIMO SISTEMA PODRÍA SER EL TUYO</p><h2>¿Tienes una idea?<br><em>Construyamos algo<br>extraordinario juntos.</em></h2><p>Cuéntanos tu idea y nuestro equipo te ayudará a convertirla en una solución tecnológica de alto impacto.</p><div><a class="button primary" href="#contacto">AGENDAR UNA REUNIÓN <b>→</b></a><a class="button ghost" href="https://wa.me/" target="_blank">ESCRÍBENOS POR WHATSAPP</a></div></section>
-
-<section class="contact" id="contacto"><div class="contact-intro"><p class="eyebrow"><span></span> 07 — CONTACTO</p><h2>Hablemos<span>.</span></h2><p>Cuéntanos qué quieres construir.</p><div class="contact-data"><a href="mailto:contacto@asysdigital.com">contacto@asysdigital.com</a><a class="whatsapp-link" href="https://wa.me/573117304768" target="_blank" rel="noopener">◉ WhatsApp · +57 311 730 4768 ↗</a><a class="whatsapp-link" href="https://wa.me/573012915093" target="_blank" rel="noopener">◉ WhatsApp · +57 301 291 5093 ↗</a><a href="https://www.linkedin.com/company/asys-technology-s-a-s/posts/?feedView=all" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.instagram.com/asys.tech/" target="_blank" rel="noopener">Instagram ↗</a></div></div>        
-        
-        <form>
-          <label>NOMBRE
-            <input type="text" placeholder="¿Cómo te llamas?" />
-            <span class="error-text">Este campo es obligatorio</span>
-          </label>
-          
-          <label>EMPRESA
-            <input type="text" placeholder="Nombre de tu empresa" />
-            <!-- Opcional: Este no suele ser obligatorio -->
-          </label>
-          
-          <label>CORREO
-            <input type="email" placeholder="correo@empresa.com" />
-            <span class="error-text">Ingresa un correo válido</span>
-          </label>
-          
-          <label>TELÉFONO
-            <input type="tel" placeholder="+57" />
-            <span class="error-text">Este campo es obligatorio</span>
-          </label>
-          
-          <label class="full">CUÉNTANOS SOBRE TU PROYECTO
-            <textarea placeholder="Una idea puede cambiarlo todo."></textarea>
-            <span class="error-text">Cuéntanos un poco sobre tu idea</span>
-          </label>
-          
-          <button class="form-submit" type="submit">INICIAR CONVERSACIÓN <b>→</b></button>
-        </form>
-    
-      </main>
-    <div class="detail-modal" aria-hidden="true"><div class="modal-backdrop"></div><section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" aria-label="Cerrar detalle">×</button><p class="eyebrow"><span></span> ASYS / DETALLE</p><div class="modal-content"></div></section></div>
-    <footer><div class="footer-top"><a class="brand" href="#inicio"><img src="asys-logo.png" alt="Logotipo ASYS" /><span>ASYS<span class="brand-dot">.</span></span></a><p>ASYS Technology S.A.S.<br><span>Automatización. Soluciones. Sistemas inteligentes.</span></p><div><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#proyectos">Proyectos</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div></div><div class="footer-bottom"><span>© 2026 ASYS TECHNOLOGY S.A.S.</span><a href="politica-privacidad.html">Política de Privacidad</a><a href="terminos-condiciones.html">Términos y Condiciones</a><span>COLOMBIA</span></div><div class="footer-line"></div></footer>
-    <script src="app.js"></script>
-  </body>
+</body>
 </html>
