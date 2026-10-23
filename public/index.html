@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" href="asys-logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@600;700&display=swap" rel="stylesheet" />
 <style>
 /* DEMO ASYS — rediseño dinámico. Mismos nombres de clases que el sitio actual.
    Layout: secciones orgánicas (blobs, curvas, radios asimétricos) + animación ligada al scroll. */
@@ -17,7 +17,7 @@
   --blue:#1554ff; --blue-2:#3d7bff; --cyan:#27c8ff; --ink:#0a1230; --ink-2:#2a3558;
   --muted:#6a7595; --line:#e3e8f5; --soft:#f3f6ff; --bg:#ffffff; --dark:#070d24; --dark-2:#0d1636;
   --ok:#12b76a; --err:#e5484d;
-  --f-display:'Sora','Manrope',system-ui,sans-serif; --f-body:'Manrope',system-ui,sans-serif;
+  --f-display:'Sora','Manrope',system-ui,sans-serif; --f-body:'Manrope',system-ui,sans-serif;--f-cond:'Barlow Semi Condensed','Sora',system-ui,sans-serif;
   --blob-a:62% 38% 55% 45% / 48% 58% 42% 52%;
   --blob-b:40% 60% 42% 58% / 58% 40% 60% 42%;
   --card-r:44px 14px 44px 14px;
@@ -302,7 +302,7 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
 .footer-line{height:2px;margin-top:1.6rem;background:linear-gradient(90deg,var(--blue),var(--cyan),transparent)}
 
 /* BANNER DE DATOS */
-.consent-bar{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));right:max(14px,env(safe-area-inset-right,0px));max-width:560px;z-index:70;background:var(--ink);color:#e6ecff;border-radius:28px 8px 28px 8px;padding:1.1rem 1.2rem;display:none;gap:.8rem;box-shadow:0 20px 60px -10px rgba(0,0,0,.6);font-size:.82rem}
+.consent-bar{position:fixed;left:auto;bottom:max(14px,env(safe-area-inset-bottom,0px));right:max(14px,env(safe-area-inset-right,0px));max-width:560px;z-index:70;background:var(--ink);color:#e6ecff;border-radius:28px 8px 28px 8px;padding:1.1rem 1.2rem;display:none;gap:.8rem;box-shadow:0 20px 60px -10px rgba(0,0,0,.6);font-size:.82rem}
 .consent-bar.show{display:grid;animation:pop .4s}
 .consent-bar div{display:flex;gap:.5rem;flex-wrap:wrap}
 .consent-bar button,.consent-bar a{padding:.55rem 1.1rem;border-radius:999px;font-weight:800;font-size:.74rem}
@@ -368,6 +368,54 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
 .rocket svg{display:block;overflow:visible}
 .rk-flame{transform-box:fill-box;transform-origin:50% 0}
 
+/* ===== ESCENAS CINEMATOGRÁFICAS (estilo pantalla completa) ===== */
+.site-header{top:0;left:0;transform:none;width:100%;border-radius:0;background:linear-gradient(180deg,rgba(3,6,18,.78),rgba(3,6,18,0));backdrop-filter:none;border:0;box-shadow:none;padding:1rem max(20px,3vw);transition:background .35s,backdrop-filter .35s}
+.site-header.scrolled{background:rgba(3,6,18,.78);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(255,255,255,.08)}
+.brand-title{color:#fff}.brand-sub{color:var(--cyan)}
+.nav-item{color:rgba(255,255,255,.85);border-radius:0;padding:.55rem .9rem;background:none}
+.nav-item:hover{background:none;color:#fff}
+.nav-item.active{background:none;color:#fff;box-shadow:inset 0 -2px 0 var(--cyan)}
+.header-cta-pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.55);border-radius:6px;color:#fff;backdrop-filter:blur(6px)}
+.header-cta-pill:hover{background:#fff;color:var(--ink);box-shadow:none}
+.menu-toggle{background:rgba(255,255,255,.12);color:#fff}
+.progress{top:auto;bottom:0}
+
+.scene{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;background:#02040d;overflow:hidden;isolation:isolate;padding:0}
+.scene-media{position:absolute;inset:0;z-index:0}
+.scene .galaxy{inset:0;left:0;top:0;width:100%;height:100%;transform:none}
+.scene-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s;z-index:1}
+.scene-video.ok{opacity:1}
+.scene-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(2,4,13,.7) 0%,rgba(2,4,13,0) 24%,rgba(2,4,13,0) 48%,rgba(2,4,13,.88) 100%),linear-gradient(90deg,rgba(2,4,13,.72) 0%,rgba(2,4,13,0) 62%)}
+.scene .smoke{z-index:2}.scene .rocket{z-index:3}
+.scene-copy{position:relative;z-index:5;padding:110px max(20px,6vw) clamp(32px,6vh,72px);max-width:900px}
+.scene h1,.scene h2,.hero h1{font-family:var(--f-cond);text-transform:uppercase;font-weight:700;line-height:.95;letter-spacing:.005em}
+.scene .hero-headline{font-size:clamp(2.2rem,4.7vw,4.3rem);margin:.9rem 0 1rem;max-width:15em}
+.scene h2{font-size:clamp(2.6rem,7vw,5.8rem);margin:.6rem 0 1rem}
+.scene .hero-subtitle{color:rgba(255,255,255,.86);font-size:1rem;max-width:30rem;margin-bottom:1.5rem}
+.scene .eyebrow-modern{color:var(--cyan);margin-bottom:0}
+.btn-outline{display:inline-flex;align-items:center;gap:.9rem;padding:1rem 1.5rem;border:1px solid rgba(255,255,255,.7);border-radius:6px;background:rgba(255,255,255,.05);backdrop-filter:blur(6px);color:#fff;font-size:.76rem;font-weight:700;letter-spacing:.14em;transition:background .25s,color .25s,gap .25s}
+.btn-outline:hover{background:#fff;color:var(--ink);gap:1.3rem}
+.scene .features-bar{display:flex;flex-wrap:wrap;gap:1rem 2rem;margin-top:2rem}
+.scene .feat-item{background:none;border:0;border-left:1px solid rgba(255,255,255,.28);border-radius:0;padding:.1rem 0 .1rem .9rem;gap:.7rem}
+.scene .feat-item:hover{transform:none;box-shadow:none;border-left-color:var(--cyan)}
+.scene .feat-circle{background:none;width:auto;height:auto}
+.scene .feat-circle svg{stroke:var(--cyan)}
+.scene .feat-copy b{color:#fff}.scene .feat-copy span{color:rgba(255,255,255,.66)}
+.scene-barberia{align-items:center}
+.scene-grid{position:relative;z-index:5;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding:110px max(20px,6vw) 70px}
+.scene-grid .scene-copy{padding:0}
+.barber-card-wrap{display:block;border-radius:var(--card-r);transition:transform .4s;max-width:620px;justify-self:end;width:100%}
+.barber-card-wrap:hover{transform:scale(1.03)}
+.barber-img{display:block;width:100%;height:auto;border-radius:var(--card-r);animation:floatSoft 7s ease-in-out infinite;filter:drop-shadow(0 30px 50px rgba(0,0,0,.6))}
+.hero{clip-path:none;min-height:100svh}
+.final-cta .scene-video{z-index:0}.final-cta .scene-video.ok{opacity:.5}
+.final-cta .galaxy,.final-cta>*:not(.scene-video):not(.galaxy){z-index:2}
+@media (max-width:960px){
+  .scene-grid{grid-template-columns:1fr;padding-top:120px}
+  .barber-card-wrap{justify-self:center;max-width:480px}
+  .scene{min-height:92svh}
+}
+
 /* REVEAL */
 .js .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .js .reveal.in{opacity:1;transform:none}
@@ -376,7 +424,7 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
 /* RESPONSIVE */
 @media (max-width:960px){
   nav{display:none}.menu-toggle{display:block}
-  .site-header.open nav{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;padding:.8rem;background:#fff;border-radius:28px;box-shadow:0 20px 50px -20px rgba(10,18,48,.5)}
+  .site-header.open nav{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;padding:.8rem;background:rgba(5,9,25,.96);border-radius:16px;box-shadow:0 20px 50px -20px #000}
   .hero-container,.hero,.ecosystem,.contact,.about{grid-template-columns:1fr}
   .hero{padding-top:130px;clip-path:none}
   .logo-stage{max-width:340px}
@@ -421,38 +469,13 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
 </header>
 
 <main>
-  <section class="hero-modern" id="inicio">
-    <div class="blob b1" aria-hidden="true"></div><div class="blob b2" aria-hidden="true"></div>
-    <div class="hero-container wrap">
-      <div class="hero-left">
-        <div class="eyebrow-modern eyebrow reveal"><span class="eyebrow-line"></span><span style="width:auto;height:auto;background:none">EL PRÓXIMO SISTEMA PODRÍA SER EL TUYO</span></div>
-        <h1 class="hero-headline reveal" data-d="1">¿Tienes una idea?<br><span class="neon-blue-gradient">Construyamos algo extraordinario juntos.</span></h1>
-        <p class="hero-subtitle reveal" data-d="2">Cuéntanos tu idea y nuestro equipo te ayudará a convertirla en una solución tecnológica de alto impacto.</p>
-        <div class="features-bar reveal" data-d="3">
-          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="feat-copy"><b>Desarrollo</b><span>a la medida</span></div></div>
-          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><div class="feat-copy"><b>Seguro y</b><span>confiable</span></div></div>
-          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div class="feat-copy"><b>Disponible 24/7</b><span>cuando lo necesites</span></div></div>
-          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div><div class="feat-copy"><b>Soporte</b><span>personalizado</span></div></div>
-        </div>
-      </div>
-      <div class="hero-right reveal" data-d="2">
-        <a href="barberias.html" class="barber-card-wrap" aria-label="Ver software para barbería">
-          <img src="barberia-hero.png" alt="Software para Barbería ASYS" class="barber-img" />
-        </a>
-      </div>
+  <section class="scene hero-modern" id="inicio">
+    <div class="scene-media">
+      <canvas class="galaxy" data-stars="6800" data-shoot="1" data-cx=".76" data-cy=".4" data-r="1.2" aria-hidden="true"></canvas>
+      <video class="scene-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="videos/hero.mp4" type="video/mp4"></video>
     </div>
-  </section>
-
-  <section class="hero" id="identidad">
-    <div class="hero-grid" aria-hidden="true"></div><div class="hero-aura" aria-hidden="true"></div>
-    <div class="hero-copy reveal">
-      <p class="eyebrow on-dark"><span></span> ASYS TECHNOLOGY S.A.S. / COLOMBIA</p>
-      <h1>Ideas que<br>se vuelven<br><em>sistema.</em></h1>
-      <p class="lede">Automatización, software e inteligencia aplicada para empresas que prefieren anticipar el futuro.</p>
-      <div class="hero-signature"><div><b>ASYS</b><span>Automatización<br>Soluciones<br>Sistemas inteligentes</span></div><p>DISEÑADO PARA<br><em>LO QUE SIGUE</em></p></div>
-    </div>
-    <div class="logo-stage" aria-label="Símbolo ASYS flotante"><canvas class="galaxy" data-stars="5200" data-shoot="1" aria-hidden="true"></canvas><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="logo-object"><div class="logo-disc"><img src="nuevo-logo-transparente.png" alt="" /></div></div><span class="stage-label top">SISTEMAS<br>INTELIGENTES</span><span class="stage-label bottom">COLOMBIA · 2026</span></div>
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="hero.mp4" type="video/mp4"></video>
+    <div class="scene-shade"></div>
+    <video class="scene-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="videos/hero.mp4" type="video/mp4"></video>
     <canvas class="smoke" aria-hidden="true"></canvas>
     <div class="rocket" aria-hidden="true">
       <svg viewBox="0 0 60 200" width="54" height="180">
@@ -468,6 +491,48 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
         <path d="M20 128 L40 128 L36 137 L24 137 Z" fill="#2a3558"/>
       </svg>
     </div>
+    <div class="scene-copy">
+      <div class="eyebrow-modern eyebrow on-dark reveal"><span class="eyebrow-line"></span><span style="width:auto;height:auto;background:none">EL PRÓXIMO SISTEMA PODRÍA SER EL TUYO</span></div>
+      <h1 class="hero-headline reveal" data-d="1">¿Tienes una idea?<br><span class="neon-blue-gradient">Construyamos algo extraordinario juntos.</span></h1>
+      <p class="hero-subtitle reveal" data-d="2">Cuéntanos tu idea y nuestro equipo te ayudará a convertirla en una solución tecnológica de alto impacto.</p>
+      <a class="btn-outline reveal" data-d="2" href="#contacto">HABLEMOS <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="features-bar reveal" data-d="3">
+          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="feat-copy"><b>Desarrollo</b><span>a la medida</span></div></div>
+          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><div class="feat-copy"><b>Seguro y</b><span>confiable</span></div></div>
+          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div class="feat-copy"><b>Disponible 24/7</b><span>cuando lo necesites</span></div></div>
+          <div class="feat-item"><div class="feat-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1554ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div><div class="feat-copy"><b>Soporte</b><span>personalizado</span></div></div>
+        </div>
+    </div>
+  </section>
+
+  <section class="scene scene-barberia" id="barberia">
+    <div class="scene-media">
+      <canvas class="galaxy" data-stars="3600" data-cx=".22" data-cy=".5" data-r="1.1" aria-hidden="true"></canvas>
+      <video class="scene-video" autoplay muted loop playsinline preload="none" aria-hidden="true"><source src="videos/barberia.mp4" type="video/mp4"></video>
+    </div>
+    <div class="scene-shade"></div>
+    <div class="scene-grid">
+      <div class="scene-copy">
+        <p class="eyebrow on-dark reveal"><span></span> PRODUCTO DESTACADO</p>
+        <h2 class="reveal" data-d="1">SOFTWARE PARA<br>BARBERÍA</h2>
+        <p class="hero-subtitle reveal" data-d="2">Agenda y administración de citas para barberías y servicios, en un solo sistema.</p>
+        <a class="btn-outline reveal" data-d="2" href="barberias.html">CONOCE MÁS <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <a href="barberias.html" class="barber-card-wrap reveal" data-d="2" aria-label="Ver software para barbería">
+        <img src="barberia-hero.png" alt="Software para Barbería ASYS" class="barber-img" decoding="async" />
+      </a>
+    </div>
+  </section>
+
+  <section class="hero" id="identidad">
+    <div class="hero-grid" aria-hidden="true"></div><div class="hero-aura" aria-hidden="true"></div>
+    <div class="hero-copy reveal">
+      <p class="eyebrow on-dark"><span></span> ASYS TECHNOLOGY S.A.S. / COLOMBIA</p>
+      <h1>Ideas que<br>se vuelven<br><em>sistema.</em></h1>
+      <p class="lede">Automatización, software e inteligencia aplicada para empresas que prefieren anticipar el futuro.</p>
+      <div class="hero-signature"><div><b>ASYS</b><span>Automatización<br>Soluciones<br>Sistemas inteligentes</span></div><p>DISEÑADO PARA<br><em>LO QUE SIGUE</em></p></div>
+    </div>
+    <div class="logo-stage" aria-label="Símbolo ASYS flotante"><canvas class="galaxy" data-stars="5200" data-shoot="1" aria-hidden="true"></canvas><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="logo-object"><div class="logo-disc"><img src="nuevo-logo-transparente.png" alt="" /></div></div><span class="stage-label top">SISTEMAS<br>INTELIGENTES</span><span class="stage-label bottom">COLOMBIA · 2026</span></div>
     <a class="scroll-cue" href="#filosofia"><span></span>SCROLL PARA EXPLORAR</a>
   </section>
 
@@ -549,7 +614,7 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
     </div>
   </section>
 
-  <section class="final-cta"><canvas class="galaxy" data-stars="4400" data-shoot="1" data-arms="4" data-tilt=".4" aria-hidden="true"></canvas>
+  <section class="final-cta"><canvas class="galaxy" data-stars="4400" data-shoot="1" data-arms="4" data-tilt=".4" aria-hidden="true"></canvas><video class="scene-video" autoplay muted loop playsinline preload="none" aria-hidden="true"><source src="videos/cta.mp4" type="video/mp4"></video>
     <div class="final-logo"><img src="nuevo-logo-transparente.png" alt="" /></div>
     <p class="eyebrow on-dark"><span></span> EL PRÓXIMO SISTEMA PODRÍA SER EL TUYO</p>
     <h2>¿Tienes una idea?<br><em>Construyamos algo<br>extraordinario juntos.</em></h2>
@@ -701,7 +766,7 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
     var shootOn=!!c.dataset.shoot,rot=-.35;
     function build(){
       var dpr=Math.min(devicePixelRatio||1,2),W=c.clientWidth,H=c.clientHeight;if(!W||!H)return;
-      c.width=W*dpr;c.height=H*dpr;o.ctx.setTransform(dpr,0,0,dpr,0,0);o.W=W;o.H=H;o.R=Math.min(W,H)/2*1.0;
+      c.width=W*dpr;c.height=H*dpr;o.ctx.setTransform(dpr,0,0,dpr,0,0);o.W=W;o.H=H;o.R=Math.min(W,H)/2*(+c.dataset.r||1);
       var n=Math.round(want*(innerWidth<700?.5:1)),i,st=[];
       for(i=0;i<n;i++){
         var r=Math.pow(Math.random(),1.25),a=(i%arms)/arms*TAU+r*twist+gauss()*(.62-r*.3);
@@ -712,7 +777,7 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
     }
     o.draw=function(t){
       if(!o.st)return;var ctx=o.ctx,W=o.W,H=o.H,R=o.R,cr=Math.cos(rot),sr=Math.sin(rot);
-      var cx=W/2+smx*26,cy=H/2+smy*18-(+root.style.getPropertyValue('--sy')||0)*30;
+      var cx=W*(+c.dataset.cx||.5)+smx*26,cy=H*(+c.dataset.cy||.5)+smy*18-(+root.style.getPropertyValue('--sy')||0)*30;
       ctx.clearRect(0,0,W,H);ctx.globalCompositeOperation='lighter';
       var g=ctx.createRadialGradient(cx,cy,0,cx,cy,R*.42);
       g.addColorStop(0,'rgba(255,244,225,.5)');g.addColorStop(.18,'rgba(120,200,255,.26)');g.addColorStop(.55,'rgba(21,84,255,.12)');g.addColorStop(1,'rgba(21,84,255,0)');
@@ -751,7 +816,7 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
 
   /* ---------- cohete ---------- */
   (function(){
-    var hero=$('#identidad'),rk=$('.rocket',hero),cv=$('.smoke',hero),fl=$('.rk-flame',hero),vid=$('.hero-video',hero);
+    var hero=$('#inicio'),rk=$('.rocket',hero),cv=$('.smoke',hero),fl=$('.rk-flame',hero),vid=$('.scene-video',hero);
     if(!hero||!rk)return;
     if(vid){vid.addEventListener('loadeddata',function(){vid.classList.add('ok')});}
     var ctx=cv.getContext('2d'),W=0,H=0,vis=false,P=[],T=11,rw=54,rh=180,TAU=Math.PI*2;
@@ -786,6 +851,14 @@ footer .brand img{box-shadow:0 0 0 2px rgba(39,200,255,.3);animation:floatSoft 6
       }
     })(0);
   })();
+
+
+  /* ---------- videos de fondo ---------- */
+  $$('.scene-video').forEach(function(v){
+    v.addEventListener('loadeddata',function(){v.classList.add('ok')});
+    if(reduce){v.removeAttribute('autoplay');v.pause();return}
+    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var pr=v.play();if(pr&&pr.catch)pr.catch(function(){})}else v.pause()})},{threshold:.15}).observe(v);
+  });
 
   /* ---------- aviso de datos ---------- */
   var bar=$('#consent-bar'),seen=false;try{seen=localStorage.getItem('asys-aviso')==='1'}catch(_){}
