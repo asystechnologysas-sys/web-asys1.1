@@ -47,7 +47,7 @@ section{position:relative}
 .site-header{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1180px,calc(100% - 28px));z-index:60;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.6rem .7rem .6rem 1.1rem;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(16px);border:1px solid rgba(21,84,255,.12);box-shadow:0 10px 40px -18px rgba(21,84,255,.35);transition:padding .3s,box-shadow .3s}
 .site-header.scrolled{box-shadow:0 14px 50px -14px rgba(10,18,48,.4)}
 .brand{display:flex;align-items:center;gap:.7rem}
-.brand-logo{width:38px;height:38px}
+.brand-logo{width:38px;height:38px;object-fit:contain}
 .brand-naming{display:flex;flex-direction:column;line-height:1}
 .brand-title{font-family:var(--f-display);font-weight:700;font-size:1.15rem;letter-spacing:.08em}
 .brand-sub{font-size:.55rem;letter-spacing:.34em;color:var(--blue);font-weight:700;margin-top:3px}
@@ -110,8 +110,8 @@ nav{display:flex;gap:.3rem}
 .orbit-two{inset:20%;animation:spin 26s linear infinite reverse;border-style:solid;border-color:rgba(39,200,255,.3)}
 .orbit-one::after,.orbit-two::after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:var(--cyan);top:-7px;left:50%;box-shadow:0 0 18px var(--cyan)}
 .logo-object{transform:translateY(calc(var(--sy)*-70px)) rotate(calc(var(--sy)*40deg))}
-.logo-disc{width:170px;height:170px;border-radius:var(--blob-a);background:linear-gradient(140deg,var(--blue),var(--cyan));display:grid;place-items:center;animation:morph 10s ease-in-out infinite;box-shadow:0 0 80px rgba(39,200,255,.5)}
-.logo-disc svg{width:84px;height:84px}
+.logo-disc{width:170px;height:170px;border-radius:var(--blob-a);background:#fff;display:grid;place-items:center;animation:morph 10s ease-in-out infinite;box-shadow:0 0 80px rgba(39,200,255,.5)}
+.logo-disc img{width:62%;height:62%;object-fit:contain}
 .stage-label{position:absolute;font-size:.68rem;letter-spacing:.2em;color:#8fa3df;font-weight:700}
 .stage-label.top{top:2%;right:4%;text-align:right}.stage-label.bottom{bottom:3%;left:4%}
 .scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-size:.66rem;letter-spacing:.24em;color:#8fa3df;display:flex;flex-direction:column;align-items:center;gap:.6rem;z-index:3}
@@ -162,8 +162,8 @@ nav{display:flex;gap:.3rem}
 .network svg{position:absolute;inset:0;width:100%;height:100%}
 .network svg path{fill:none;stroke:rgba(39,200,255,.45);stroke-width:1.4;stroke-dasharray:6 8;animation:dash 18s linear infinite}
 @keyframes dash{to{stroke-dashoffset:-400}}
-.network-core{position:absolute;left:50%;top:48.2%;transform:translate(-50%,-50%);width:23%;aspect-ratio:1;border-radius:var(--blob-a);background:linear-gradient(140deg,var(--blue),var(--cyan));display:grid;place-items:center;animation:morph 9s ease-in-out infinite;box-shadow:0 0 70px rgba(39,200,255,.5);z-index:2}
-.network-core svg{position:static;width:50%;height:50%}
+.network-core{position:absolute;left:50%;top:48.2%;transform:translate(-50%,-50%);width:23%;aspect-ratio:1;border-radius:var(--blob-a);background:#fff;display:grid;place-items:center;animation:morph 9s ease-in-out infinite;box-shadow:0 0 70px rgba(39,200,255,.5);z-index:2}
+.network-core img{width:62%;height:62%;object-fit:contain}
 .node{position:absolute;transform:translate(-50%,-50%);padding:.55rem 1rem;border-radius:999px;font-size:.68rem;font-weight:800;letter-spacing:.14em;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);animation:bob 5s ease-in-out infinite;z-index:2}
 .node:hover{background:var(--cyan);color:var(--dark)}
 .node.ai{left:18%;top:19%}.node.auto{left:81%;top:18%;animation-delay:.6s}.node.soft{left:16%;top:66%;animation-delay:1.2s}
@@ -237,7 +237,7 @@ nav{display:flex;gap:.3rem}
 .about-copy>p:not(.eyebrow){color:var(--ink-2);margin:1rem 0 1.6rem;max-width:34rem}
 .manifesto{font-family:var(--f-display);font-size:1.3rem;line-height:1.6}.manifesto b{color:var(--blue)}
 .about-orbit{aspect-ratio:1;border-radius:50%;border:1px dashed var(--blue);display:grid;place-items:center;animation:spin 30s linear infinite;max-width:260px;justify-self:center;width:100%}
-.about-orbit svg{width:46%;animation:spin 30s linear infinite reverse}
+.about-orbit img{width:46%;animation:spin 30s linear infinite reverse}
 
 /* PRINCIPIOS */
 .principles{padding:90px max(20px,5vw)}
@@ -253,8 +253,8 @@ nav{display:flex;gap:.3rem}
 .final-cta{text-align:center;padding:130px max(20px,5vw);background:var(--dark);color:#fff;border-radius:80px 80px 0 0;overflow:hidden}
 .final-cta::before{content:"";position:absolute;left:50%;top:-200px;width:800px;height:800px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(21,84,255,.5),transparent 65%)}
 .final-cta>*{position:relative}
-.final-logo{width:90px;height:90px;margin:0 auto 1.6rem;border-radius:var(--blob-a);background:linear-gradient(140deg,var(--blue),var(--cyan));display:grid;place-items:center;animation:morph 9s ease-in-out infinite}
-.final-logo svg{width:46px;height:46px}
+.final-logo{width:90px;height:90px;margin:0 auto 1.6rem;border-radius:var(--blob-a);background:#fff;display:grid;place-items:center;animation:morph 9s ease-in-out infinite}
+.final-logo img{width:62%;height:62%;object-fit:contain}
 .final-cta h2{font-size:clamp(2.2rem,6vw,4.6rem);margin-bottom:1.2rem}.final-cta h2 em{color:var(--cyan)}
 .final-cta>p:not(.eyebrow){color:#b9c6ee;max-width:34rem;margin:0 auto 2rem}
 .final-cta>div{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
@@ -356,14 +356,10 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
 <div class="cursor-glow" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
-<!-- SÍMBOLO DE MARCA PROVISIONAL: reemplazar por asys-logo.png en el sitio real -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <symbol id="asys-mark" viewBox="0 0 48 48"><path d="M24 5 6 41h8l3.4-7.4h13.2L34 41h8L24 5Zm0 15 4.2 9.6h-8.4L24 20Z" fill="#fff"/></symbol>
-</defs></svg>
 
 <header class="site-header">
   <a class="brand" href="#inicio" aria-label="ASYS Technology, inicio">
-    <svg class="brand-logo" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="16" fill="#1554ff"/><use href="#asys-mark" x="6" y="6" width="36" height="36"/></svg>
+    <img class="brand-logo" src="nuevo logo.png" alt="Logotipo ASYS" />
     <div class="brand-naming"><span class="brand-title">ASYS</span><span class="brand-sub">TECHNOLOGY</span></div>
   </a>
   <nav aria-label="Navegación principal">
@@ -414,7 +410,7 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
       <p class="lede">Automatización, software e inteligencia aplicada para empresas que prefieren anticipar el futuro.</p>
       <div class="hero-signature"><div><b>ASYS</b><span>Automatización<br>Soluciones<br>Sistemas inteligentes</span></div><p>DISEÑADO PARA<br><em>LO QUE SIGUE</em></p></div>
     </div>
-    <div class="logo-stage" aria-label="Símbolo ASYS flotante"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="logo-object"><div class="logo-disc"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#asys-mark"/></svg></div></div><span class="stage-label top">SISTEMAS<br>INTELIGENTES</span><span class="stage-label bottom">COLOMBIA · 2026</span></div>
+    <div class="logo-stage" aria-label="Símbolo ASYS flotante"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="logo-object"><div class="logo-disc"><img src="nuevo logo.png" alt="" /></div></div><span class="stage-label top">SISTEMAS<br>INTELIGENTES</span><span class="stage-label bottom">COLOMBIA · 2026</span></div>
     <a class="scroll-cue" href="#filosofia"><span></span>SCROLL PARA EXPLORAR</a>
   </section>
 
@@ -437,7 +433,7 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
   <section class="ecosystem">
     <div class="ecosystem-copy reveal"><p class="eyebrow on-dark"><span></span> 02 — ECOSISTEMA</p><h2>TECNOLOGÍA<br>QUE <em>CONECTA.</em></h2><p>Un ecosistema diseñado para que cada parte de tu negocio se mueva con inteligencia.</p></div>
     <div class="network reveal" data-d="1" aria-label="Ecosistema tecnológico ASYS">
-      <div class="network-core"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#asys-mark"/></svg></div>
+      <div class="network-core"><img src="nuevo logo.png" alt="" /></div>
       <span class="node ai">AI</span><span class="node auto">AUTOMATION</span><span class="node soft">SOFTWARE</span><span class="node data">DATA</span><span class="node cloud">CLOUD</span><span class="node integ">INTEGRATION</span>
       <svg viewBox="0 0 700 560" aria-hidden="true"><path d="M350,270 L126,106 M350,270 L567,101 M350,270 L112,370 M350,270 L595,403 M350,270 L252,504 M350,270 L448,510"/></svg>
     </div>
@@ -483,7 +479,7 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
   <section class="about" id="nosotros">
     <div class="about-stamp reveal">ASYS<br>TECHNOLOGY<br><span>DESDE COLOMBIA</span></div>
     <div class="about-copy reveal" data-d="1"><p class="eyebrow"><span></span> 05 — NOSOTROS</p><h2>Somos <em>ASYS.</em></h2><p>Una empresa de tecnología e innovación enfocada en transformar procesos, conectar sistemas y convertir ideas en soluciones digitales que generan impacto.</p><div class="manifesto">Automatizamos lo repetitivo.<br>Digitalizamos lo complejo.<br><b>Inteligentizamos lo posible.</b></div></div>
-    <div class="about-orbit" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5 6 41h8l3.4-7.4h13.2L34 41h8L24 5Zm0 15 4.2 9.6h-8.4L24 20Z" fill="#1554ff"/></svg></div>
+    <div class="about-orbit" aria-hidden="true"><img src="nuevo logo.png" alt="" /></div>
   </section>
 
   <section class="principles">
@@ -497,7 +493,7 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
   </section>
 
   <section class="final-cta">
-    <div class="final-logo"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#asys-mark"/></svg></div>
+    <div class="final-logo"><img src="nuevo logo.png" alt="" /></div>
     <p class="eyebrow on-dark"><span></span> EL PRÓXIMO SISTEMA PODRÍA SER EL TUYO</p>
     <h2>¿Tienes una idea?<br><em>Construyamos algo<br>extraordinario juntos.</em></h2>
     <p>Cuéntanos tu idea y nuestro equipo te ayudará a convertirla en una solución tecnológica de alto impacto.</p>
@@ -530,7 +526,7 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
 <div class="consent-bar" id="consent-bar" role="region" aria-label="Aviso de datos"><p>Usamos almacenamiento local para recordar tu preferencia y tratamos tus datos según la Ley 1581 de 2012.</p><div><button class="ok" type="button">Entendido</button><a class="more" href="politica-privacidad.html">Ver política</a></div></div>
 
 <footer>
-  <div class="footer-top"><a class="brand" href="#inicio"><svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="16" fill="#1554ff"/><use href="#asys-mark" x="6" y="6" width="36" height="36"/></svg><span>ASYS<span class="brand-dot">.</span></span></a><p>ASYS Technology S.A.S.<br><span>Automatización. Soluciones. Sistemas inteligentes.</span></p><div><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#proyectos">Proyectos</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div></div>
+  <div class="footer-top"><a class="brand" href="#inicio"><img src="nuevo logo.png" alt="Logotipo ASYS" width="34" height="34" /><span>ASYS<span class="brand-dot">.</span></span></a><p>ASYS Technology S.A.S.<br><span>Automatización. Soluciones. Sistemas inteligentes.</span></p><div><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#proyectos">Proyectos</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div></div>
   <div class="footer-bottom"><span>© 2026 ASYS TECHNOLOGY S.A.S.</span><a href="politica-privacidad.html">Política de Privacidad</a><a href="terminos-condiciones.html">Términos y Condiciones</a><span>COLOMBIA</span></div>
   <div class="footer-line"></div>
 </footer>
