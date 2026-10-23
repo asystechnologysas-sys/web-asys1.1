@@ -171,16 +171,16 @@ nav{display:flex;gap:.3rem}
 .project-track{display:flex;gap:1.4rem;width:max-content;will-change:transform}
 .project-showcase.static{overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}
 .project-showcase.static .project-track{padding-inline:max(20px,5vw)}
-.project-card{flex:0 0 min(560px,86vw);scroll-snap-align:center;border-radius:60px 16px 60px 16px;padding:2rem;display:grid;gap:1.4rem;min-height:520px;color:#fff;position:relative;overflow:hidden;transition:transform .4s}
+.project-card{flex:0 0 min(560px,86vw);scroll-snap-align:center;border-radius:60px 16px 60px 16px;padding:1.5rem;display:grid;gap:1rem;min-height:0;color:#fff;position:relative;overflow:hidden;transition:transform .4s}
 .project-card:hover{transform:translateY(-8px) rotate(-.6deg)}
 .project-card.zylo{background:linear-gradient(150deg,#0f2a8a,#1554ff)}
 .project-card.cafe{background:linear-gradient(150deg,#1a1a2e,#3a2a6b)}
 .project-card.chatbot{background:linear-gradient(150deg,#06485e,#139fc0)}
 .project-card.dashboard{background:linear-gradient(150deg,#0a1230,#243a8f)}
 .project-copy p{font-size:.7rem;letter-spacing:.18em;opacity:.8;margin-bottom:.8rem}
-.project-copy h3{font-size:2.1rem;margin-bottom:.7rem}.project-copy h3 i{font-style:normal;color:var(--cyan)}
-.project-copy span{display:block;opacity:.85;max-width:26rem;margin-bottom:1.2rem}
-.project-open,.project-copy a{display:inline-flex;gap:.5rem;padding:.7rem 1.2rem;border-radius:999px;background:#fff;color:var(--ink);font-weight:800;font-size:.76rem;letter-spacing:.1em;transition:gap .2s}
+.project-copy h3{font-size:1.6rem;margin-bottom:.5rem}.project-copy h3 i{font-style:normal;color:var(--cyan)}
+.project-copy span{display:block;opacity:.85;max-width:24rem;font-size:.9rem;line-height:1.5;margin-bottom:.9rem}
+.project-open,.project-copy a{display:inline-flex;gap:.5rem;padding:.6rem 1.05rem;border-radius:999px;background:#fff;color:var(--ink);font-weight:800;font-size:.76rem;letter-spacing:.1em;transition:gap .2s}
 .project-open:hover,.project-copy a:hover{gap:.9rem}
 .dash{margin-top:auto;display:grid;grid-template-columns:50px 1fr;gap:.6rem;border-radius:22px 22px 0 0;background:rgba(255,255,255,.95);color:var(--ink);padding:1rem}
 .dash-side{background:var(--soft);border-radius:12px}
@@ -335,7 +335,7 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
 .final-logo{z-index:2}
 
 /* PROYECTOS CON CAPTURAS REALES */
-.project-card{align-content:start;flex-basis:min(620px,88vw)}
+.project-card{align-content:start;flex-basis:min(430px,84vw)}
 .shot{border-radius:20px;overflow:hidden;background:#0b1230;border:1px solid rgba(255,255,255,.22);box-shadow:0 24px 50px -22px rgba(0,0,0,.7);cursor:zoom-in}
 .shot-bar{display:flex;gap:6px;padding:9px 12px;background:rgba(255,255,255,.14)}
 .shot-bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.5)}
@@ -343,7 +343,7 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
 .shot:hover .project-real{transform:scale(1.04)}
 .shot.swap .project-real{opacity:0}
 .thumbs{display:flex;gap:.6rem}
-.thumb{flex:1 1 0;max-width:110px;border-radius:14px;overflow:hidden;border:2px solid transparent;opacity:.6;transition:opacity .2s,border-color .2s,transform .2s;padding:0;background:#0b1230}
+.thumb{flex:1 1 0;max-width:84px;border-radius:14px;overflow:hidden;border:2px solid transparent;opacity:.6;transition:opacity .2s,border-color .2s,transform .2s;padding:0;background:#0b1230}
 .thumb img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top}
 .thumb:hover{opacity:1;transform:translateY(-3px)}
 .thumb.on{opacity:1;border-color:var(--cyan)}
@@ -437,7 +437,7 @@ footer .brand{color:#fff;font-family:var(--f-display);font-weight:700;font-size:
 }
 @media (max-width:560px){
   .features-bar,.contact form{grid-template-columns:1fr}
-  .project-card{min-height:480px;padding:1.4rem}
+  .project-card{padding:1.2rem}
   .word-stack div{-webkit-text-stroke-width:1.2px}
   .modal-panel{padding:1.6rem 1.2rem}
 }
